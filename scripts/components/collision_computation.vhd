@@ -89,7 +89,7 @@ begin
 	
 	gen_computing_blocks: for k in 0 to GRIDS_AMOUNT - 1 generate
 		bricks(k) <= construct_brick_info(construct_point(GRIDS_LT_X + k rem GRIDS_COLUMNS * BRICK_WIDTH,
-		                                                  GRIDS_LT_Y + k mod GRIDS_COLUMNS * BRICK_HEIGHT),
+		                                                  GRIDS_LT_Y + k / GRIDS_COLUMNS * BRICK_HEIGHT),
 													 grids_map((k * 2) to (k * 2 + 1)));
 		u1: collision_detection port map(bricks(k), ball, collisions(k));
 		hit_map(k) <= '0' when collisions(k) = none else '1';

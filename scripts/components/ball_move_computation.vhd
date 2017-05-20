@@ -29,12 +29,12 @@ begin
 		variable x_cnt, y_cnt: integer := 0;
 	begin
 		if (clk'event and clk = '1') then
-			if (x_cnt >= velocity(0) - 1 and y_cnt >= velocity(1) - 1) then
+			if (x_cnt >= velocity_abs(0) - 1 and y_cnt >= velocity_abs(1) - 1) then
 				x_cnt := 0;
 				y_cnt := 0;
 				ball_next <= construct_ball_info(ball.radius, ball.position + delta_x + delta_y);
 			else
-				if (x_cnt >= velocity(0) - 1) then
+				if (x_cnt >= velocity_abs(0) - 1) then
 					x_cnt := 0;
 					ball_next <= construct_ball_info(ball.radius, ball.position + delta_x);
 				else
@@ -42,7 +42,7 @@ begin
 					ball_next <= ball;
 				end if;
 				
-				if (y_cnt >= velocity(1) - 1) then 
+				if (y_cnt >= velocity_abs(1) - 1) then 
 					y_cnt := 0;
 					ball_next <= construct_ball_info(ball.radius, ball.position + delta_y);
 				else

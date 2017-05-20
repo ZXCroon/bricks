@@ -28,12 +28,28 @@ architecture bhv of display_control_test is
 		);
 	end component;
 	
+	component ball_move_computation
+		port(
+			clk: in std_logic;
+			ball: in ball_info;
+			velocity: in vector;
+			set: out std_logic;
+			ball_next: out ball_info
+		);
+	end component;
+	
 	signal clk_50m, clk_25m: std_logic;
 	signal rst: std_logic;
 	signal grids_map: std_logic_vector(0 to (GRIDS_BITS - 1));
 	signal plate: plate_info;
-	signal ball: ball_info;
+	signal ball, ball_next: ball_info;
+	signal ball_init: ball_info := construct_ball_info(8, construct_point(140, 200));
+	signal velocity: vector := construct_vector(300000, 600000);
 	signal game_flag: integer;
+	
+	signal set: std_logic;
+	
+	--shared variable cnt: integer := 0;
 begin
 	rst <= '1';
 	process(clk_100m)
@@ -63,8 +79,21 @@ begin
 			grids_map(k * GRID_BITS + GRID_BITS - 1) <= '1';
 		end generate gen_brick_1;
 	end generate gen_bricks;
-	
-	ball <= construct_ball_info(8, construct_point(340, 400));
+
+--	process(clk_25m)
+--		variable cnt: integer := 0;
+--	begin
+--		if (clk_25m'event and clk_25m = '1') then
+--			if (cnt = 999999) then
+--				ball_next <= construct_ball_info(ball_next.radius, ball_next.position + construct_vector(1, 0));
+--				cnt := 0;
+--			else
+--				cnt := cnt + 1;
+--			end if;
+--		end if;
+--	end process;
+	u_b: ball_move_computation port map(clk_25m, ball, velocity, set, ball_next);
+	ball <= ball_next when set = '1' else ball_init;
 	
 	u: display_control port map(clk_25m, rst, grids_map, plate, ball, game_flag, hs, vs, r_out, g_out, b_out);
 end bhv;

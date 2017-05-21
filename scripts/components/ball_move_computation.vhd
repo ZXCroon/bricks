@@ -6,6 +6,7 @@ use work.info.all;
 entity ball_move_computation is
 	port(
 		clk: in std_logic;
+		ena: in std_logic;
 		ball: in ball_info;
 		velocity: in vector;
 		set: out std_logic;
@@ -29,28 +30,32 @@ begin
 		variable x_cnt, y_cnt: integer := 0;
 	begin
 		if (clk'event and clk = '1') then
-			if (x_cnt >= velocity_abs(0) - 1 and y_cnt >= velocity_abs(1) - 1) then
-				x_cnt := 0;
-				y_cnt := 0;
-				ball_next <= construct_ball_info(ball.radius, ball.position + delta_x + delta_y);
+			if (ena = '0') then
+				ball_next <= ball;
 			else
-				if (x_cnt >= velocity_abs(0) - 1) then
+				if (x_cnt >= velocity_abs(0) - 1 and y_cnt >= velocity_abs(1) - 1) then
 					x_cnt := 0;
-					ball_next <= construct_ball_info(ball.radius, ball.position + delta_x);
-				else
-					x_cnt := x_cnt + 1;
-					ball_next <= ball;
-				end if;
-				
-				if (y_cnt >= velocity_abs(1) - 1) then 
 					y_cnt := 0;
-					ball_next <= construct_ball_info(ball.radius, ball.position + delta_y);
+					ball_next <= construct_ball_info(ball.radius, ball.position + delta_x + delta_y);
 				else
-					y_cnt := y_cnt + 1;
-					ball_next <= ball;
+					if (x_cnt >= velocity_abs(0) - 1) then
+						x_cnt := 0;
+						ball_next <= construct_ball_info(ball.radius, ball.position + delta_x);
+					else
+						x_cnt := x_cnt + 1;
+						ball_next <= ball;
+					end if;
+					
+					if (y_cnt >= velocity_abs(1) - 1) then 
+						y_cnt := 0;
+						ball_next <= construct_ball_info(ball.radius, ball.position + delta_y);
+					else
+						y_cnt := y_cnt + 1;
+						ball_next <= ball;
+					end if;
 				end if;
+				set_t <= '1';
 			end if;
-			set_t <= '1';
 		end if;
 	end process;
 end bhv;

@@ -6,6 +6,7 @@ use work.info.all;
 entity plate_move_computation is
 	port(
 		clk: in std_logic;
+		ena: in std_logic;
 		plate: in plate_info;
 		plate_move: in integer;
 		set: out std_logic;
@@ -27,15 +28,19 @@ begin
 		variable cnt: integer := 0;
 	begin
 		if (clk'event and clk = '1') then
-			if (cnt >= move_abs - 1) then
-				cnt := 0;
-				plate_next <= construct_plate_info(plate.l_position + delta, plate.len, plate.class);
-			else
-				cnt := cnt + 1;
+			if (ena = '0') then
 				plate_next <= plate;
+			else 
+				if (cnt >= move_abs - 1) then
+					cnt := 0;
+					plate_next <= construct_plate_info(plate.l_position + delta, plate.len, plate.class);
+				else
+					cnt := cnt + 1;
+					plate_next <= plate;
+				end if;
+				
+				set_t <= '1';
 			end if;
-			
-			set_t <= '1';
 		end if;
 	end process;
 end bhv;

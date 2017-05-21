@@ -7,6 +7,7 @@ use work.basic_settings.all;
 entity display_control_test is
 	port(
 		clk_100m: in std_logic;
+		ena: in std_logic;
 		hs, vs: out std_logic;
 		r_out, g_out, b_out: out std_logic_vector(2 downto 0)
 	);
@@ -31,6 +32,7 @@ architecture bhv of display_control_test is
 	component ball_move_computation
 		port(
 			clk: in std_logic;
+			ena: in std_logic;
 			ball: in ball_info;
 			velocity: in vector;
 			set: out std_logic;
@@ -44,7 +46,7 @@ architecture bhv of display_control_test is
 	signal plate: plate_info;
 	signal ball, ball_next: ball_info;
 	signal ball_init: ball_info := construct_ball_info(8, construct_point(140, 200));
-	signal velocity: vector := construct_vector(300000, 600000);
+	signal velocity: vector := construct_vector(600000, 1200000);
 	signal game_flag: integer;
 	
 	signal set: std_logic;
@@ -92,7 +94,7 @@ begin
 --			end if;
 --		end if;
 --	end process;
-	u_b: ball_move_computation port map(clk_25m, ball, velocity, set, ball_next);
+	u_b: ball_move_computation port map(clk_25m, ena, ball, velocity, set, ball_next);
 	ball <= ball_next when set = '1' else ball_init;
 	
 	u: display_control port map(clk_25m, rst, grids_map, plate, ball, game_flag, hs, vs, r_out, g_out, b_out);

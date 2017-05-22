@@ -16,22 +16,27 @@ end process_controller;
 architecture bhv of process_controller is
 	type state_type is (menu, gaming, pause, gameover);
 	signal curstate: state_type := menu;
-	signal lastconfirm, lastquit, zp, xp: std_logic;
+	-- 表示z,x键被按下
+	signal zp, xp: std_logic;
+	
+	component convert_risingedge is
+		port(
+			-- fclk: filter clock, clkin: 想检测上升沿的时钟
+			fclk, clkin: in std_logic;
+			clk: out std_logic
+		);
+	end component;
 begin
+	cvtz: convert_risingedge port map(clk, confirm, zp);
+	cvtx: convert_risingedge port map(clk, quit, xp);
+
 	state_trans: process(clk, rst, curstate) is
-		-- zp: confirm pressed, xp: quit pressed
-		variable lastconfirm, lastquit, zp, xp: std_logic;
 	begin
 		if(rst='1') then
 			curstate <= menu;
 			logic_ena <= '0';
 			maploader_ena <= '0';
 		elsif(rising_edge(clk)) then
-			lastconfirm := confirm;
-			lastquit := quit;
-			-- 表示z,x键被按下了
-			zp := confirm and (not lastconfirm);
-			xp := quit and (not lastquit);
 			case curstate is
 				when menu =>
 					if(zp='1') then

@@ -1,6 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
-USE ieee.std_logic_unsigned.all;
+use ieee.std_logic_unsigned.all;
 use ieee.std_logic_arith.all;
 use work.key_coding.all;
 
@@ -10,7 +10,7 @@ port(
 	datain,clkin,fclk,rst_in: in std_logic;
 	board_speed: out integer;
 	-- 游戏流程的确认，取消
-	confirm, quit: out std_logic
+	confirm, quit, upp, downp: out std_logic
 );
 end keyboard_decoder;
 
@@ -45,6 +45,12 @@ begin
 					when key_right =>
 						rightp <= not isbreak;
 						isbreak := '0';
+					when key_up =>
+						upp <= not isbreak;
+						isbreak := '0';
+					when key_down =>
+						downp <= not isbreak;
+						isbreak := '0';
 					when key_lshift =>
 						shiftp <= not isbreak;
 						isbreak := '0';
@@ -68,17 +74,15 @@ begin
 		link := leftp & rightp;
 		if(shiftp='0')then
 			case link is
-				when "00" => board_speed <= 0;
+				when "00"|"11" => board_speed <= 0;
 				when "01" => board_speed <= highspeed;
 				when "10" => board_speed <= -highspeed;
-				when "11" => board_speed <= 0;
 			end case;
 		else
 			case link is
-				when "00" => board_speed <= 0;
+				when "00"|"11" => board_speed <= 0;
 				when "01" => board_speed <= lowspeed;
 				when "10" => board_speed <= -lowspeed;
-				when "11" => board_speed <= 0;
 			end case;
 		end if;
 	end process;

@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C70F672C8
-set_global_assignment -name TOP_LEVEL_ENTITY serial_to_parallel
+set_global_assignment -name TOP_LEVEL_ENTITY logic_control_test
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:12:29  MAY 16, 2017"
 set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
@@ -46,8 +46,34 @@ set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
-set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_location_assignment PIN_U3 -to hs
+set_location_assignment PIN_U4 -to vs
+set_location_assignment PIN_U1 -to b_out[2]
+set_location_assignment PIN_U2 -to b_out[1]
+set_location_assignment PIN_T4 -to b_out[0]
+set_location_assignment PIN_T3 -to g_out[2]
+set_location_assignment PIN_T2 -to g_out[1]
+set_location_assignment PIN_R5 -to g_out[0]
+set_location_assignment PIN_R4 -to r_out[2]
+set_location_assignment PIN_R3 -to r_out[1]
+set_location_assignment PIN_R2 -to r_out[0]
+set_global_assignment -name SIMULATION_MODE FUNCTIONAL
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
+set_location_assignment PIN_N2 -to clk
+set_location_assignment PIN_AC7 -to collision
+set_location_assignment PIN_AB8 -to collision[1]
+set_location_assignment PIN_AE5 -to Ls
+set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "E:/Development/DLC/bricks/Waveform.vwf"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VHDL_FILE scripts/components/transfer.vhd
+set_global_assignment -name VHDL_FILE scripts/components/draw_bricks.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/info.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/geometry.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/basic_settings.vhd
@@ -57,9 +83,11 @@ set_global_assignment -name VHDL_FILE scripts/components/reflection_computation.
 set_global_assignment -name VHDL_FILE scripts/components/plate_collision_detection.vhd
 set_global_assignment -name VHDL_FILE scripts/components/collision_detection.vhd
 set_global_assignment -name VHDL_FILE scripts/components/collision_computation.vhd
-set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name VHDL_FILE scripts/modules/logic_control.vhd
+set_global_assignment -name VHDL_FILE scripts/modules/state_storage.vhd
+set_global_assignment -name VHDL_FILE scripts/modules/display_control.vhd
+set_global_assignment -name VHDL_FILE scripts/components/vga_control.vhd
+set_global_assignment -name VHDL_FILE scripts/tests/display_control_test.vhd
+set_global_assignment -name VHDL_FILE scripts/tests/logic_control_test.vhd
+set_global_assignment -name VHDL_FILE scripts/components/clock.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

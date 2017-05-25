@@ -54,8 +54,9 @@ architecture bhv of collision_computation is
 	
 	function summarize_collisions(collisions: collisions_info;
 	                              plate_collision, wall_collision: collision_info) return collision_info is
-		variable now_collision: collision_info := none;
+		variable now_collision: collision_info;
 	begin
+		now_collision := none;
 		if (plate_collision /= none) then
 			return plate_collision;
 		elsif (wall_collision /= none) then
@@ -90,7 +91,7 @@ begin
 	gen_computing_blocks: for k in 0 to GRIDS_AMOUNT - 1 generate
 		bricks(k) <= construct_brick_info(construct_point(GRIDS_LT_X + k rem GRIDS_COLUMNS * BRICK_WIDTH,
 		                                                  GRIDS_LT_Y + k / GRIDS_COLUMNS * BRICK_HEIGHT),
-													 grids_map((k * 2) to (k * 2 + 1)));
+													 grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)));
 		u1: collision_detection port map(bricks(k), ball, collisions(k));
 		hit_map(k) <= '0' when collisions(k) = none else '1';
 	end generate gen_computing_blocks;

@@ -69,9 +69,14 @@ set_location_assignment PIN_AC7 -to collision
 set_location_assignment PIN_AB8 -to collision[1]
 set_location_assignment PIN_AE5 -to Ls
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "E:/Development/DLC/bricks/Waveform.vwf"
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -entity logic_control_test -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -entity logic_control_test -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -entity logic_control_test -section_id Top
+set_global_assignment -name VHDL_FILE scripts/packages/key_coding.vhd
+set_global_assignment -name VHDL_FILE scripts/modules/process_controller.vhd
+set_global_assignment -name VHDL_FILE scripts/modules/keyboard_decoder.vhd
+set_global_assignment -name VHDL_FILE scripts/process_comp/convert_risingedge.vhd
+set_global_assignment -name VHDL_FILE scripts/keyboard_comp/KeyboardReader.vhd
 set_global_assignment -name VHDL_FILE scripts/components/transfer.vhd
 set_global_assignment -name VHDL_FILE scripts/components/draw_bricks.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/info.vhd

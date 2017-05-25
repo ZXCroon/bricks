@@ -29,11 +29,15 @@ architecture bhv of transfer is
 begin	
 	velocity_abs(0) <= velocity(0) when velocity(0) >= 0 else -velocity(0);
 	velocity_abs(1) <= velocity(1) when velocity(1) >= 0 else -velocity(1);
-	delta_x <= construct_vector(1, 0) when velocity(0) >= 0 else construct_vector(-1, 0);
-	delta_y <= construct_vector(0, 1) when velocity(1) >= 0 else construct_vector(0, -1);
+	delta_x <= construct_vector(1, 0) when velocity(0) > 0 else
+	           construct_vector(-1, 0) when velocity(0) < 0 else
+				  construct_vector(0, 0);
+	delta_y <= construct_vector(0, 1) when velocity(1) > 0 else
+	           construct_vector(0, -1) when velocity(1) < 0 else
+				  construct_vector(0, 0);
 	
 	plate_move_abs <= plate_move when plate_move >= 0 else -plate_move;
-	delta <= (1, 0) when plate_move >= 0 else (-1, 0);
+	delta <= (1, 0) when plate_move > 0 else (-1, 0) when plate_move < 0 else (0, 0);
 
 	process(clk)
 		variable x_cnt, y_cnt, p_cnt: integer := 0;

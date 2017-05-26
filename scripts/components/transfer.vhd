@@ -51,45 +51,82 @@ begin
 				plate_next <= plate;
 				ball_moved <= '0';
 			else
-				if (x_cnt >= velocity_abs(0) - 1 and y_cnt >= velocity_abs(1) - 1) then
-					x_cnt := 0;
-					y_cnt := 0;
+				if (x_cnt = 0 and y_cnt = 0) then
 					ball_next <= construct_ball_info(ball.radius, ball.position + delta_x + delta_y);
 					ball_moved <= '1';
 				else
-					if (x_cnt >= velocity_abs(0) - 1) then
-						x_cnt := 0;
+					if (x_cnt = 0) then
 						ball_next <= construct_ball_info(ball.radius, ball.position + delta_x);
 						ball_moved <= '1';
-					else
-						x_cnt := x_cnt + 1;
-						ball_next <= ball;
-						ball_moved <= '0';
-					end if;
-					
-					if (y_cnt >= velocity_abs(1) - 1) then 
-						y_cnt := 0;
+					elsif (y_cnt = 0) then
 						ball_next <= construct_ball_info(ball.radius, ball.position + delta_y);
 						ball_moved <= '1';
 					else
-						y_cnt := y_cnt + 1;
 						ball_next <= ball;
 						ball_moved <= '0';
 					end if;
 				end if;
+				x_cnt := x_cnt + 1;
+				y_cnt := y_cnt + 1;
+				if (x_cnt >= velocity_abs(0)) then
+					x_cnt := 0;
+				end if;
+				if (y_cnt >= velocity_abs(1)) then
+					y_cnt := 0;
+				end if;
 				
-				if (p_cnt >= plate_move_abs - 1) then
-					p_cnt := 0;
+--				if (x_cnt >= velocity_abs(0) - 1 and y_cnt >= velocity_abs(1) - 1) then
+--					x_cnt := 0;
+--					y_cnt := 0;
+--					ball_next <= construct_ball_info(ball.radius, ball.position + delta_x + delta_y);
+--					ball_moved <= '1';
+--				else
+--					if (x_cnt >= velocity_abs(0) - 1) then
+--						x_cnt := 0;
+--						ball_next <= construct_ball_info(ball.radius, ball.position + delta_x);
+--						ball_moved <= '1';
+--					else
+--						x_cnt := x_cnt + 1;
+--						ball_next <= ball;
+--						ball_moved <= '0';
+--					end if;
+--					
+--					if (y_cnt >= velocity_abs(1) - 1) then 
+--						y_cnt := 0;
+--						ball_next <= construct_ball_info(ball.radius, ball.position + delta_y);
+--						ball_moved <= '1';
+--					else
+--						y_cnt := y_cnt + 1;
+--						ball_next <= ball;
+--						ball_moved <= '0';
+--					end if;
+--				end if;
+				
+				if (p_cnt = 0) then
 					if ((plate.l_position(0) > 0 or plate_move > 0) and
 					    (plate.l_position(0) + plate.len < SCREEN_WIDTH or plate_move < 0)) then
 						plate_next <= construct_plate_info(plate.l_position + delta, plate.len, plate.class);
-					else
-						plate_next <= plate;
 					end if;
 				else
-					p_cnt := p_cnt + 1;
 					plate_next <= plate;
 				end if;
+				p_cnt := p_cnt + 1;
+				if (p_cnt >= plate_move_abs) then
+					p_cnt := 0;
+				end if;
+				
+--				if (p_cnt >= plate_move_abs - 1) then
+--					p_cnt := 0;
+--					if ((plate.l_position(0) > 0 or plate_move > 0) and
+--					    (plate.l_position(0) + plate.len < SCREEN_WIDTH or plate_move < 0)) then
+--						plate_next <= construct_plate_info(plate.l_position + delta, plate.len, plate.class);
+--					else
+--						plate_next <= plate;
+--					end if;
+--				else
+--					p_cnt := p_cnt + 1;
+--					plate_next <= plate;
+--				end if;
 			end if;
 		end if;
 	end process;

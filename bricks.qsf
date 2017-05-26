@@ -87,7 +87,6 @@ set_global_assignment -name VHDL_FILE scripts/components/plate_collision_detecti
 set_global_assignment -name VHDL_FILE scripts/components/collision_detection.vhd
 set_global_assignment -name VHDL_FILE scripts/components/collision_computation.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/logic_control.vhd
-set_global_assignment -name VHDL_FILE scripts/modules/state_storage.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/display_control.vhd
 set_global_assignment -name VHDL_FILE scripts/components/vga_control.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/display_control_test.vhd

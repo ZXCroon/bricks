@@ -18,7 +18,7 @@ architecture bhv of plate_collision_detection is
 	signal l_corner, r_corner: boolean;
 	signal radius2: integer;
 begin
-	top_side <= ((plate.l_position(1) - ball.position(1)) <= ball.radius);
+	top_side <= ((plate.l_position(1) - ball.position(1)) = ball.radius);
 	inside_x_range <= (ball.position(0) >= plate.l_position(0) and
 	                   ball.position(0) <= plate.l_position(0) + plate.len);
 	

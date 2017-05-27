@@ -28,6 +28,7 @@ architecture bhv of logic_control is
 			grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
 			ball: in ball_info;
 			plate: in plate_info;
+			plate_move: in integer;
 			current_velocity: in vector;
 			hit_map: out std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 			next_velocity: out vector;
@@ -51,7 +52,7 @@ architecture bhv of logic_control is
 			ball_moved: out std_logic
 		);
 	end component;
-	
+
 	signal next_ball_t: ball_info;
 	signal next_velocity_t: vector;
 	signal next_plate_t: plate_info;
@@ -60,7 +61,8 @@ architecture bhv of logic_control is
 	signal current_velocity_trans: vector;
 	signal current_grids_map_trans: std_logic_vector(0 to (GRIDS_BITS - 1));
 begin
-	u: collision_computation port map(current_grids_map_trans, next_ball_t, next_plate_t, current_velocity_trans,
+	u: collision_computation port map(current_grids_map_trans, next_ball_t, next_plate_t,
+	                                  plate_move, current_velocity_trans,
 	                                  hit_map, next_velocity_t, fall_out);
 	gen_next_grids_map:
 	for k in 0 to GRIDS_AMOUNT - 1 generate

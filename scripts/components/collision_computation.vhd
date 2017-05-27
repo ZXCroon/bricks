@@ -9,6 +9,7 @@ entity collision_computation is
 		grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
 		ball: in ball_info;
 		plate: in plate_info;
+		plate_move: in integer;
 		current_velocity: in vector;
 		hit_map: out std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 		next_velocity: out vector;
@@ -77,16 +78,52 @@ architecture bhv of collision_computation is
 			return now_collision;
 		end if;
 	end summarize_collisions;
+		
+	function velocity_change(velocity: vector; force: integer) return vector is
+		variable v_x, v_x_1: integer;
+	begin
+		if (force = 0) then
+			return velocity;
+		end if;
+		v_x := velocity(0);
+		if (v_x = 0) then
+			v_x_1 := force * 3;
+		elsif (v_x > 0) then
+			if (force > 0) then
+				-- TODO: change according to force --
+				v_x_1 := v_x * 7 / 8;
+			else
+				v_x_1 := v_x + (250 + force) / 2;
+			end if;
+		else
+			if (force < 0) then
+				v_x_1 := v_x * 3 / 4;
+			else
+				v_x_1 := v_x - (150 - force) / 2;
+			end if;
+		end if;
+		if (v_x_1 >= 0 and v_x_1 < MIN_VELOCITY_VALUE_X) then
+			v_x_1 := MIN_VELOCITY_VALUE_X;
+		elsif (v_x_1 <= 0 and v_x_1 > -MIN_VELOCITY_VALUE_X) then
+			v_x_1 := -MIN_VELOCITY_VALUE_X;
+		end if;
+		
+		return construct_vector(v_x_1, velocity(1));
+	end velocity_change;
 	
 	signal bricks: bricks_info;
 	signal collisions: collisions_info;
 	signal plate_collision, wall_collision: collision_info;
 	signal summarized_collision: collision_info;
+	signal next_velocity_t: vector;
 	signal fall_out_bool: boolean;
 	
 begin
 	summarized_collision <= summarize_collisions(collisions, plate_collision, wall_collision);
-	u0: reflection_computation port map(current_velocity, summarized_collision, next_velocity);
+	u0: reflection_computation port map(current_velocity, summarized_collision, next_velocity_t);
+	
+	next_velocity <= next_velocity_t when (plate_collision /= horizontal or wall_collision /= none) else
+	                 velocity_change(next_velocity_t, plate_move);
 	
 	gen_computing_blocks: for k in 0 to GRIDS_AMOUNT - 1 generate
 		bricks(k) <= construct_brick_info(construct_point(GRIDS_LT_X + k rem GRIDS_COLUMNS * BRICK_WIDTH,

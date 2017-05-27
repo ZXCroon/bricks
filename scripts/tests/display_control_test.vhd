@@ -45,8 +45,8 @@ architecture bhv of display_control_test is
 	signal grids_map: std_logic_vector(0 to (GRIDS_BITS - 1));
 	signal plate: plate_info;
 	signal ball, ball_next: ball_info;
-	signal ball_init: ball_info := construct_ball_info(8, construct_point(140, 200));
-	signal velocity: vector := construct_vector(600000, 1200000);
+	signal ball_init: ball_info := construct_ball_info(8, construct_point(340, 400));
+	signal velocity: vector := construct_vector(-600000, -1200000);
 	signal game_flag: integer;
 	
 	signal set: std_logic;

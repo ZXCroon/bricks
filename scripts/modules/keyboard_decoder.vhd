@@ -67,8 +67,8 @@ begin
 	end process;
 	
 	speed_converter: process(leftp, rightp, shiftp) is
-		constant lowspeed: integer := 10;
-		constant highspeed: integer := 5;
+		constant lowspeed: integer := 100;
+		constant highspeed: integer := 50;
 		variable link: std_logic_vector(1 downto 0);
 	begin
 		link := leftp & rightp;

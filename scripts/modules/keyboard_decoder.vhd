@@ -7,9 +7,8 @@ use work.key_coding.all;
 entity keyboard_decoder is
 port(
 	-- datain: ps2data; clkin: ps2 clock; fclk: filter clock;
-	datain, clkin, fastclk, rst_in: in std_logic;
-	board_speed: out integer range -2 to 2 := 0;
-	leftp, rightp, shiftp, isbreak: buffer std_logic := '0';
+	datain, clkin, fclk, rst_in: in std_logic;
+	board_speed: out integer := 0;
 	-- 游戏流程的确认，取消
 	confirm, quit, upp, downp: out std_logic := '0'
 );
@@ -25,40 +24,24 @@ architecture behave of keyboard_decoder is
 	);
 	end component;
 	
-	signal fclk: std_logic := '0';
-	signal scancode, lastscancode: KeyVector;
-	signal rst : std_logic;
+	signal scancode: KeyVector;
+	signal rst, dataok: std_logic;
 	-- p stands for pressed
---	signal leftp, rightp, shiftp: std_logic := '0';
---	signal isbreak : std_logic := '0';
-	signal ise0: std_logic := '0';
-	signal dataok: std_logic;
+	signal leftp, rightp, shiftp: std_logic := '0';
+	signal isbreak, ise0 : std_logic := '0';
 begin
 	rst<=not rst_in;
-	
-	process(fastclk, fclk)
-		constant clkperhsec: integer := 50;
-		variable count: integer range 0 to clkperhsec := 0;
-	begin
-		if(rising_edge(fastclk)) then
-			count := count + 1;
-			if(count = clkperhsec) then
-				count := 0;
-				fclk <= not fclk;
-			end if;
-		end if;
-	end process;
 	
 	kb: KeyboardReader port map(datain, clkin, fclk, rst, dataok, scancode);
 	
 	scancode_decoder: process(scancode, fclk, rst, dataok) is
 --		variable isbreak: std_logic := '0';
 	begin
-		-- dataok 0->1 means scancode has been updated
 		if (rst='1') then
 			leftp <= '0'; rightp <= '0'; shiftp <= '0';
 			upp <= '0'; downp <= '0'; confirm <= '0'; quit <= '0'; 
 			isbreak <= '0';
+		-- dataok 0->1 means scancode has been updated
 		elsif(rising_edge(dataok)) then
 			case scancode is
 				when key_break => isbreak <= '1';
@@ -80,6 +63,9 @@ begin
 					isbreak <= '0';
 					ise0 <= '0';
 				when key_lshift =>
+					-- when holding shift and pressing arrow key
+					-- keyboard will send e0 f0 12(shift breakcode)
+					-- this can prevent unexpected breakcode
 					if(ise0='0') then
 						shiftp <= not isbreak;
 					end if;
@@ -99,8 +85,8 @@ begin
 	end process;
 	
 	speed_converter: process(leftp, rightp, shiftp) is
-		constant lowspeed: integer := 1;
-		constant highspeed: integer := 2;
+		constant lowspeed: integer := 100;
+		constant highspeed: integer := 50;
 		variable link: std_logic_vector(1 downto 0);
 	begin
 		link := leftp & rightp;

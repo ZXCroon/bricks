@@ -87,27 +87,12 @@ set_global_assignment -name VHDL_FILE scripts/tests/test_kb.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/test_process.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/logic_control_test.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/display_control_test.vhd
-set_location_assignment PIN_AD6 -to clkin
-set_location_assignment PIN_AD7 -to datain
-set_location_assignment PIN_AC6 -to rst_in
 set_global_assignment -name PARTITION_NETLIST_TYPE POST_FIT -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name EDA_MAINTAIN_DESIGN_HIERARCHY ON -section_id eda_simulation
-set_location_assignment PIN_AC8 -to board_speed[2]
-set_location_assignment PIN_AB8 -to board_speed[1]
-set_location_assignment PIN_AC7 -to board_speed[0]
-set_location_assignment PIN_AC9 -to confirm
-set_location_assignment PIN_AF7 -to downp
-set_location_assignment PIN_AF9 -to leftp
-set_location_assignment PIN_AF8 -to quit
-set_location_assignment PIN_AE9 -to rightp
-set_location_assignment PIN_AD10 -to shiftp
-set_location_assignment PIN_AE8 -to upp
-set_location_assignment PIN_AC11 -to isbreak
 set_global_assignment -name ENABLE_SIGNALTAP OFF
 set_global_assignment -name USE_SIGNALTAP_FILE "signal tap/keyboard.stp"
 set_global_assignment -name SIGNALTAP_FILE "signal tap/keyboard.stp"
-set_location_assignment PIN_P1 -to fastclk
 set_global_assignment -name SLD_FILE "C:/Users/Wuql/Quartus/bricks/signal tap/keyboard_auto_stripped.stp"
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -7,7 +7,7 @@ use work.key_coding.all;
 entity keyboard_decoder is
 port(
 	-- datain: ps2data; clkin: ps2 clock; fclk: filter clock;
-	datain, clkin, fclk, rst_in: in std_logic;
+	datain, clkin, fastclk, rst_in: in std_logic;
 	board_speed: out integer range -2 to 2 := 0;
 	leftp, rightp, shiftp, isbreak: buffer std_logic := '0';
 	-- 游戏流程的确认，取消
@@ -25,14 +25,29 @@ architecture behave of keyboard_decoder is
 	);
 	end component;
 	
+	signal fclk: std_logic := '0';
 	signal scancode, lastscancode: KeyVector;
 	signal rst : std_logic;
 	-- p stands for pressed
 --	signal leftp, rightp, shiftp: std_logic := '0';
 --	signal isbreak : std_logic := '0';
+	signal ise0: std_logic := '0';
 	signal dataok: std_logic;
 begin
 	rst<=not rst_in;
+	
+	process(fastclk, fclk)
+		constant clkperhsec: integer := 50;
+		variable count: integer range 0 to clkperhsec := 0;
+	begin
+		if(rising_edge(fastclk)) then
+			count := count + 1;
+			if(count = clkperhsec) then
+				count := 0;
+				fclk <= not fclk;
+			end if;
+		end if;
+	end process;
 	
 	kb: KeyboardReader port map(datain, clkin, fclk, rst, dataok, scancode);
 	
@@ -47,27 +62,37 @@ begin
 		elsif(rising_edge(dataok)) then
 			case scancode is
 				when key_break => isbreak <= '1';
+				when key_e0 => ise0 <= '1';
 				when key_up =>
 					upp <= not isbreak;
 					isbreak <= '0';
+					ise0 <= '0';
 				when key_down =>
 					downp <= not isbreak;
 					isbreak <= '0';
+					ise0 <= '0';
 				when key_left =>
 					leftp <= not isbreak;
 					isbreak <= '0';
+					ise0 <= '0';
 				when key_right =>
 					rightp <= not isbreak;
 					isbreak <= '0';
+					ise0 <= '0';
 				when key_lshift =>
-					shiftp <= not isbreak;
+					if(ise0='0') then
+						shiftp <= not isbreak;
+					end if;
 					isbreak <= '0';
+					ise0 <= '0';
 				when key_z =>
 					confirm <= not isbreak;
 					isbreak <= '0';
+					ise0 <= '0';
 				when key_x =>
 					quit <= not isbreak;
 					isbreak <= '0';
+					ise0 <= '0';
 				when others => null;
 			end case;
 		end if;

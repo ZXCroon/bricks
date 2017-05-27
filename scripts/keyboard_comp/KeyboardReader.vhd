@@ -28,7 +28,7 @@ begin
 	odd <= code(0) xor code(1) xor code(2) xor code(3) 
 		xor code(4) xor code(5) xor code(6) xor code(7) ;
 	
-	scancode <= code when dataok = '1' ;
+--	scancode <= code when dataok = '1' ;
 	
 	process(rst, fclk)
 	begin
@@ -112,6 +112,7 @@ begin
 
 				WHEN finish =>
 					state <= delay ;
+					scancode <= code;
 					dataok <= '1' ;
 				when others =>
 					state <= delay ;

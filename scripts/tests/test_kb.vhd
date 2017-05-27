@@ -23,8 +23,8 @@ architecture bhv of test_kb is
 	);
 	end component;
 	
-	constant lowspeed: integer := 10;
-	constant highspeed: integer := 5;
+	constant lowspeed: integer := 1;
+	constant highspeed: integer := 2;
 	signal board_speed: integer := 0;
 	
 --	function abs(n: integer) return integer is

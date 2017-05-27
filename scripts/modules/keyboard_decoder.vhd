@@ -8,9 +8,10 @@ entity keyboard_decoder is
 port(
 	-- datain: ps2data; clkin: ps2 clock; fclk: filter clock;
 	datain, clkin, fclk, rst_in: in std_logic;
-	board_speed: out integer range -2 to 2;
+	board_speed: out integer range -2 to 2 := 0;
+	leftp, rightp, shiftp, isbreak: buffer std_logic := '0';
 	-- 游戏流程的确认，取消
-	confirm, quit, upp, downp: out std_logic
+	confirm, quit, upp, downp: out std_logic := '0'
 );
 end keyboard_decoder;
 
@@ -27,8 +28,8 @@ architecture behave of keyboard_decoder is
 	signal scancode, lastscancode: KeyVector;
 	signal rst : std_logic;
 	-- p stands for pressed
-	signal leftp, rightp, shiftp: std_logic := '0';
-	signal isbreak : std_logic := '0';
+--	signal leftp, rightp, shiftp: std_logic := '0';
+--	signal isbreak : std_logic := '0';
 	signal dataok: std_logic;
 begin
 	rst<=not rst_in;

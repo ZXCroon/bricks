@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C70F672C8
-set_global_assignment -name TOP_LEVEL_ENTITY logic_control_test
+set_global_assignment -name TOP_LEVEL_ENTITY test_process
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:12:29  MAY 16, 2017"
 set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
@@ -51,25 +51,10 @@ set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
-set_location_assignment PIN_U3 -to hs
-set_location_assignment PIN_U4 -to vs
-set_location_assignment PIN_U1 -to b_out[2]
-set_location_assignment PIN_U2 -to b_out[1]
-set_location_assignment PIN_T4 -to b_out[0]
-set_location_assignment PIN_T3 -to g_out[2]
-set_location_assignment PIN_T2 -to g_out[1]
-set_location_assignment PIN_R5 -to g_out[0]
-set_location_assignment PIN_R4 -to r_out[2]
-set_location_assignment PIN_R3 -to r_out[1]
-set_location_assignment PIN_R2 -to r_out[0]
 set_global_assignment -name SIMULATION_MODE FUNCTIONAL
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
-set_location_assignment PIN_AC7 -to collision
-set_location_assignment PIN_AB8 -to collision[1]
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "E:/Development/DLC/bricks/Waveform.vwf"
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -entity logic_control_test -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -entity logic_control_test -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -entity logic_control_test -section_id Top
+set_global_assignment -name VHDL_FILE scripts/tests/test_process.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/key_coding.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/process_controller.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/keyboard_decoder.vhd
@@ -92,12 +77,21 @@ set_global_assignment -name VHDL_FILE scripts/components/vga_control.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/display_control_test.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/logic_control_test.vhd
 set_global_assignment -name VHDL_FILE scripts/components/clock.vhd
-set_location_assignment PIN_AD7 -to ps2data
-set_location_assignment PIN_AD6 -to ps2clock
 set_global_assignment -name VHDL_FILE scripts/modules/state_control.vhd
-set_location_assignment PIN_AD5 -to run
-set_location_assignment PIN_AE5 -to Ld
-set_location_assignment PIN_N2 -to clk_100m
-set_location_assignment PIN_AE11 -to fall_out
-set_location_assignment PIN_AC15 -to finished
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_AC9 -to confirm
+set_location_assignment PIN_AF7 -to downp
+set_location_assignment PIN_AB8 -to interface_info[1]
+set_location_assignment PIN_AC7 -to interface_info[0]
+set_location_assignment PIN_AC11 -to logic_ena
+set_location_assignment PIN_AB12 -to maploader_ena
+set_location_assignment PIN_AF8 -to quit
+set_location_assignment PIN_AD4 -to rst
+set_location_assignment PIN_AE8 -to upp
+set_location_assignment PIN_P1 -to fclk
+set_location_assignment PIN_AC6 -to gameinfo_switch
+set_location_assignment PIN_AD6 -to kbclk
+set_location_assignment PIN_AD7 -to kbdata
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

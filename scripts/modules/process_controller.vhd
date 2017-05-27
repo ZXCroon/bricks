@@ -32,10 +32,8 @@ begin
 
 	state_trans: process(clk, rst, curstate) is
 	begin
-		if(rst='1') then
+		if(rst='0') then
 			curstate <= menu;
-			logic_ena <= '0';
-			maploader_ena <= '0';
 		elsif(rising_edge(clk)) then
 			case curstate is
 				when menu =>
@@ -61,6 +59,8 @@ begin
 			end case;
 		end if;
 	end process;
+	
+	logic_ena <= '1' when curstate=gaming else '0';
 	
 	-- output interface info
 	with curstate select

@@ -5,3 +5,6 @@
 !*.mif
 !*.qpf
 !*.qsf
+!*.vwf
+
+simulation/*/

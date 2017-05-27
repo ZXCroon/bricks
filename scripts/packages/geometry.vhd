@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
 use ieee.std_logic_signed.all;
 
 package geometry is
@@ -14,6 +15,9 @@ package geometry is
 	function "-"(v: vector) return vector;
 	function "*"(v: vector; k: integer) return vector;
 	function "*"(k: integer; v: vector) return vector;
+	
+	function dot(va, vb: vector) return integer;
+	function distance2(p1, p2: point) return integer;
 end geometry;
 
 package body geometry is
@@ -72,6 +76,15 @@ begin
 	return v * k;
 end "*";
 
+function dot(va, vb: vector) return integer is
+begin
+	return va(0) * vb(0) + va(1) * vb(1);
+end dot;
+
+function distance2(p1, p2: point) return integer is
+begin
+	return (p1(0) - p2(0)) * (p1(0) - p2(0)) + (p1(1) - p2(1)) * (p1(1) - p2(1));
+end distance2;
 
 
 end geometry;

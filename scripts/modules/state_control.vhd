@@ -81,7 +81,7 @@ begin
 	current_grids_map <= next_grids_map when load = '0' else grids_map_load;
 	current_plate <= next_plate when load = '0' else construct_plate_info(construct_point(280, 450), 80, 0);
 	current_velocity <= next_velocity when load = '0' else construct_vector(100, -100);
-	current_ball <= next_ball when load = '0' else construct_ball_info(8, construct_point(320, 442));
+	current_ball <= next_ball when load = '0' else construct_ball_info(NORMAL_BALL_RADIUS, construct_point(320, 442));
 	
 	grids_map <= current_grids_map;
 	ball <= current_ball;

@@ -22,9 +22,16 @@ package info is
 	
 	type collision_info is (none, vertical, horizontal, corner);
 	
+	type buff_info is (none, smaller);
+	type card_info is record
+		lt_position: point;
+		buff: buff_info;
+	end record;
+	
 	function construct_ball_info(radius_0: integer; position_0: point) return ball_info;
 	function construct_brick_info(lt_position_0: point; class_0: std_logic_vector) return brick_info;
 	function construct_plate_info(l_position_0: point; len_0, class_0: integer) return plate_info;
+	function construct_card_info(lt_position_0: point; buff_0: buff_info) return card_info;
 end info;
 
 package body info is
@@ -54,6 +61,14 @@ begin
 	plate_info_0.class := class_0;
 	return plate_info_0;
 end construct_plate_info;
+
+function construct_card_info(lt_position_0: point; buff_0: buff_info) return card_info is
+	variable card_info_0: card_info;
+begin
+	card_info_0.lt_position := lt_position_0;
+	card_info_0.buff := buff_0;
+	return card_info_0;
+end construct_card_info;
 
 
 end info;

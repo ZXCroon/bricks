@@ -16,9 +16,16 @@ package basic_settings is
 	constant BRICK_WIDTH: integer := 40;
 	constant BRICK_HEIGHT: integer := 15;
 	
+	constant NORMAL_BALL_RADIUS: integer := 8;
+	constant SMALL_BALL_RADIUS: integer := 4;
+	constant BIG_BALL_RADIUS: integer := 12;
+	
 	constant CODE_BITS: integer := 6;
 	constant INITIATION_CODE: std_logic_vector((CODE_BITS - 1) downto 0) := "110101";
 	constant TERMINATION_CODE: std_logic_vector((CODE_BITS - 1) downto 0) := "111011";
 	
 	constant MIN_VELOCITY_VALUE_X: integer := 63;
+	
+	constant CARD_SIDE: integer := 20;
+	constant CARD_GENS: integer := 1;
 end basic_settings;

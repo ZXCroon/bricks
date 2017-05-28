@@ -11,10 +11,12 @@ entity buff_test is
 end buff_test;
 
 architecture bhv of buff_test is
-	component buff_control
+	component buff_time_control
 		generic(duration: integer);    -- unit: ms
 		port(
 			clk_100m: in std_logic;
+			ena: in std_logic;
+			rst: in std_logic;
 			buff_get: in buff_info;
 			buff: out buff_info := none
 		);
@@ -23,6 +25,6 @@ architecture bhv of buff_test is
 	signal buff0: buff_info;
 begin
 	buff_get <= smaller when b = '0' else none;
-	u: buff_control generic map(60000) port map(clk_100m, buff_get, buff0);
+	u: buff_time_control generic map(60000) port map(clk_100m, '1', '1', buff_get, buff0);
 	buff <= '1' when buff0 /= none else '0';
 end bhv;

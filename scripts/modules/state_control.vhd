@@ -11,13 +11,20 @@ entity state_control is
 		run: in std_logic;
 		plate_move: in integer;
 		grids_map_load: in std_logic_vector(0 to (GRIDS_BITS - 1));
+		ask_x: in std_logic_vector(9 downto 0);
+		ask_y: in std_logic_vector(8 downto 0);
 		
 		grids_map: out std_logic_vector(0 to (GRIDS_BITS - 1));
 		ball: out ball_info;
 		plate: out plate_info;
+		buff: out buff_info;
+		buff_time_left: out integer;
+		answer_card: out card_info;
 		
 		finished: out std_logic;
-		fall_out: out std_logic
+		fall_out: out std_logic;
+		
+		sig: out std_logic
 	);
 end state_control;
 
@@ -58,6 +65,33 @@ architecture bhv of state_control is
 		);
 	end component;
 	
+	component buff_control
+		port(
+			clk_100m: in std_logic;
+			ena: in std_logic;
+			rst: in std_logic;
+			
+			ball: in ball_info;
+			plate: in plate_info;
+			velocity: in vector;
+			grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
+			
+			ball_b: out ball_info;
+			plate_b: out plate_info;
+			velocity_b: out vector;
+			grids_map_b: out std_logic_vector(0 to (GRIDS_BITS - 1));
+			
+			buff: out buff_info;
+			time_left: out integer;
+			
+			ask_x: in std_logic_vector(9 downto 0);
+			ask_y: in std_logic_vector(8 downto 0);
+			answer_card: out card_info;
+			
+			sig: out std_logic
+		);
+	end component;
+	
 	signal clk_trans, clk_load, clk_start: std_logic;
 	
 	signal current_grids_map: std_logic_vector(0 to (GRIDS_BITS - 1));
@@ -70,6 +104,11 @@ architecture bhv of state_control is
 	signal next_plate: plate_info;
 	signal next_velocity: vector;
 	
+	signal next_grids_map_b: std_logic_vector(0 to (GRIDS_BITS - 1));
+	signal next_ball_b: ball_info;
+	signal next_plate_b: plate_info;
+	signal next_velocity_b: vector;
+	
 	signal zeros: std_logic_vector(0 to (GRIDS_BITS - 1));
 begin
 	u_c: clock generic map(1000) port map(clk_100m, clk_trans);
@@ -77,6 +116,9 @@ begin
 	u_trans: logic_control port map(clk_trans, run, plate_move,
 	                                current_grids_map, current_plate, current_velocity, current_ball,
 	                                next_grids_map, next_plate, next_velocity, next_ball, fall_out);
+	u_buff: buff_control port map(clk_100m, run, not load, next_ball, next_plate, next_velocity, next_grids_map,
+	                              next_ball_b, next_plate_b, next_velocity_b, next_grids_map_b,
+											buff, buff_time_left, ask_x, ask_y, answer_card, sig);
 									  
 	current_grids_map <= next_grids_map when load = '0' else grids_map_load;
 	current_plate <= next_plate when load = '0' else construct_plate_info(construct_point(280, 450), 80, 0);

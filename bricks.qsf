@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C70F672C8
-set_global_assignment -name TOP_LEVEL_ENTITY buff_test
+set_global_assignment -name TOP_LEVEL_ENTITY logic_control_test
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:12:29  MAY 16, 2017"
 set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
@@ -65,17 +65,12 @@ set_location_assignment PIN_R2 -to r_out[0]
 set_global_assignment -name SIMULATION_MODE FUNCTIONAL
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
 set_location_assignment PIN_AB8 -to collision[1]
-set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "E:/Development/DLC/bricks/Waveform.vwf"
 set_location_assignment PIN_AD7 -to ps2data
 set_location_assignment PIN_AD6 -to ps2clock
 set_location_assignment PIN_AD5 -to run
 set_location_assignment PIN_N2 -to clk_100m
 set_location_assignment PIN_AE11 -to fall_out
 set_location_assignment PIN_AC15 -to finished
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_location_assignment PIN_AE5 -to b
 set_location_assignment PIN_AC7 -to buff
 set_global_assignment -name VHDL_FILE scripts/packages/key_coding.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/info.vhd
@@ -105,4 +100,12 @@ set_global_assignment -name VHDL_FILE scripts/tests/test_process.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/logic_control_test.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/display_control_test.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/buff_test.vhd
+set_location_assignment PIN_AE5 -to Ld
+set_location_assignment PIN_AC16 -to c
+set_global_assignment -name VECTOR_WAVEFORM_FILE output_files/Waveform.vwf
+set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "E:/Development/DLC/bricks/output_files/Waveform.vwf"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_AC12 -to sig
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -27,7 +27,9 @@ entity buff_control is
 		
 		ask_x: in std_logic_vector(9 downto 0);
 		ask_y: in std_logic_vector(8 downto 0);
-		answer_card: out card_info
+		answer_card: out card_info;
+		
+		sig: out std_logic
 	);
 end buff_control;
 
@@ -58,7 +60,7 @@ architecture bhv of buff_control is
 	
 	type cards_info is array(0 to (CARD_GENS - 1)) of card_info;
 	signal rst_cg: std_logic;
-	signal buff_get: buff_info;
+	signal buff_get: buff_info := none;
 	signal buff_t: buff_info;
 	signal cards: cards_info;
 	
@@ -79,6 +81,7 @@ begin
 	touch_detection:
 	process(cards)
 	begin
+		buff_get <= none;
 		for k in 0 to CARD_GENS - 1 loop
 			if (cards(k).buff /= none) then
 				if (cards(k).lt_position(0) <= plate.l_position(0) + plate.len and
@@ -86,13 +89,24 @@ begin
 					 cards(k).lt_position(1) >= plate.l_position(1)) then
 					 buff_get <= cards(k).buff;
 				end if;
-				if (ask_x >= cards(k).lt_position(0) and ask_x <= cards(k).lt_position(0) + CARD_SIDE and
-				    ask_y >= cards(k).lt_position(1) and ask_y <= cards(k).lt_position(1) + CARD_SIDE) then
+			end if;
+		end loop;
+	end process touch_detection;
+	
+	sig <= rst_cg;
+	
+	process(x_int, y_int)
+	begin
+		answer_card <= construct_card_info(construct_point(0, 0), none);
+		for k in 0 to CARD_GENS - 1 loop
+			if (cards(k).buff /= none) then
+				if (x_int >= cards(k).lt_position(0) and x_int <= cards(k).lt_position(0) + CARD_SIDE and
+				    y_int >= cards(k).lt_position(1) and y_int <= cards(k).lt_position(1) + CARD_SIDE) then
 					answer_card <= cards(k);
 				end if;
 			end if;
 		end loop;
-	end process touch_detection;
+	end process;
 	
 	process(buff_t)
 	begin

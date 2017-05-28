@@ -13,9 +13,12 @@ entity display_control is
 		
 		grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
 		plate: in plate_info;
-		ball: in ball_info;		
+		ball: in ball_info;
+		card_xy: in card_info;
 		game_flag: in integer;
 		
+		x: out std_logic_vector(9 downto 0);
+		y: out std_logic_vector(8 downto 0);
 		hs, vs: out std_logic;
 		r_out, g_out, b_out: out std_logic_vector(2 downto 0)
 	);
@@ -56,6 +59,9 @@ begin
 	u0: vga_control port map(clk, rst, now_r, now_g, now_b, hs, vs, now_x, now_y, r_out, g_out, b_out);
 	u1: draw_bricks port map(now_x, now_y, grids_map, inside_bricks, now_r_bt, now_g_bt, now_b_bt);
 	
+	x <= now_x;
+	y <= now_y;
+	
 	process(now_x, now_y)
 	begin
 		-- background --
@@ -86,6 +92,13 @@ begin
 			now_r <= "010";
 			now_g <= "101";
 			now_b <= "100";
+		end if;
+		
+		-- card --
+		if (card_xy.buff /= none) then
+			now_r <= "100";
+			now_g <= "001";
+			now_b <= "001";
 		end if;
 		
 		-- popup --

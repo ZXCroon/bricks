@@ -28,13 +28,13 @@ architecture bhv of card_generator is
 	
 	function gen_next(x, random_factor: integer) return integer is
 	begin
-		return (x + random_factor) * 32768 rem 7000 + 7000;
+		return (x + random_factor) * 32768 rem 7000 + 3000;
 	end gen_next;
 	
 	type state is (st0, st1);
 	signal clk_1k: std_logic;
 	signal calc_sig: std_logic := '0';
-	signal interval: integer;
+	signal interval: integer := seed rem 7000 + 7000;
 begin
 	u_c: clock generic map(100000) port map(clk_100m, clk_1k);
 	
@@ -60,12 +60,14 @@ begin
 				case current_state is
 					when st0 =>
 						cnt := cnt + 1;
-						if (cnt = interval) then
+						if (cnt >= interval) then
 							cnt := 0;
 							calc_sig <= '1';
 							current_state := st1;
 							-- TODO: finish card generator --
 							card.lt_position <= construct_point(300, -CARD_SIDE);
+							now_x := 300;
+							now_y := -CARD_SIDE;
 							card.buff <= smaller;
 						else
 							calc_sig <= '0';

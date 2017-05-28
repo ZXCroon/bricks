@@ -13,7 +13,9 @@ entity logic_control_test is
 		hs, vs: out std_logic;
 		r_out, g_out, b_out: out std_logic_vector(2 downto 0);
 		finished: out std_logic;
-		fall_out: out std_logic
+		fall_out: out std_logic;
+		
+		sig: out std_logic
 	);
 end logic_control_test;
 
@@ -33,13 +35,20 @@ architecture bhv of logic_control_test is
 			run: in std_logic;
 			plate_move: in integer;
 			grids_map_load: in std_logic_vector(0 to (GRIDS_BITS - 1));
+			ask_x: in std_logic_vector(9 downto 0);
+			ask_y: in std_logic_vector(8 downto 0);
 			
 			grids_map: out std_logic_vector(0 to (GRIDS_BITS - 1));
 			ball: out ball_info;
 			plate: out plate_info;
+			buff: out buff_info;
+			buff_time_left: out integer;
+			answer_card: out card_info;
 			
 			finished: out std_logic;
-			fall_out: out std_logic
+			fall_out: out std_logic;
+			
+			sig: out std_logic
 		);
 	end component;
 	
@@ -50,9 +59,12 @@ architecture bhv of logic_control_test is
 			
 			grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
 			plate: in plate_info;
-			ball: in ball_info;		
+			ball: in ball_info;
+			card_xy: in card_info;
 			game_flag: in integer;
 			
+			x: out std_logic_vector(9 downto 0);
+			y: out std_logic_vector(8 downto 0);
 			hs, vs: out std_logic;
 			r_out, g_out, b_out: out std_logic_vector(2 downto 0)
 		);
@@ -82,6 +94,12 @@ architecture bhv of logic_control_test is
 	
 	signal keyboard_rst: std_logic := '1';
 	signal plate_move_t: integer;
+	
+	signal ask_x: std_logic_vector(9 downto 0);
+	signal ask_y: std_logic_vector(8 downto 0);
+	signal buff: buff_info;
+	signal buff_time_left: integer;
+	signal answer_card: card_info;
 
 begin
 	process(clk_100m)
@@ -102,8 +120,10 @@ begin
 	u_k: keyboard_decoder port map(ps2data, ps2clock, clk_10m, keyboard_rst, plate_move_t);
 	plate_move <= plate_move_t;
 	
-	u_d: display_control port map(clk_25m, rst, grids_map, plate, ball, game_flag, hs, vs, r_out, g_out, b_out);
-	u_s: state_control port map(clk_100m, Ld, run, plate_move, grids_map_init, grids_map, ball, plate, finished, fall_out);
+	u_d: display_control port map(clk_25m, rst, grids_map, plate, ball, answer_card, game_flag, 
+	                              ask_x, ask_y, hs, vs, r_out, g_out, b_out);
+	u_s: state_control port map(clk_100m, Ld, run, plate_move, grids_map_init, ask_x, ask_y,
+	                            grids_map, ball, plate, buff, buff_time_left, answer_card, finished, fall_out, sig);
 	
 	grids_map_init <= (others => '1');
 	

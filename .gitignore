@@ -6,6 +6,6 @@
 !*.qpf
 !*.qsf
 !*.vwf
-!images/*
+!images/**/*
 
 simulation/*/

@@ -17,7 +17,7 @@ for filename in os.listdir():
       img = Image.open(filename)
       w, h = img.size
       txt = ''
-      txt += 'WIDTH=3;\nDEPTH=%d;\nADDRESS_RADIX=UNS;\nDATA_RADIX=BIN;\nCONTENT BEGIN\n' % (3 * w * h)
+      txt += 'WIDTH=9;\nDEPTH=%d;\nADDRESS_RADIX=UNS;\nDATA_RADIX=BIN;\nCONTENT BEGIN\n' % (w * h)
       for i in range(h):
           for j in range(w):
               r, g, b = img.getpixel((j, i))
@@ -26,9 +26,7 @@ for filename in os.listdir():
               b = b // 32 * 32
               img.putpixel((j, i), (r, g, b))
 
-              txt += '\t%d:%s;\n' % ((i * w + j) * 3, bin3(r // 32))
-              txt += '\t%d:%s;\n' % ((i * w + j) * 3 + 1, bin3(g // 32))
-              txt += '\t%d:%s;\n' % ((i * w + j) * 3 + 2, bin3(b // 32))
+              txt += '\t%d:%s%s%s;\n' % (i * w + j, bin3(r // 32), bin3(g // 32), bin3(b // 32))
       img.save('jpg3/' + filename)
       txt += 'END;\n'
       f = open('mif/' + filename[:-4] + '.mif', 'w')

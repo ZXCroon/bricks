@@ -82,6 +82,8 @@ architecture bhv of logic_control_test is
 	
 	signal keyboard_rst: std_logic := '1';
 	signal plate_move_t: integer;
+	
+	signal load: std_logic := '1';
 
 begin
 	process(clk_100m)
@@ -97,13 +99,20 @@ begin
 		end if;
 	end process;
 	
+	process(load, Ld)
+	begin
+		if(falling_edge(Ld)) then
+			load <= not load;
+		end if;
+	end process;
+	
 	u_c: clock generic map(10) port map(clk_100m, clk_10m);
 	
 	u_k: keyboard_decoder port map(ps2data, ps2clock, clk_10m, keyboard_rst, plate_move_t);
 	plate_move <= plate_move_t;
 	
 	u_d: display_control port map(clk_25m, rst, grids_map, plate, ball, game_flag, hs, vs, r_out, g_out, b_out);
-	u_s: state_control port map(clk_100m, Ld, run, plate_move, grids_map_init, grids_map, ball, plate, finished, fall_out);
+	u_s: state_control port map(clk_100m, load, run, plate_move, grids_map_init, grids_map, ball, plate, finished, fall_out);
 	
 	grids_map_init <= (others => '1');
 	

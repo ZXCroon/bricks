@@ -42,6 +42,7 @@ architecture bhv of buff_control is
 			rst: in std_logic;
 			buff_get: in buff_info;
 			buff: out buff_info := none;
+			buff_sig: out std_logic;
 			time_left: out integer      -- unit: ms
 		);
 	end component;
@@ -63,10 +64,11 @@ architecture bhv of buff_control is
 	signal buff_get: buff_info := none;
 	signal buff_t: buff_info;
 	signal cards: cards_info;
+	signal buff_sig: std_logic;
 	
 	signal x_int, y_int: integer;
 begin
-	u_btc: buff_time_control generic map(60000) port map(clk_100m, ena, rst, buff_get, buff_t, time_left);
+	u_btc: buff_time_control generic map(60000) port map(clk_100m, ena, rst, buff_get, buff_t, buff_sig, time_left);
 	buff <= buff_t;
 	rst_cg <= '0' when buff_t /= none else '1';
 	
@@ -86,14 +88,15 @@ begin
 			if (cards(k).buff /= none) then
 				if (cards(k).lt_position(0) <= plate.l_position(0) + plate.len and
 				    cards(k).lt_position(0) + CARD_SIDE >= plate.l_position(0) and
-					 cards(k).lt_position(1) >= plate.l_position(1)) then
+					 cards(k).lt_position(1) + CARD_SIDE >= plate.l_position(1) and
+					 cards(k).lt_position(1) <= plate.l_position(1) + PLATE_WIDTH) then
 					 buff_get <= cards(k).buff;
 				end if;
 			end if;
 		end loop;
 	end process touch_detection;
 	
-	sig <= rst_cg;
+	sig <= '1' when buff_t /= none else '0';
 	
 	process(x_int, y_int)
 	begin
@@ -110,18 +113,49 @@ begin
 	
 	process(buff_t)
 	begin
+		ball_b.position <= ball.position;
+		ball_b.radius <= NORMAL_BALL_RADIUS;
+		plate_b.l_position <= plate.l_position;
+		plate_b.len <= NORMAL_PLATE_LEN;
+		velocity_b <= velocity;
+		grids_map_b <= grids_map;
 		case buff_t is
 			when smaller =>
-				ball_b.position <= ball.position;
 				ball_b.radius <= SMALL_BALL_RADIUS;
-				velocity_b <= velocity;
-				grids_map_b <= grids_map;
+			when bigger =>
+				ball_b.radius <= BIG_BALL_RADIUS;
 			when others =>
-				ball_b <= ball;
-				plate_b <= plate;
-				velocity_b <= velocity;
-				grids_map_b <= grids_map;
 		end case;
 	end process;
 	
+--	process(buff_t, buff_sig)
+--		variable st: std_logic := '0';
+--	begin
+--		if (buff_sig'event and buff_sig = '1') then
+--			if (st = '0') then
+--				case buff_t is
+--					when smaller =>
+--						ball_b.position <= ball.position;
+--						ball_b.radius <= SMALL_BALL_RADIUS;
+--						plate_b <= plate;
+--						velocity_b <= velocity;
+--						grids_map_b <= grids_map;
+--					when others =>
+--						ball_b <= ball;
+--						plate_b <= plate;
+--						velocity_b <= velocity;
+--						grids_map_b <= grids_map;
+--				end case;
+--			else
+--				ball_b.position <= ball.position;
+--				ball_b.radius <= NORMAL_BALL_RADIUS;
+--				plate_b.l_position <= plate.l_position;
+--				plate_b.len <= NORMAL_PLATE_LEN;
+--				-- TODO: velocity --
+--				velocity_b <= velocity;
+--				grids_map_b <= grids_map;
+--			end if;
+--			st := not st;
+--		end if;
+--	end process;
 end bhv;

@@ -120,10 +120,11 @@ begin
 	                              next_ball_b, next_plate_b, next_velocity_b, next_grids_map_b,
 											buff, buff_time_left, ask_x, ask_y, answer_card, sig);
 									  
-	current_grids_map <= next_grids_map when load = '0' else grids_map_load;
-	current_plate <= next_plate when load = '0' else construct_plate_info(construct_point(280, 450), 80, 0);
-	current_velocity <= next_velocity when load = '0' else construct_vector(100, -100);
-	current_ball <= next_ball when load = '0' else construct_ball_info(NORMAL_BALL_RADIUS, construct_point(320, 442));
+	current_grids_map <= next_grids_map_b when load = '0' else grids_map_load;
+	current_plate <= next_plate_b when load = '0' else
+	                 construct_plate_info(construct_point((SCREEN_WIDTH - NORMAL_PLATE_LEN) / 2, 450), NORMAL_PLATE_LEN, 0);
+	current_velocity <= next_velocity_b when load = '0' else construct_vector(100, -100);
+	current_ball <= next_ball_b when load = '0' else construct_ball_info(NORMAL_BALL_RADIUS, construct_point(320, 442));
 	
 	grids_map <= current_grids_map;
 	ball <= current_ball;

@@ -22,7 +22,8 @@ package info is
 	
 	type collision_info is (none, vertical, horizontal, corner);
 	
-	type buff_info is (none, smaller);
+	type buff_info is (none, smaller, bigger);
+	constant BUFF_NUM: integer := 3;
 	type card_info is record
 		lt_position: point;
 		buff: buff_info;
@@ -32,6 +33,7 @@ package info is
 	function construct_brick_info(lt_position_0: point; class_0: std_logic_vector) return brick_info;
 	function construct_plate_info(l_position_0: point; len_0, class_0: integer) return plate_info;
 	function construct_card_info(lt_position_0: point; buff_0: buff_info) return card_info;
+	function get_buff(num: integer) return buff_info;
 end info;
 
 package body info is
@@ -69,6 +71,16 @@ begin
 	card_info_0.buff := buff_0;
 	return card_info_0;
 end construct_card_info;
+
+function get_buff(num: integer) return buff_info is
+begin
+	case num is
+		when 0 => return none;
+		when 1 => return smaller;
+		when 2 => return bigger;
+		when others => return none;
+	end case;
+end get_buff;
 
 
 end info;

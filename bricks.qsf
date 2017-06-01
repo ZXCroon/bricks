@@ -90,6 +90,7 @@ set_global_assignment -name VHDL_FILE scripts/modules/buff_control.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/display_control.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/process_controller.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/keyboard_decoder.vhd
+set_global_assignment -name VHDL_FILE scripts/rom_comp/rom_reader.vhd
 set_global_assignment -name VHDL_FILE scripts/util_comp/serial_to_parallel.vhd
 set_global_assignment -name VHDL_FILE scripts/util_comp/clock.vhd
 set_global_assignment -name VHDL_FILE scripts/logic_control_comp/wall_collision_detection.vhd
@@ -126,3 +127,4 @@ set_global_assignment -name MIF_FILE images/mif/ball_traversal.mif
 set_global_assignment -name MIF_FILE images/mif/ball_small.mif
 set_global_assignment -name MIF_FILE images/mif/ball_normal.mif
 set_global_assignment -name MIF_FILE images/mif/ball_big.mif
+set_global_assignment -name QIP_FILE scripts/rom_comp/rom_reader.qip

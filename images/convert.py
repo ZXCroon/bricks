@@ -32,3 +32,4 @@ for filename in os.listdir():
       f = open('mif/' + filename[:-4] + '.mif', 'w')
       f.write(txt)
       f.close()
+

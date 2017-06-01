@@ -20,6 +20,7 @@ package img_coding is
 		card_shorter,
 		card_smaller,
 		card_traversal,
+		card_wiggle,
 		plate_long,
 		plate_normal,
 		plate_short
@@ -41,8 +42,9 @@ package img_coding is
 		card_shorter => 5152,
 		card_smaller => 5552,
 		card_traversal => 5952,
-		plate_long => 6352,
-		plate_normal => 7002,
-		plate_short => 7502
+		card_wiggle => 6352,
+		plate_long => 6752,
+		plate_normal => 7402,
+		plate_short => 7902
 	);
 end img_coding;

@@ -12,6 +12,7 @@ entity buff_time_control is
 		rst: in std_logic;
 		buff_get: in buff_info;
 		buff: out buff_info := none;
+		buff_sig: out std_logic := '0';
 		time_left: out integer      -- unit: ms
 	);
 end buff_time_control;
@@ -43,11 +44,13 @@ begin
 			time_left_v := 0;
 		elsif (clk_10m'event and clk_10m = '1') then
 			if (ena = '1') then
+				buff_sig <= '0';
 				case current_state is
 					when st0 =>
 						if (buff_get /= none) then
 							current_state := st1;
 							buff <= buff_get;
+							buff_sig <= '1';
 						end if;
 					when st1 =>
 						if (buff_get = none) then
@@ -63,6 +66,7 @@ begin
 							if (time_left_v = 0) then
 								current_state := st0;
 								buff <= none;
+								buff_sig <= '1';
 							end if;
 						end if;
 					when others =>

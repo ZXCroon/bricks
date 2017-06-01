@@ -88,7 +88,7 @@ begin
 		if (now_x >= conv_std_logic_vector(plate.l_position(0), 10) and
 	       now_x <= conv_std_logic_vector(plate.l_position(0) + plate.len, 10) and
 		    now_y >= conv_std_logic_vector(plate.l_position(1), 9) and
-			 now_y <= conv_std_logic_vector(plate.l_position(1) + 5, 9)) then
+			 now_y <= conv_std_logic_vector(plate.l_position(1) + PLATE_WIDTH, 9)) then
 			now_r <= "010";
 			now_g <= "101";
 			now_b <= "100";

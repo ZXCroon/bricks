@@ -14,7 +14,7 @@ def bin3(x):
     return s
 
 
-offset = []
+offset = {}
 datalst = []
 filelst = os.listdir('.')
 filelst.sort()
@@ -26,7 +26,8 @@ for filename in filelst:
 
         txt = ''
         txt += 'WIDTH=9;\nDEPTH=%d;\nADDRESS_RADIX=UNS;\nDATA_RADIX=BIN;\nCONTENT BEGIN\n' % (w * h)
-        offset.append('\tconstant {name}: integer := {pos};'.format(name=filename.replace('.jpg', '_start'), pos=len(datalst)))
+        # offset.append('\tconstant {name}: integer := {pos};'.format(name=filename.replace('.jpg', '_start'), pos=len(datalst)))
+        offset[filename.replace('.jpg', '')] = len(datalst)
 
         for i in range(h):
             for j in range(w):
@@ -41,14 +42,23 @@ for filename in filelst:
 
 
 fout = open('mif/allimg.mif', 'w')
-foffset = open('../scripts/packages/img_offset_temp.vhd')
+foffset = open('../scripts/packages/img_coding_temp.vhd')
 template = foffset.read()
 foffset.close()
-foffset = open('../scripts/packages/img_offset.vhd', 'w')
+foffset = open('../scripts/packages/img_coding.vhd', 'w')
 
 fout.write('WIDTH=9;\nDEPTH={};\nADDRESS_RADIX=UNS;\nDATA_RADIX=BIN;\nCONTENT BEGIN\n'.format(len(datalst)))
 for line in datalst:
     fout.write(line)
 fout.write('END;\n')
 
-foffset.write(template.format('\n'.join(offset)))
+keys = list(offset.keys())
+keys.sort()
+offset_txt = ''
+for k in keys:
+    offset_txt += '\t\t{} => {},\n'.format(k, offset[k])
+offset_txt = offset_txt[:-2]
+
+img_info = ',\n\t\t'.join(keys)
+img_info = '\t\t' + img_info
+foffset.write(template.format(img_info=img_info, dic=offset_txt))

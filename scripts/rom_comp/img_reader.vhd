@@ -13,52 +13,58 @@ entity img_reader is
 		x: in std_logic_vector(9 downto 0);
 		y: in std_logic_vector(8 downto 0);
 		img: in img_info;
-		clk: in std_logic;
+		-- outclk frequnceny = inclk freq * 2
+		inclk: in std_logic;
+		clken: in std_logic;
 		r, g, b: out std_logic_vector(2 downto 0);
-		dataok: out std_logic
+		dataok: out std_logic := '0'
 	);
 end img_reader;
 
 architecture bhv of img_reader is
 	component rom_reader
-		port (
-			address		: in std_logic_vector (13 downto 0);
-			clken		: in std_logic;
-			clock		: in std_logic;
-			q		: out std_logic_vector (8 downto 0)
+		PORT
+		(
+			address		: IN STD_LOGIC_VECTOR (13 DOWNTO 0);
+			clken		: IN STD_LOGIC  := '1';
+			clock		: IN STD_LOGIC  := '1';
+			q		: OUT STD_LOGIC_VECTOR (8 DOWNTO 0)
 		);
 	end component;
 
-	type statetype is (reading, output);
-	signal state: statetype := reading;
+	type statetype is (read_add, waiting, output);
+	signal state: statetype := read_add;
 
 	signal address: std_logic_vector(13 downto 0) := (others=>'0');
 	signal romdata: std_logic_vector(8 downto 0);
-	signal clken: std_logic := '0';
 
-	signal addint, addtmp: integer range 0 to 2**address'length-1 := 0;
+	signal addint: integer range 0 to 2**address'length-1 := 0;
 begin
-	romreader: rom_reader port map(address, '1', clk, romdata);
+	romreader: rom_reader port map(address, clken, inclk, romdata);
+	address <= conv_std_logic_vector(addint, address'length);
 	r <= romdata(8 downto 6);
 	g <= romdata(5 downto 3);
 	b <= romdata(2 downto 0);
-	address <= conv_std_logic_vector(addint, address'length);
 
-	state_machine: process(state, clk)
+	state_machine: process(state, inclk)
 	begin
-		if(rising_edge(clk)) then
+		if(rising_edge(inclk)) then
 			dataok <= '0';
 			case state is
 				--when ready =>
 				--	addint <= addtmp;
-				--	state <= reading;
-				when reading =>
+				--	state <= read_add;
+				when read_add =>
+					if(clken='1') then
+						state <= waiting;
+					end if;
+				when waiting =>
 					state <= output;
 				when output =>
 					dataok <= '1';
-					state <= reading;
+					state <= read_add;
 				when others =>
-					state <= statetype'left;
+					state <= read_add;
 			end case;
 		end if;
 	end process;

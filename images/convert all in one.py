@@ -15,6 +15,7 @@ def bin3(x):
 
 
 offset = {}
+width = {}
 datalst = []
 filelst = os.listdir('.')
 filelst.sort()
@@ -28,6 +29,7 @@ for filename in filelst:
         txt += 'WIDTH=9;\nDEPTH=%d;\nADDRESS_RADIX=UNS;\nDATA_RADIX=BIN;\nCONTENT BEGIN\n' % (w * h)
         # offset.append('\tconstant {name}: integer := {pos};'.format(name=filename.replace('.jpg', '_start'), pos=len(datalst)))
         offset[filename.replace('.jpg', '')] = len(datalst)
+        width[filename.replace('.jpg', '')] = w
 
         for i in range(h):
             for j in range(w):
@@ -54,11 +56,8 @@ fout.write('END;\n')
 
 keys = list(offset.keys())
 keys.sort()
-offset_txt = ''
-for k in keys:
-    offset_txt += '\t\t{} => {},\n'.format(k, offset[k])
-offset_txt = offset_txt[:-2]
+offset_txt = ',\n\t\t'.join(map(lambda k: '{} => {}'.format(k, offset[k]), keys))
+width_txt = ',\n\t\t'.join(map(lambda k: '{} => {}'.format(k, width[k]), keys))
 
 img_info = ',\n\t\t'.join(keys)
-img_info = '\t\t' + img_info
-foffset.write(template.format(img_info=img_info, dic=offset_txt))
+foffset.write(template.format(img_info=img_info, offset=offset_txt, width=width_txt))

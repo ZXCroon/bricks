@@ -47,4 +47,25 @@ package img_coding is
 		plate_normal => 7402,
 		plate_short => 7902
 	);
+	constant width_dic: img_info2integer := (
+		ball_big => 24,
+		ball_normal => 16,
+		ball_small => 8,
+		ball_traversal => 16,
+		bg_texture => 20,
+		brick1 => 40,
+		brick2 => 40,
+		brick3 => 40,
+		brick4 => 40,
+		card_bigger => 20,
+		card_death => 20,
+		card_longer => 20,
+		card_shorter => 20,
+		card_smaller => 20,
+		card_traversal => 20,
+		card_wiggle => 20,
+		plate_long => 130,
+		plate_normal => 100,
+		plate_short => 70
+	);
 end img_coding;

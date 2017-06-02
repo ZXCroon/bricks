@@ -3,7 +3,6 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_unsigned.all;
 use IEEE.std_logic_arith.all;
 use work.img_coding.all;
-use work.basic_settings.all;
 
 -- 使用方式
 -- 在rising_edge(dataok)时, 读取romdata, 并且准备好下一个请求的address
@@ -45,7 +44,7 @@ begin
 	b <= romdata(2 downto 0);
 	address <= conv_std_logic_vector(addint, address'length);
 
-	state_machine: process(state)
+	state_machine: process(state, clk)
 	begin
 		if(rising_edge(clk)) then
 			dataok <= '0';
@@ -65,10 +64,10 @@ begin
 	end process;
 
 	data_address: process(x, y, img)
-		variable xint, yint: integer range addint'range;
+		variable xint, yint: integer; -- range addint'low to addint'high;
 	begin
 		xint := conv_integer(x);
 		yint := conv_integer(y);
-		addint <= offset_dic(img) + yint + xint * SCREEN_WIDTH;
+		addint <= offset_dic(img) + yint + xint * width_dic(img);
 	end process;
 end bhv;

@@ -10,8 +10,9 @@ entity draw_bricks is
 		y: in std_logic_vector(8 downto 0);
 		grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
 		
-		inside: out boolean;
-		r_out, b_out, g_out: out std_logic_vector(2 downto 0)
+		inside_which: out std_logic_vector(0 to (GRID_BITS - 1));
+		x_r: out std_logic_vector(9 downto 0);
+		y_r: out std_logic_vector(8 downto 0)
 	);
 end draw_bricks;
 
@@ -41,25 +42,30 @@ begin
 			else (others => '0');
 	end generate gen_filter;
 	
-	summarized_grids_map(0 to (GRID_BITS - 1)) <= filtrated_grids_map(0 to (GRID_BITS - 1));
-	gen_summary:
-	for k in 1 to GRIDS_AMOUNT - 1 generate
-		summarized_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) <= 
-		filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1))
-			when filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) /= zeros
-			else summarized_grids_map(((k - 1) * GRID_BITS) to (k * GRID_BITS - 1));
-	end generate gen_summary;
-	
-	summarized_grid <= summarized_grids_map((GRIDS_BITS - GRID_BITS) to (GRIDS_BITS - 1));
-	process(summarized_grid)
+	process(filtrated_grids_map)
+		variable l: integer := 0;
+		variable r: integer := GRID_BITS - 1;
 	begin
-		if (summarized_grid = zeros) then
-			inside <= false;
-		else
-			inside <= true;
-			r_out <= "101";
-			g_out <= "011";
-			b_out <= "011";
-		end if;
+		for k in 0 to GRIDS_AMOUNT - 1 loop
+			if (filtrated_grids_map(l to r) /= zeros) then
+				inside_which <= filtrated_grids_map(l to r);
+				x_r <= x - conv_std_logic_vector(lt_x_array(k), 10);
+				y_r <= y - conv_std_logic_vector(lt_y_array(k), 9);
+			end if;
+			l := r + 1;
+			r := r + GRID_BITS;
+		end loop;
 	end process;
+	
+--	summarized_grids_map(0 to (GRID_BITS - 1)) <= filtrated_grids_map(0 to (GRID_BITS - 1));
+--	gen_summary:
+--	for k in 1 to GRIDS_AMOUNT - 1 generate
+--		summarized_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) <= 
+--		filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1))
+--			when filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) /= zeros
+--			else summarized_grids_map(((k - 1) * GRID_BITS) to (k * GRID_BITS - 1));
+--	end generate gen_summary;
+--	
+--	summarized_grid <= summarized_grids_map((GRIDS_BITS - GRID_BITS) to (GRIDS_BITS - 1));
+--	inside_which <= summarized_grid;
 end bhv;

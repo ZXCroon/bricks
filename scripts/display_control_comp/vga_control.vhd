@@ -15,6 +15,8 @@ entity vga_control is
 		hs, vs: out std_logic;
 		x: out std_logic_vector(9 downto 0);
 		y: out std_logic_vector(8 downto 0);
+		next_x: out std_logic_vector(9 downto 0);
+		next_y: out std_logic_vector(8 downto 0);
 		r_out, g_out, b_out: out std_logic_vector(2 downto 0)
 	);
 end vga_control;
@@ -22,29 +24,28 @@ end vga_control;
 architecture bhv of vga_control is
 	signal xt: std_logic_vector(9 downto 0);
 	signal yt: std_logic_vector(8 downto 0);
+	signal next_xt: std_logic_vector(9 downto 0);
+	signal next_yt: std_logic_vector(8 downto 0);
 	signal hst, vst: std_logic;
 begin
 	hs <= hst;
 	vs <= vst;
 	x <= xt;
 	y <= yt;
+	next_x <= next_xt;
+	next_y <= next_yt;
 	
 	process(vga_clk, rst)
 	begin
 		if (rst = '0') then
 			xt <= (others => '0');
 			yt <= (others => '0');
+			next_xt <= (others => '0');
+			next_xt(0) <= '1';
+			next_yt <= (others => '0');
 		elsif (vga_clk'event and vga_clk = '1') then
-			if (xt = 799) then
-				xt <= (others => '0');
-				if (yt = 524) then
-					yt <= (others => '0');
-				else
-					yt <= yt + 1;
-				end if;
-			else
-				xt <= xt + 1;
-			end if;
+			xt <= next_xt;
+			yt <= next_yt;
 		end if;
 	end process;
 	
@@ -84,6 +85,20 @@ begin
 				g_out <= g_in;
 				b_out <= b_in;
 			end if;
+		end if;
+	end process;
+	
+	process(xt, yt)
+	begin
+		if (xt = 799) then
+			next_xt <= (others => '0');
+			if (yt = 524) then
+				next_yt <= (others => '0');
+			else
+				next_yt <= yt + 1;
+			end if;
+		else
+			next_xt <= xt + 1;
 		end if;
 	end process;
 end bhv;

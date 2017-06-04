@@ -32,7 +32,7 @@ architecture bhv of img_reader is
 		);
 	end component;
 
-	type statetype is (read_add, waiting, output);
+	type statetype is (read_add, waiting1, waiting2, output);
 	signal state: statetype := read_add;
 
 	signal address: std_logic_vector(13 downto 0) := (others=>'0');
@@ -56,9 +56,11 @@ begin
 				--	state <= read_add;
 				when read_add =>
 					if(clken='1') then
-						state <= waiting;
+						state <= waiting1;
 					end if;
-				when waiting =>
+				when waiting1 =>
+					state <= waiting2;
+				when waiting2 =>
 					state <= output;
 				when output =>
 					dataok <= '1';

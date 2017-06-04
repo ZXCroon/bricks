@@ -23,7 +23,8 @@ package img_coding is
 		card_wiggle,
 		plate_long,
 		plate_normal,
-		plate_short
+		plate_short,
+		start
 	);
 	type img_info2integer is array(img_info) of integer;
 	constant offset_dic: img_info2integer := (
@@ -45,7 +46,8 @@ package img_coding is
 		card_wiggle => 6352,
 		plate_long => 6752,
 		plate_normal => 7402,
-		plate_short => 7902
+		plate_short => 7902,
+		start => 8252
 	);
 	constant width_dic: img_info2integer := (
 		ball_big => 24,
@@ -66,6 +68,7 @@ package img_coding is
 		card_wiggle => 20,
 		plate_long => 130,
 		plate_normal => 100,
-		plate_short => 70
+		plate_short => 70,
+		start => 300
 	);
 end img_coding;

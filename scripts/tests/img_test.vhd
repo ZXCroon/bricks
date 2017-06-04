@@ -36,12 +36,12 @@ architecture bhv of img_test is
 	signal ask_x: std_logic_vector(9 downto 0);
 	signal ask_y: std_logic_vector(8 downto 0);
 begin
-	u: img_reader port map(ask_x, ask_y, ball_small, clk_100m, '1', r_out, g_out, b_out, vga_clk);
+	u: img_reader port map(ask_x, ask_y, bg_texture, clk_100m, '1', r_out, g_out, b_out, vga_clk);
 	hs <= hst;
 	vs <= vst;
 	
-	ask_x <= conv_std_logic_vector(conv_integer(next_x) rem 8, 10);
-	ask_y <= conv_std_logic_vector(conv_integer(next_y) rem 8, 9);
+	ask_x <= conv_std_logic_vector(conv_integer(next_x) rem 20, 10);
+	ask_y <= conv_std_logic_vector(conv_integer(next_y) rem 20, 9);
 	
 	process(vga_clk, rst)
 		variable xt_v: std_logic_vector(9 downto 0);

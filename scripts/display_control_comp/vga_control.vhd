@@ -36,6 +36,8 @@ begin
 	next_y <= next_yt;
 	
 	process(vga_clk, rst)
+		variable x_v: std_logic_vector(9 downto 0);
+		variable y_v: std_logic_vector(8 downto 0);
 	begin
 		if (rst = '0') then
 			xt <= (others => '0');
@@ -44,18 +46,20 @@ begin
 			next_xt(0) <= '1';
 			next_yt <= (others => '0');
 		elsif (vga_clk'event and vga_clk = '1') then
-			xt <= next_xt;
-			yt <= next_yt;
+			x_v := next_xt;
+			y_v := next_yt;
+			xt <= x_v;
+			yt <= y_v;
 			
-			if (xt = 799) then
+			if (x_v = 799) then
 				next_xt <= (others => '0');
-				if (yt = 524) then
+				if (y_v = 524) then
 					next_yt <= (others => '0');
 				else
-					next_yt <= yt + 1;
+					next_yt <= y_v + 1;
 				end if;
 			else
-				next_xt <= xt + 1;
+				next_xt <= x_v + 1;
 			end if;
 		end if;
 	end process;

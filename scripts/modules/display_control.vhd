@@ -94,8 +94,8 @@ begin
 	process(next_x, next_y)
 	begin
 		img <= bg_texture;
-		next_x_r <= conv_std_logic_vector(conv_integer(next_x_r) rem 20, 10);
-		next_y_r <= conv_std_logic_vector(conv_integer(next_y_r) rem 20, 9);
+		next_x_r <= conv_std_logic_vector(conv_integer(next_x) rem 20, 10);
+		next_y_r <= conv_std_logic_vector(conv_integer(next_y) rem 20, 9);
 		
 		-- bricks --
 		if (inside_which /= zeros) then
@@ -115,11 +115,22 @@ begin
 			next_y_r <= next_y - plate.l_position(1);
 		end if;
 		
+		-- card --
+		if (card_xy.buff /= none) then
+			case card_xy.buff is
+				when smaller => img <= card_smaller;
+				when bigger => img <= card_bigger;
+				when others => img <= card_smaller;
+			end case;
+			next_x_r <= next_x - card_xy.lt_position(0);
+			next_y_r <= next_y - card_xy.lt_position(1);
+		end if;
+		
 		-- ball --
 		if (distance2(construct_point(conv_integer(next_x), conv_integer(next_y)), ball.position) <=
 		    ball.radius * ball.radius) then
 			next_x_r <= next_x - (ball.position(0) - ball.radius);
-			next_y_r <= next_y - (ball.position(0) - ball.radius);
+			next_y_r <= next_y - (ball.position(1) - ball.radius);
 			case buff is
 				when smaller => img <= ball_small;
 				when bigger  => img <= ball_big;

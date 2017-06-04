@@ -46,6 +46,17 @@ begin
 		elsif (vga_clk'event and vga_clk = '1') then
 			xt <= next_xt;
 			yt <= next_yt;
+			
+			if (xt = 799) then
+				next_xt <= (others => '0');
+				if (yt = 524) then
+					next_yt <= (others => '0');
+				else
+					next_yt <= yt + 1;
+				end if;
+			else
+				next_xt <= xt + 1;
+			end if;
 		end if;
 	end process;
 	
@@ -85,20 +96,6 @@ begin
 				g_out <= g_in;
 				b_out <= b_in;
 			end if;
-		end if;
-	end process;
-	
-	process(xt, yt)
-	begin
-		if (xt = 799) then
-			next_xt <= (others => '0');
-			if (yt = 524) then
-				next_yt <= (others => '0');
-			else
-				next_yt <= yt + 1;
-			end if;
-		else
-			next_xt <= xt + 1;
 		end if;
 	end process;
 end bhv;

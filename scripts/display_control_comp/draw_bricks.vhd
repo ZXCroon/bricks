@@ -43,17 +43,13 @@ begin
 	end generate gen_filter;
 	
 	process(filtrated_grids_map)
-		variable l: integer := 0;
-		variable r: integer := GRID_BITS - 1;
 	begin
 		for k in 0 to GRIDS_AMOUNT - 1 loop
-			if (filtrated_grids_map(l to r) /= zeros) then
-				inside_which <= filtrated_grids_map(l to r);
+			if (filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) /= zeros) then
+				inside_which <= filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1));
 				x_r <= x - conv_std_logic_vector(lt_x_array(k), 10);
 				y_r <= y - conv_std_logic_vector(lt_y_array(k), 9);
 			end if;
-			l := r + 1;
-			r := r + GRID_BITS;
 		end loop;
 	end process;
 	

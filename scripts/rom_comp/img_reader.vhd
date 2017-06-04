@@ -76,6 +76,6 @@ begin
 	begin
 		xint := conv_integer(x);
 		yint := conv_integer(y);
-		addint <= offset_dic(img) + yint + xint * width_dic(img);
+		addint <= offset_dic(img) + xint + yint * width_dic(img);
 	end process;
 end bhv;

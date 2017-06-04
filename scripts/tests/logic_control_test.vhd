@@ -54,7 +54,7 @@ architecture bhv of logic_control_test is
 	
 	component display_control
 		port(
-			clk: in std_logic;
+			clk_100m: in std_logic;
 			rst: in std_logic;
 			
 			grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
@@ -64,8 +64,8 @@ architecture bhv of logic_control_test is
 			buff: in buff_info;
 			game_flag: in integer;
 			
-			x: out std_logic_vector(9 downto 0);
-			y: out std_logic_vector(8 downto 0);
+			ask_x: out std_logic_vector(9 downto 0);
+			ask_y: out std_logic_vector(8 downto 0);
 			hs, vs: out std_logic;
 			r_out, g_out, b_out: out std_logic_vector(2 downto 0)
 		);

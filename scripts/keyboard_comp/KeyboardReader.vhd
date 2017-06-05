@@ -105,6 +105,7 @@ begin
 						-- 末尾‘1’
 						if data = '1' then
 							state <= finish;
+							--scancode <= code;
 						else
 							state <= delay;
 						end if;

@@ -78,6 +78,14 @@ architecture bhv of logic_control_test is
 			clk_out: out std_logic
 		);
 	end component;
+
+	component convert_risingedge is
+		port(
+			-- fclk: filter clock, clkin: 想检测上升沿的时钟
+			fclk, clkin: in std_logic;
+			clk: out std_logic
+		);
+	end component;
 	
 	signal rst: std_logic := '1';
 	signal plate_move: integer := 0;
@@ -102,8 +110,9 @@ architecture bhv of logic_control_test is
 	signal buff_time_left: integer;
 	signal answer_card: card_info;
 
-	signal load: std_logic := '1';
+	signal load, LD_cvt: std_logic := '1';
 begin
+	-- TODO: clk_25m和clk_100m上升沿可能不同步
 	process(clk_100m)
 	begin
 		if (clk_100m'event and clk_100m = '1') then
@@ -117,11 +126,15 @@ begin
 		end if;
 	end process;
 	
-	process(load, Ld)
+	narrow_Ld: convert_risingedge port map(clk_10m, Ld, LD_cvt);
+	process(load, LD_cvt)
 	begin
-		if(falling_edge(Ld)) then
+		if(rising_edge(clk_10m) and LD_cvt='1') then
 			load <= not load;
 		end if;
+--		if(falling_edge(Ld)) then
+--			load <= not load;
+--		end if;
 	end process;
 	
 	u_c: clock generic map(10) port map(clk_100m, clk_10m);

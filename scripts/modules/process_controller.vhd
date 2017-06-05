@@ -8,7 +8,7 @@ entity process_controller is
 		clk, rst: in std_logic;
 		confirm, quit, upp, downp: in std_logic;
 		gameinfo: in std_logic;
-		logic_ena, maploader_ena: out std_logic := '0';
+		logic_run, logic_load: out std_logic := '0';
 		interface_info: out std_logic_vector(1 downto 0)
 	);
 end process_controller;
@@ -35,9 +35,11 @@ begin
 		if(rst='0') then
 			curstate <= menu;
 		elsif(rising_edge(clk)) then
+			logic_load <= '0';
 			case curstate is
 				when menu =>
 					if(zp='1') then
+						logic_load <= '1';
 						curstate <= gaming;
 					end if;
 				when gaming =>
@@ -60,7 +62,7 @@ begin
 		end if;
 	end process;
 	
-	logic_ena <= '1' when curstate=gaming else '0';
+	logic_run <= '1' when curstate=gaming else '0';
 	
 	-- output interface info
 	with curstate select

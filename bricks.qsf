@@ -38,10 +38,10 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C70F672C8
-set_global_assignment -name TOP_LEVEL_ENTITY logic_control_test
+set_global_assignment -name TOP_LEVEL_ENTITY bricks
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:12:29  MAY 16, 2017"
-set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
+set_global_assignment -name LAST_QUARTUS_VERSION 13.0
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
@@ -85,6 +85,7 @@ set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME tb -section_id tb
 set_global_assignment -name EDA_TEST_BENCH_FILE simulation/rom/tb.vhd -section_id tb
 set_global_assignment -name VECTOR_OUTPUT_FORMAT VWF
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "E:/Development/DLC/bricks/output_files/Waveform.vwf"
+set_global_assignment -name VHDL_FILE scripts/modules/bricks.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/img_coding.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/key_coding.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/info.vhd

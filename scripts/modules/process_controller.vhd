@@ -2,6 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use ieee.std_logic_arith.all;
+use work.interface_coding.all;
 
 entity process_controller is
 	port(
@@ -9,7 +10,7 @@ entity process_controller is
 		confirm, quit, upp, downp: in std_logic;
 		gameinfo: in std_logic;
 		logic_run, logic_load: out std_logic := '0';
-		interface_info: out std_logic_vector(1 downto 0)
+		interface_info: out interface_type
 	);
 end process_controller;
 
@@ -66,8 +67,8 @@ begin
 	
 	-- output interface info
 	with curstate select
-		interface_info <= "00" when menu,
-		                  "01" when gaming,
-						  "10" when pause,
-						  "11" when gameover;
+		interface_info <= ui_menu when menu,
+		                  ui_gaming when gaming,
+						  ui_pause when pause,
+						  ui_gameover when gameover;
 end bhv;

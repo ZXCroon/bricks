@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 use work.geometry.all;
 use work.info.all;
 use work.basic_settings.all;
+use work.interface_coding.all;
 
 entity logic_control_test is
 	port(
@@ -62,7 +63,7 @@ architecture bhv of logic_control_test is
 			ball: in ball_info;
 			card_xy: in card_info;
 			buff: in buff_info;
-			game_flag: in integer;
+			game_flag: in interface_type;
 			
 			ask_x: out std_logic_vector(9 downto 0);
 			ask_y: out std_logic_vector(8 downto 0);
@@ -94,7 +95,7 @@ architecture bhv of logic_control_test is
 	signal grids_map_init: std_logic_vector(0 to (GRIDS_BITS - 1));
 	signal plate: plate_info;
 	signal ball: ball_info;
-	signal game_flag: integer;
+	signal game_flag: interface_type;
 	
 	signal clk_50m: std_logic;
 	signal clk_25m: std_logic;
@@ -144,7 +145,7 @@ begin
 	
 	u_d: display_control port map(clk_100m, rst, grids_map, plate, ball, answer_card, buff, game_flag, 
 	                              ask_x, ask_y, hs, vs, r_out, g_out, b_out);
-	u_s: state_control port map(clk_100m, load, run, plate_move, grids_map_init, ask_x, ask_y,
+	u_s: state_control port map(clk_100m, Ld, run, plate_move, grids_map_init, ask_x, ask_y,
 	                            grids_map, ball, plate, buff, buff_time_left, answer_card, finished, fall_out, sig);
 	
 	grids_map_init <= (others => '1');

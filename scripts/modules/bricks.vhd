@@ -10,6 +10,7 @@ entity bricks is
 		clk_100m: in std_logic;
 		ps2data, ps2clock: in std_logic;
 		rst: in std_logic; -- reset when =0
+		interface: out interface_type;
 		-- display
 		hs, vs: out std_logic;
 		r_out, g_out, b_out: out std_logic_vector(2 downto 0)
@@ -116,6 +117,7 @@ architecture bhv of bricks is
 	signal finished, fall_out: std_logic;
 	signal sig: std_logic;
 begin
+	interface <= interface_info;
 	u_keyboard: keyboard_decoder port map(
 		datain=>ps2data, clkin=>ps2clock, fclk=>clk_10m, rst_in=>rst,
 		board_speed=>plate_speed, confirm=>confirm, quit=>quit,

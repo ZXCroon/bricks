@@ -143,10 +143,13 @@ begin
 	u_k: keyboard_decoder port map(ps2data, ps2clock, clk_10m, keyboard_rst, plate_move_t);
 	plate_move <= plate_move_t;
 	
-	u_d: display_control port map(clk_100m, rst, grids_map, plate, ball, answer_card, buff, game_flag, 
-	                              ask_x, ask_y, hs, vs, r_out, g_out, b_out);
-	u_s: state_control port map(clk_100m, Ld, run, plate_move, grids_map_init, ask_x, ask_y,
-	                            grids_map, ball, plate, buff, buff_time_left, answer_card, finished, fall_out, sig);
+	u_d: display_control port map(
+		clk_100m, rst, grids_map, plate, ball, answer_card, buff, game_flag, 
+	    ask_x, ask_y, hs, vs, r_out, g_out, b_out);
+	u_s: state_control port map(
+		clk_100m, Ld, run, plate_move, grids_map_init, ask_x, ask_y,
+	    grids_map, ball, plate, buff, buff_time_left, answer_card, 
+	    finished, fall_out, sig);
 	
 	grids_map_init <= (others => '1');
 	

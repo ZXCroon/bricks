@@ -140,7 +140,8 @@ begin
 	
 	u_c: clock generic map(10) port map(clk_100m, clk_10m);
 	
-	u_k: keyboard_decoder port map(ps2data, ps2clock, clk_10m, keyboard_rst, plate_move_t);
+	u_k: keyboard_decoder port map(
+		ps2data, ps2clock, clk_10m, keyboard_rst, plate_move_t);
 	plate_move <= plate_move_t;
 	
 	u_d: display_control port map(

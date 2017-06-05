@@ -10,6 +10,7 @@ entity bricks is
 		clk_100m: in std_logic;
 		ps2data, ps2clock: in std_logic;
 		rst: in std_logic; -- reset when =0
+		load, run: in std_logic;
 		interface: out interface_type;
 		-- display
 		hs, vs: out std_logic;
@@ -123,12 +124,18 @@ begin
 		board_speed=>plate_speed, confirm=>confirm, quit=>quit,
 		upp=>upp, downp=>downp
 	);
-	u_process_control: process_controller port map(
-		clk=>clk_10m, rst=>rst,
-		confirm=>confirm, quit=>quit, upp=>upp, downp=>downp,
-		gameinfo=>finished or fall_out,
-		logic_run=>logic_run, logic_load=>logic_load,
-		interface_info=>interface_info
+	--u_process_control: process_controller port map(
+	--	clk=>clk_10m, rst=>rst,
+	--	confirm=>confirm, quit=>quit, upp=>upp, downp=>downp,
+	--	gameinfo=>finished or fall_out,
+	--	logic_run=>logic_run, logic_load=>logic_load,
+	--	interface_info=>interface_info
+	--);
+	logic_load <= load;
+	logic_run <= run;
+	u_display: display_control port map(
+		clk_100m, rst, grids_map, plate, ball, answer_card, buff, interface_info, 
+		ask_x, ask_y, hs, vs, r_out, g_out, b_out
 	);
 	u_state: state_control port map(
 		clk_100m, logic_load, logic_run, plate_speed,
@@ -136,10 +143,6 @@ begin
 		-- output
 		grids_map, ball, plate, buff, buff_time_left, answer_card,
 		finished, fall_out, sig
-	);
-	u_display: display_control port map(
-		clk_100m, rst, grids_map, plate, ball, answer_card, buff, interface_info, 
-		ask_x, ask_y, hs, vs, r_out, g_out, b_out
 	);
 
 	grids_map_init <= (others => '1');

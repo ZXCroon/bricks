@@ -124,15 +124,15 @@ begin
 		board_speed=>plate_speed, confirm=>confirm, quit=>quit,
 		upp=>upp, downp=>downp
 	);
-	--u_process_control: process_controller port map(
-	--	clk=>clk_10m, rst=>rst,
-	--	confirm=>confirm, quit=>quit, upp=>upp, downp=>downp,
-	--	gameinfo=>finished or fall_out,
-	--	logic_run=>logic_run, logic_load=>logic_load,
-	--	interface_info=>interface_info
-	--);
-	logic_load <= load;
-	logic_run <= run;
+	u_process_control: process_controller port map(
+		clk=>clk_10m, rst=>rst,
+		confirm=>confirm, quit=>quit, upp=>upp, downp=>downp,
+		gameinfo=>finished or fall_out,
+		logic_run=>logic_run, logic_load=>logic_load,
+		interface_info=>interface_info
+	);
+	--logic_load <= load;
+	--logic_run <= run;
 	u_display: display_control port map(
 		clk_100m, rst, grids_map, plate, ball, answer_card, buff, interface_info, 
 		ask_x, ask_y, hs, vs, r_out, g_out, b_out

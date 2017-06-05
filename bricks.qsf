@@ -51,8 +51,8 @@ set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
-set_location_assignment PIN_U4 -to hs
-set_location_assignment PIN_U3 -to vs
+set_location_assignment PIN_U3 -to hs
+set_location_assignment PIN_U4 -to vs
 set_location_assignment PIN_U1 -to b_out[2]
 set_location_assignment PIN_U2 -to b_out[1]
 set_location_assignment PIN_T4 -to b_out[0]
@@ -117,13 +117,13 @@ set_global_assignment -name MIF_FILE images/mif/allimg.mif
 set_global_assignment -name QIP_FILE scripts/rom_comp/rom_reader.qip
 set_global_assignment -name VECTOR_WAVEFORM_FILE output_files/Waveform.vwf
 set_global_assignment -name VHDL_FILE scripts/tests/img_test.vhd
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS OUTPUT DRIVING GROUND"
+set_location_assignment PIN_AD5 -to run
+set_location_assignment PIN_AE5 -to Ld
+set_location_assignment PIN_AC6 -to rst
+set_location_assignment PIN_AC7 -to interface[0]
+set_location_assignment PIN_AB8 -to interface[1]
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_location_assignment PIN_AC6 -to rst
-set_location_assignment PIN_AB8 -to interface[1]
-set_location_assignment PIN_AC7 -to interface[0]
-set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS OUTPUT DRIVING GROUND"
-set_location_assignment PIN_AD5 -to run
-set_location_assignment PIN_AE5 -to load
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -15,7 +15,7 @@ entity process_controller is
 end process_controller;
 
 architecture bhv of process_controller is
-	type state_type is (menu, gaming, pause, gameover);
+	type state_type is (menu, loading, gaming, pause, gameover);
 	signal curstate: state_type := menu;
 	-- 表示z,x键被按下
 	signal zp, xp: std_logic;
@@ -32,6 +32,8 @@ begin
 	cvtx: convert_risingedge port map(clk, quit, xp);
 
 	state_trans: process(clk, rst, curstate) is
+		constant loadtime: integer := 1023;
+		variable cnt: integer range 0 to loadtime := 0;
 	begin
 		if(rst='0') then
 			curstate <= menu;
@@ -40,7 +42,14 @@ begin
 			case curstate is
 				when menu =>
 					if(zp='1') then
-						logic_load <= '1';
+						curstate <= loading;
+					end if;
+				when loading =>
+					-- wait for logic module loading
+					logic_load <= '1';
+					cnt := cnt + 1;
+					if(cnt=loadtime) then
+						cnt := 0;
 						curstate <= gaming;
 					end if;
 				when gaming =>
@@ -67,8 +76,10 @@ begin
 	
 	-- output interface info
 	with curstate select
-		interface_info <= ui_menu when menu,
-		                  ui_gaming when gaming,
-						  ui_pause when pause,
-						  ui_gameover when gameover;
+		interface_info <= 
+			ui_menu when menu,
+			ui_menu when loading,
+			ui_gaming when gaming,
+			ui_pause when pause,
+			ui_gameover when gameover;
 end bhv;

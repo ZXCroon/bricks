@@ -127,16 +127,16 @@ begin
 		end if;
 	end process;
 	
-	narrow_Ld: convert_risingedge port map(clk_10m, Ld, LD_cvt);
-	process(load, LD_cvt)
-	begin
-		if(rising_edge(clk_10m) and LD_cvt='1') then
-			load <= not load;
-		end if;
+--	narrow_Ld: convert_risingedge port map(clk_10m, Ld, LD_cvt);
+--	process(load, LD_cvt)
+--	begin
+--		if(rising_edge(clk_10m) and LD_cvt='1') then
+--			load <= not load;
+--		end if;
 --		if(falling_edge(Ld)) then
 --			load <= not load;
 --		end if;
-	end process;
+--	end process;
 	
 	u_c: clock generic map(10) port map(clk_100m, clk_10m);
 	

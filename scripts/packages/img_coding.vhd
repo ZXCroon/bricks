@@ -21,6 +21,7 @@ package img_coding is
 		card_smaller,
 		card_traversal,
 		card_wiggle,
+		img_menu,
 		plate_long,
 		plate_normal,
 		plate_short,
@@ -44,10 +45,11 @@ package img_coding is
 		card_smaller => 5552,
 		card_traversal => 5952,
 		card_wiggle => 6352,
-		plate_long => 6752,
-		plate_normal => 7402,
-		plate_short => 7902,
-		start => 8252
+		img_menu => 6752,
+		plate_long => 49952,
+		plate_normal => 50602,
+		plate_short => 51102,
+		start => 51452
 	);
 	constant width_dic: img_info2integer := (
 		ball_big => 24,
@@ -66,6 +68,7 @@ package img_coding is
 		card_smaller => 20,
 		card_traversal => 20,
 		card_wiggle => 20,
+		img_menu => 300,
 		plate_long => 130,
 		plate_normal => 100,
 		plate_short => 70,

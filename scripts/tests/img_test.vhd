@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use ieee.std_logic_arith.all;
 use work.img_coding.all;
+use work.img_coding2v.all;
 
 entity img_test is
 	port(
@@ -25,6 +26,19 @@ architecture bhv of img_test is
 			dataok: out std_logic := '0'
 		);
 	end component;
+	
+	component img_reader2v
+		port (
+			x: in std_logic_vector(9 downto 0);
+			y: in std_logic_vector(8 downto 0);
+			img2v: in img_info2v;
+			-- outclk frequnceny = inclk freq * 2
+			inclk: in std_logic;
+			clken: in std_logic;
+			filled: out std_logic;
+			dataok: out std_logic := '0'
+		);
+	end component;
 
 	signal vga_clk: std_logic;
 	signal rst: std_logic := '1';
@@ -35,13 +49,19 @@ architecture bhv of img_test is
 	signal hst, vst: std_logic;
 	signal ask_x: std_logic_vector(9 downto 0);
 	signal ask_y: std_logic_vector(8 downto 0);
+	signal filled: std_logic;
 begin
-	u: img_reader port map(ask_x, ask_y, ball_big, clk_100m, '1', r_out, g_out, b_out, vga_clk);
+--	u: img_reader port map(ask_x, ask_y, ball_big, clk_100m, '1', r_out, g_out, b_out, vga_clk);
+	u: img_reader2v port map(ask_x, ask_y, pause, clk_100m, '1', filled, vga_clk);
+	r_out <= "111" when filled = '1' else "000";
+	g_out <= "111" when filled = '1' else "000";
+	b_out <= "111" when filled = '1' else "000";
+	
 	hs <= hst;
 	vs <= vst;
 	
-	ask_x <= conv_std_logic_vector(conv_integer(next_x) rem 24, 10);
-	ask_y <= conv_std_logic_vector(conv_integer(next_y) rem 24, 9);
+	ask_x <= conv_std_logic_vector(conv_integer(next_x) rem 200, 10);
+	ask_y <= conv_std_logic_vector(conv_integer(next_y) rem 87, 9);
 	
 	process(vga_clk, rst)
 		variable xt_v: std_logic_vector(9 downto 0);

@@ -10,7 +10,7 @@ entity bricks is
 		clk_100m: in std_logic;
 		ps2data, ps2clock: in std_logic;
 		rst: in std_logic; -- reset when =0
-		load, run: in std_logic;
+--		load, run: in std_logic;
 		interface: out interface_type;
 		-- display
 		hs, vs: out std_logic;

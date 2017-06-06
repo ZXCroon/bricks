@@ -105,7 +105,7 @@ begin
 						-- 末尾‘1’
 						if data = '1' then
 							state <= finish;
-							--scancode <= code;
+							scancode <= code;
 						else
 							state <= delay;
 						end if;
@@ -113,7 +113,7 @@ begin
 
 				WHEN finish =>
 					state <= delay ;
-					scancode <= code;
+					--scancode <= code;
 					dataok <= '1' ;
 				when others =>
 					state <= delay ;

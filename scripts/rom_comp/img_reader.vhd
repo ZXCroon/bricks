@@ -25,7 +25,7 @@ architecture bhv of img_reader is
 	component rom_reader
 		PORT
 		(
-			address		: IN STD_LOGIC_VECTOR (13 DOWNTO 0);
+			address		: IN STD_LOGIC_VECTOR (15 DOWNTO 0);
 			clken		: IN STD_LOGIC  := '1';
 			clock		: IN STD_LOGIC  := '1';
 			q		: OUT STD_LOGIC_VECTOR (8 DOWNTO 0)
@@ -35,7 +35,7 @@ architecture bhv of img_reader is
 	type statetype is (read_add, waiting1, waiting2, output);
 	signal state: statetype := read_add;
 
-	signal address: std_logic_vector(13 downto 0) := (others=>'0');
+	signal address: std_logic_vector(15 downto 0) := (others=>'0');
 	signal romdata: std_logic_vector(8 downto 0);
 
 	signal addint: integer range 0 to 2**address'length-1 := 0;

@@ -95,8 +95,8 @@ begin
 	process(next_x, next_y)
 	begin
 		img <= bg_texture;
-		next_x_r <= conv_std_logic_vector(conv_integer(next_x) rem 20, 10);
-		next_y_r <= conv_std_logic_vector(conv_integer(next_y) rem 20, 9);
+		next_x_r <= (others=>'0');
+		next_y_r <= (others=>'0');
 		
 		-- bricks --
 		if (inside_which /= zeros) then
@@ -137,6 +137,19 @@ begin
 				when bigger  => img <= ball_big;
 				when others  => img <= ball_normal;
 			end case;
+		end if;
+
+		-- menu --
+		if(game_flag=ui_menu) then
+			if(next_x>=170 and next_x<=170+300
+			and next_y>=168 and next_y<=168+144) then
+				img <= img_menu;
+				next_x_r <= next_x-170;
+				next_y_r <= next_y-168;
+			else
+				img <= bg_texture;
+				next_x_r <= (others=>'0');
+				next_y_r <= (others=>'0');
 		end if;
 	end process;
 	

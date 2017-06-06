@@ -79,14 +79,10 @@ set_global_assignment -name VECTOR_OUTPUT_FORMAT VWF
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "E:/Development/DLC/bricks/output_files/Waveform.vwf"
 set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
 set_global_assignment -name SMART_RECOMPILE OFF
-set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS OUTPUT DRIVING GROUND"
-set_location_assignment PIN_AD5 -to run
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
 set_location_assignment PIN_AC6 -to rst
 set_location_assignment PIN_AC7 -to interface[0]
 set_location_assignment PIN_AB8 -to interface[1]
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name SDC_FILE bricks.sdc
 set_global_assignment -name VHDL_FILE scripts/modules/bricks.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/interface_coding.vhd
@@ -126,4 +122,9 @@ set_global_assignment -name MIF_FILE images/mif/allimg.mif
 set_global_assignment -name QIP_FILE scripts/rom_comp/rom_reader.qip
 set_global_assignment -name VECTOR_WAVEFORM_FILE output_files/Waveform.vwf
 set_global_assignment -name VHDL_FILE scripts/tests/img_test.vhd
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

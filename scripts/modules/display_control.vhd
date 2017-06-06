@@ -141,8 +141,8 @@ begin
 
 		-- menu --
 		if(game_flag=ui_menu) then
-			if(next_x>=170 and next_x<=170+300
-			and next_y>=168 and next_y<=168+144) then
+			if(next_x>=170 and next_x<170+300
+			and next_y>=168 and next_y<168+144) then
 				img <= img_menu;
 				next_x_r <= next_x-170;
 				next_y_r <= next_y-168;
@@ -150,6 +150,7 @@ begin
 				img <= bg_texture;
 				next_x_r <= (others=>'0');
 				next_y_r <= (others=>'0');
+			end if;
 		end if;
 	end process;
 	

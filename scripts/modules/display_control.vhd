@@ -128,8 +128,8 @@ begin
 		end if;
 		
 		-- ball --
-		if (distance2(construct_point(conv_integer(next_x), conv_integer(next_y)), ball.position) <=
-		    ball.radius * ball.radius) then
+		if (distance2(construct_point(conv_integer(next_x), conv_integer(next_y)), ball.position) * 4 <=
+		    ball.radius * ball.radius * 4 + 26) then
 			next_x_r <= next_x - (ball.position(0) - ball.radius);
 			next_y_r <= next_y - (ball.position(1) - ball.radius);
 			case buff is

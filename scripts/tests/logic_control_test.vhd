@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 use work.geometry.all;
 use work.info.all;
 use work.basic_settings.all;
+use work.interface_coding.all;
 
 entity logic_control_test is
 	port(
@@ -62,7 +63,7 @@ architecture bhv of logic_control_test is
 			ball: in ball_info;
 			card_xy: in card_info;
 			buff: in buff_info;
-			game_flag: in integer;
+			game_flag: in interface_type;
 			
 			ask_x: out std_logic_vector(9 downto 0);
 			ask_y: out std_logic_vector(8 downto 0);
@@ -78,6 +79,14 @@ architecture bhv of logic_control_test is
 			clk_out: out std_logic
 		);
 	end component;
+
+	component convert_risingedge is
+		port(
+			-- fclk: filter clock, clkin: 想检测上升沿的时钟
+			fclk, clkin: in std_logic;
+			clk: out std_logic
+		);
+	end component;
 	
 	signal rst: std_logic := '1';
 	signal plate_move: integer := 0;
@@ -86,7 +95,7 @@ architecture bhv of logic_control_test is
 	signal grids_map_init: std_logic_vector(0 to (GRIDS_BITS - 1));
 	signal plate: plate_info;
 	signal ball: ball_info;
-	signal game_flag: integer;
+	signal game_flag: interface_type;
 	
 	signal clk_50m: std_logic;
 	signal clk_25m: std_logic;
@@ -102,7 +111,9 @@ architecture bhv of logic_control_test is
 	signal buff_time_left: integer;
 	signal answer_card: card_info;
 
+	signal load, LD_cvt: std_logic := '1';
 begin
+	-- TODO: clk_25m和clk_100m上升沿可能不同步
 	process(clk_100m)
 	begin
 		if (clk_100m'event and clk_100m = '1') then
@@ -116,15 +127,30 @@ begin
 		end if;
 	end process;
 	
+--	narrow_Ld: convert_risingedge port map(clk_10m, Ld, LD_cvt);
+--	process(load, LD_cvt)
+--	begin
+--		if(rising_edge(clk_10m) and LD_cvt='1') then
+--			load <= not load;
+--		end if;
+--		if(falling_edge(Ld)) then
+--			load <= not load;
+--		end if;
+--	end process;
+	
 	u_c: clock generic map(10) port map(clk_100m, clk_10m);
 	
-	u_k: keyboard_decoder port map(ps2data, ps2clock, clk_10m, keyboard_rst, plate_move_t);
+	u_k: keyboard_decoder port map(
+		ps2data, ps2clock, clk_10m, keyboard_rst, plate_move_t);
 	plate_move <= plate_move_t;
 	
-	u_d: display_control port map(clk_100m, rst, grids_map, plate, ball, answer_card, buff, game_flag, 
-	                              ask_x, ask_y, hs, vs, r_out, g_out, b_out);
-	u_s: state_control port map(clk_100m, Ld, run, plate_move, grids_map_init, ask_x, ask_y,
-	                            grids_map, ball, plate, buff, buff_time_left, answer_card, finished, fall_out, sig);
+	u_d: display_control port map(
+		clk_100m, rst, grids_map, plate, ball, answer_card, buff, game_flag, 
+	    ask_x, ask_y, hs, vs, r_out, g_out, b_out);
+	u_s: state_control port map(
+		clk_100m, Ld, run, plate_move, grids_map_init, ask_x, ask_y,
+	    grids_map, ball, plate, buff, buff_time_left, answer_card, 
+	    finished, fall_out, sig);
 	
 	grids_map_init <= (others => '1');
 	

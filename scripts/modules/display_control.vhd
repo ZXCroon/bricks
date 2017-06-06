@@ -6,6 +6,7 @@ use work.geometry.all;
 use work.info.all;
 use work.img_coding.all;
 use work.basic_settings.all;
+use work.interface_coding.all;
 
 entity display_control is
 	port(
@@ -17,7 +18,7 @@ entity display_control is
 		ball: in ball_info;
 		card_xy: in card_info;
 		buff: in buff_info;
-		game_flag: in integer;
+		game_flag: in interface_type;
 		
 		ask_x: out std_logic_vector(9 downto 0);
 		ask_y: out std_logic_vector(8 downto 0);

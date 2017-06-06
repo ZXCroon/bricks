@@ -2,15 +2,16 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.std_logic_unsigned.all;
 use IEEE.std_logic_arith.all;
+use work.interface_coding.all;
 
 entity test_process is
 	port (
 		fclk, rst: in std_logic;
 		kbclk, kbdata: in std_logic;
 		gameinfo_switch: in std_logic;
-		logic_ena, maploader_ena: out std_logic;
+		logic_run, logic_load: out std_logic;
 		confirm, quit, upp, downp: buffer std_logic;
-		interface_info: out std_logic_vector(1 downto 0)
+		interface_info: out interface_type
 	);
 end test_process;
 
@@ -20,8 +21,8 @@ architecture bhv of test_process is
 			clk, rst: in std_logic;
 			confirm, quit, upp, downp: in std_logic;
 			gameinfo: in std_logic;
-			logic_ena, maploader_ena: out std_logic := '0';
-			interface_info: out std_logic_vector(1 downto 0)
+			logic_run, logic_load: out std_logic := '0';
+			interface_info: out interface_type
 		);
 	end component;
 
@@ -37,6 +38,11 @@ architecture bhv of test_process is
 
 	signal board_speed: integer;
 begin
-	kb_decoder: keyboard_decoder port map(kbdata, kbclk, fclk, rst, board_speed, confirm, quit, upp, downp);
-	pro_con: process_controller port map(fclk, rst, confirm, quit, upp, downp, not gameinfo_switch, logic_ena, maploader_ena, interface_info);
+	kb_decoder: keyboard_decoder port map(
+		kbdata, kbclk, fclk, rst, board_speed, confirm, quit, upp, downp
+	);
+	pro_con: process_controller port map(
+		fclk, rst, confirm, quit, upp, downp, not gameinfo_switch, 
+		logic_run, logic_load, interface_info
+	);
 end bhv;

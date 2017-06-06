@@ -7,8 +7,8 @@ use work.basic_settings.all;
 entity state_control is
 	port(
 		clk_100m: in std_logic;
-		load: in std_logic;
-		run: in std_logic;
+		load: in std_logic; -- =1 load initial map, =0 continue game
+		run: in std_logic; -- =0 pause game, =1 game running
 		plate_move: in integer;
 		grids_map_load: in std_logic_vector(0 to (GRIDS_BITS - 1));
 		ask_x: in std_logic_vector(9 downto 0);

@@ -74,8 +74,8 @@ architecture bhv of display_control is
 	signal now_y: std_logic_vector(8 downto 0);
 	signal next_x: std_logic_vector(9 downto 0);
 	signal next_y: std_logic_vector(8 downto 0);
-	signal next_x_r: std_logic_vector(9 downto 0);
-	signal next_y_r: std_logic_vector(8 downto 0);
+	signal next_x_r, next_x_rreg: std_logic_vector(9 downto 0);
+	signal next_y_r, next_y_rreg: std_logic_vector(8 downto 0);
 	signal next_x_r_b: std_logic_vector(9 downto 0);
 	signal next_y_r_b: std_logic_vector(8 downto 0);
 	signal now_r, now_g, now_b: std_logic_vector(2 downto 0);
@@ -96,7 +96,10 @@ architecture bhv of display_control is
 begin
 	u0: vga_control port map(clk_25m, rst, now_r, now_g, now_b, hs, vs, now_x, now_y, next_x, next_y, r_out, g_out, b_out);
 	u1: draw_bricks port map(next_x, next_y, grids_map, inside_which, next_x_r_b, next_y_r_b);
-	u2: img_reader port map(next_x_r, next_y_r, img, clk_100m, '1', now_r, now_g, now_b, clk_25m);
+	u2: img_reader port map(next_x_rreg, next_y_rreg, img, clk_100m, '1', now_r, now_g, now_b, clk_25m);
+
+	next_x_rreg <= next_x_r when rising_edge(clk_25m);
+	next_y_rreg <= next_y_r when rising_edge(clk_25m);
 	
 	ask_x <= next_x;
 	ask_y <= next_y;

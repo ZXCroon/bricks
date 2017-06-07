@@ -12,15 +12,7 @@ entity buff_control is
 		ena: in std_logic;
 		rst: in std_logic;
 		
-		ball: in ball_info;
 		plate: in plate_info;
-		velocity: in vector;
-		grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
-		
-		ball_b: out ball_info;
-		plate_b: out plate_info;
-		velocity_b: out vector;
-		grids_map_b: out std_logic_vector(0 to (GRIDS_BITS - 1));
 		
 		buff: out buff_info;
 		time_left: out integer;
@@ -110,52 +102,4 @@ begin
 			end if;
 		end loop;
 	end process;
-	
-	process(buff_t)
-	begin
-		ball_b.position <= ball.position;
-		ball_b.radius <= NORMAL_BALL_RADIUS;
-		plate_b.l_position <= plate.l_position;
-		plate_b.len <= NORMAL_PLATE_LEN;
-		velocity_b <= velocity;
-		grids_map_b <= grids_map;
-		case buff_t is
-			when smaller =>
-				ball_b.radius <= SMALL_BALL_RADIUS;
-			when bigger =>
-				ball_b.radius <= BIG_BALL_RADIUS;
-			when others =>
-		end case;
-	end process;
-	
---	process(buff_t, buff_sig)
---		variable st: std_logic := '0';
---	begin
---		if (buff_sig'event and buff_sig = '1') then
---			if (st = '0') then
---				case buff_t is
---					when smaller =>
---						ball_b.position <= ball.position;
---						ball_b.radius <= SMALL_BALL_RADIUS;
---						plate_b <= plate;
---						velocity_b <= velocity;
---						grids_map_b <= grids_map;
---					when others =>
---						ball_b <= ball;
---						plate_b <= plate;
---						velocity_b <= velocity;
---						grids_map_b <= grids_map;
---				end case;
---			else
---				ball_b.position <= ball.position;
---				ball_b.radius <= NORMAL_BALL_RADIUS;
---				plate_b.l_position <= plate.l_position;
---				plate_b.len <= NORMAL_PLATE_LEN;
---				-- TODO: velocity --
---				velocity_b <= velocity;
---				grids_map_b <= grids_map;
---			end if;
---			st := not st;
---		end if;
---	end process;
 end bhv;

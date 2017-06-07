@@ -13,6 +13,7 @@ entity logic_control is
 		current_plate: in plate_info;
 		current_velocity: in vector;
 		current_ball: in ball_info;
+		buff: in buff_info;
 		
 		next_grids_map: out std_logic_vector(0 to (GRIDS_BITS - 1));
 		next_plate: out plate_info;
@@ -52,18 +53,31 @@ architecture bhv of logic_control is
 			ball_moved: out std_logic
 		);
 	end component;
+	
+	signal zeros: std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 
 	signal next_ball_t: ball_info;
-	signal next_velocity_t: vector;
+	signal next_velocity_tt, next_velocity_t: vector;
 	signal next_plate_t: plate_info;
+	signal next_ball_ub: ball_info;
+	signal next_velocity_ub: vector;
+	signal next_plate_ub: plate_info;
+	signal fall_out_ub: std_logic;
 	signal ball_moved: std_logic;
 	signal hit_map: std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 	signal current_velocity_trans: vector;
 	signal current_grids_map_trans: std_logic_vector(0 to (GRIDS_BITS - 1));
+	
+	signal wiggling: std_logic := '0';
+	signal trav: std_logic := '0';
 begin
+	zeros <= (others => '0');
+	
 	u: collision_computation port map(current_grids_map_trans, next_ball_t, next_plate_t,
 	                                  plate_move, current_velocity_trans,
-	                                  hit_map, next_velocity_t, fall_out);
+	                                  hit_map, next_velocity_tt, fall_out_ub);
+	next_velocity_t <= next_velocity_tt when wiggling = '0' else
+	                   next_velocity_tt + construct_vector(next_ball_t.position(0) mod 5 - 2, next_ball_t.position(1) mod 5 - 2);
 	gen_next_grids_map:
 	for k in 0 to GRIDS_AMOUNT - 1 generate
 		next_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) <= (others => '0') when hit_map(k) = '1' else
@@ -74,7 +88,58 @@ begin
 		clk, ena, current_ball, current_velocity, current_plate, plate_move, current_grids_map,
 		next_ball_t, current_velocity_trans, next_plate_t, current_grids_map_trans, ball_moved
 	);
-	next_velocity <= next_velocity_t when ball_moved = '1' else current_velocity_trans;
-	next_ball <= next_ball_t;
-	next_plate <= next_plate_t;
+	next_velocity_ub <= next_velocity_t when ball_moved = '1' and (trav = '0' or hit_map = zeros)
+	                    else current_velocity_trans;
+	next_ball_ub <= next_ball_t;
+	next_plate_ub <= next_plate_t;
+	
+	
+	
+	---------------------  calc buff effects  ----------------------
+	
+	process(buff)
+	begin
+		next_ball.position <= next_ball_ub.position;
+		next_ball.radius <= NORMAL_BALL_RADIUS;
+		next_plate.l_position(1) <= next_plate_ub.l_position(1);
+		if (next_plate_ub.l_position(0) < 0) then
+			next_plate.l_position(0) <= 0;
+		elsif (next_plate_ub.l_position(0) > SCREEN_WIDTH - NORMAL_PLATE_LEN) then
+			next_plate.l_position(0) <= SCREEN_WIDTH - NORMAL_PLATE_LEN;
+		else
+			next_plate.l_position(0) <= next_plate_ub.l_position(0);
+		end if;
+		next_plate.len <= NORMAL_PLATE_LEN;
+		next_velocity <= next_velocity_ub;
+		fall_out <= fall_out_ub;
+		wiggling <= '0';
+		trav <= '0';
+		case buff is
+			when smaller =>
+				next_ball.radius <= SMALL_BALL_RADIUS;
+				
+			when bigger =>
+				next_ball.radius <= BIG_BALL_RADIUS;
+				
+			when shorter =>
+				next_plate.len <= SHORT_PLATE_LEN;
+				
+			when longer =>
+				if (next_plate_ub.l_position(0) > SCREEN_WIDTH - LONG_PLATE_LEN) then
+					next_plate.l_position(0) <= SCREEN_WIDTH - LONG_PLATE_LEN;
+				end if;
+				next_plate.len <= LONG_PLATE_LEN;
+				
+			when death =>
+				fall_out <= '1';
+				
+			when wiggle =>
+				wiggling <= '1';
+				
+			when traversal =>
+				trav <= '1';
+				
+			when others =>
+		end case;
+	end process;
 end bhv;

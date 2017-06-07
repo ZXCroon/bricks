@@ -83,6 +83,16 @@ architecture bhv of display_control is
 	signal inside_which: std_logic_vector(0 to (GRID_BITS - 1));
 	signal zeros: std_logic_vector(0 to (GRID_BITS - 1));
 	signal img: img_info;
+	signal isbrick, isplate, iscard, isball, ismenu, isinmenu: std_logic;
+
+	function bool2logic(bool: boolean) return std_logic is
+	begin
+		if(bool) then
+			return '1';
+		else
+			return '0';
+		end if;
+	end function;
 begin
 	u0: vga_control port map(clk_25m, rst, now_r, now_g, now_b, hs, vs, now_x, now_y, next_x, next_y, r_out, g_out, b_out);
 	u1: draw_bricks port map(next_x, next_y, grids_map, inside_which, next_x_r_b, next_y_r_b);
@@ -92,57 +102,22 @@ begin
 	ask_y <= next_y;
 	zeros <= (others => '0');
 	
+	isbrick <= bool2logic(inside_which /= zeros);
+	isplate <= bool2logic(next_x >= conv_std_logic_vector(plate.l_position(0), 10) and
+		           next_x <= conv_std_logic_vector(plate.l_position(0) + plate.len, 10) and
+		           next_y >= conv_std_logic_vector(plate.l_position(1), 9) and
+			       next_y <= conv_std_logic_vector(plate.l_position(1) + PLATE_WIDTH, 9));
+	iscard <=  bool2logic(card_xy.buff /= none);
+	isball <=  bool2logic(distance2(construct_point(conv_integer(next_x), conv_integer(next_y)), ball.position) <=
+		          ball.radius * ball.radius);
+	ismenu <=  bool2logic(game_flag=ui_menu);
+	isinmenu <= bool2logic(next_x>=170 and next_x<170+300
+			        and next_y>=168 and next_y<168+144);
+
 	process(next_x, next_y)
 	begin
-		img <= bg_texture;
-		next_x_r <= (others=>'0');
-		next_y_r <= (others=>'0');
-		
-		-- bricks --
-		if (inside_which /= zeros) then
-			img <= brick1;
-			next_x_r <= next_x_r_b;
-			next_y_r <= next_y_r_b;
-		end if;
-		
-		-- plate --
-		if (next_x >= conv_std_logic_vector(plate.l_position(0), 10) and
-	       next_x <= conv_std_logic_vector(plate.l_position(0) + plate.len, 10) and
-		    next_y >= conv_std_logic_vector(plate.l_position(1), 9) and
-			 next_y <= conv_std_logic_vector(plate.l_position(1) + PLATE_WIDTH, 9)) then
---			 case buff is
-			img <= plate_normal;
-			next_x_r <= next_x - plate.l_position(0);
-			next_y_r <= next_y - plate.l_position(1);
-		end if;
-		
-		-- card --
-		if (card_xy.buff /= none) then
-			case card_xy.buff is
-				when smaller => img <= card_smaller;
-				when bigger => img <= card_bigger;
-				when others => img <= card_smaller;
-			end case;
-			next_x_r <= next_x - card_xy.lt_position(0);
-			next_y_r <= next_y - card_xy.lt_position(1);
-		end if;
-		
-		-- ball --
-		if (distance2(construct_point(conv_integer(next_x), conv_integer(next_y)), ball.position) <=
-		    ball.radius * ball.radius) then
-			next_x_r <= next_x - (ball.position(0) - ball.radius);
-			next_y_r <= next_y - (ball.position(1) - ball.radius);
-			case buff is
-				when smaller => img <= ball_small;
-				when bigger  => img <= ball_big;
-				when others  => img <= ball_normal;
-			end case;
-		end if;
-
-		-- menu --
-		if(game_flag=ui_menu) then
-			if(next_x>=170 and next_x<170+300
-			and next_y>=168 and next_y<168+144) then
+		if(ismenu='1') then
+			if(isinmenu='1') then
 				img <= img_menu;
 				next_x_r <= next_x-170;
 				next_y_r <= next_y-168;
@@ -151,7 +126,94 @@ begin
 				next_x_r <= (others=>'0');
 				next_y_r <= (others=>'0');
 			end if;
+		elsif(isball='1') then
+			next_x_r <= next_x - (ball.position(0) - ball.radius);
+			next_y_r <= next_y - (ball.position(1) - ball.radius);
+			case buff is
+				when smaller => img <= ball_small;
+				when bigger  => img <= ball_big;
+				when others  => img <= ball_normal;
+			end case;
+		elsif(iscard='1') then
+			case card_xy.buff is
+				when smaller => img <= card_smaller;
+				when bigger => img <= card_bigger;
+				when others => img <= card_smaller;
+			end case;
+			next_x_r <= next_x - card_xy.lt_position(0);
+			next_y_r <= next_y - card_xy.lt_position(1);
+		elsif(isplate='1') then
+			img <= plate_normal;
+			next_x_r <= next_x - plate.l_position(0);
+			next_y_r <= next_y - plate.l_position(1);
+		elsif(isbrick='1') then
+			img <= brick1;
+			next_x_r <= next_x_r_b;
+			next_y_r <= next_y_r_b;
+		else
+			img <= bg_texture;
+			next_x_r <= (others=>'0');
+			next_y_r <= (others=>'0');
 		end if;
+
+--		img <= bg_texture;
+--		next_x_r <= (others=>'0');
+--		next_y_r <= (others=>'0');
+		
+--		-- bricks --
+--		if (inside_which /= zeros) then
+--			img <= brick1;
+--			next_x_r <= next_x_r_b;
+--			next_y_r <= next_y_r_b;
+--		end if;
+		
+--		-- plate --
+--		if (next_x >= conv_std_logic_vector(plate.l_position(0), 10) and
+--	       next_x <= conv_std_logic_vector(plate.l_position(0) + plate.len, 10) and
+--		    next_y >= conv_std_logic_vector(plate.l_position(1), 9) and
+--			 next_y <= conv_std_logic_vector(plate.l_position(1) + PLATE_WIDTH, 9)) then
+----			 case buff is
+--			img <= plate_normal;
+--			next_x_r <= next_x - plate.l_position(0);
+--			next_y_r <= next_y - plate.l_position(1);
+--		end if;
+		
+--		-- card --
+--		if (card_xy.buff /= none) then
+--			case card_xy.buff is
+--				when smaller => img <= card_smaller;
+--				when bigger => img <= card_bigger;
+--				when others => img <= card_smaller;
+--			end case;
+--			next_x_r <= next_x - card_xy.lt_position(0);
+--			next_y_r <= next_y - card_xy.lt_position(1);
+--		end if;
+		
+--		-- ball --
+--		if (distance2(construct_point(conv_integer(next_x), conv_integer(next_y)), ball.position) <=
+--		    ball.radius * ball.radius) then
+--			next_x_r <= next_x - (ball.position(0) - ball.radius);
+--			next_y_r <= next_y - (ball.position(1) - ball.radius);
+--			case buff is
+--				when smaller => img <= ball_small;
+--				when bigger  => img <= ball_big;
+--				when others  => img <= ball_normal;
+--			end case;
+--		end if;
+
+--		-- menu --
+--		if(game_flag=ui_menu) then
+--			if(next_x>=170 and next_x<170+300
+--			and next_y>=168 and next_y<168+144) then
+--				img <= img_menu;
+--				next_x_r <= next_x-170;
+--				next_y_r <= next_y-168;
+--			else
+--				img <= bg_texture;
+--				next_x_r <= (others=>'0');
+--				next_y_r <= (others=>'0');
+--			end if;
+--		end if;
 	end process;
 	
 end bhv;

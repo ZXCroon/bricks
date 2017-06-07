@@ -7,5 +7,6 @@
 !*.qsf
 !*.vwf
 !images/**/*
+!*.sdc
 
 simulation/*/

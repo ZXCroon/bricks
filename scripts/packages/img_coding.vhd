@@ -16,7 +16,10 @@ package img_coding is
 		brick4,
 		card_bigger,
 		card_death,
+		card_double,
+		card_invisible,
 		card_longer,
+		card_shoot,
 		card_shorter,
 		card_smaller,
 		card_traversal,
@@ -24,6 +27,7 @@ package img_coding is
 		img_menu,
 		plate_long,
 		plate_normal,
+		plate_shoot,
 		plate_short,
 		start
 	);
@@ -40,16 +44,20 @@ package img_coding is
 		brick4 => 3432,
 		card_bigger => 4032,
 		card_death => 4432,
-		card_longer => 4832,
-		card_shorter => 5232,
-		card_smaller => 5632,
-		card_traversal => 6032,
-		card_wiggle => 6432,
-		img_menu => 6832,
-		plate_long => 50032,
-		plate_normal => 50682,
-		plate_short => 51182,
-		start => 51532
+		card_double => 4832,
+		card_invisible => 5232,
+		card_longer => 5632,
+		card_shoot => 6032,
+		card_shorter => 6432,
+		card_smaller => 6832,
+		card_traversal => 7232,
+		card_wiggle => 7632,
+		img_menu => 8032,
+		plate_long => 51232,
+		plate_normal => 51882,
+		plate_shoot => 52382,
+		plate_short => 52882,
+		start => 53232
 	);
 	constant width_dic: img_info2integer := (
 		ball_big => 24,
@@ -63,7 +71,10 @@ package img_coding is
 		brick4 => 40,
 		card_bigger => 20,
 		card_death => 20,
+		card_double => 20,
+		card_invisible => 20,
 		card_longer => 20,
+		card_shoot => 20,
 		card_shorter => 20,
 		card_smaller => 20,
 		card_traversal => 20,
@@ -71,6 +82,7 @@ package img_coding is
 		img_menu => 300,
 		plate_long => 130,
 		plate_normal => 100,
+		plate_shoot => 100,
 		plate_short => 70,
 		start => 300
 	);

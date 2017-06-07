@@ -27,41 +27,46 @@ architecture bhv of draw_bricks is
 begin
 	zeros <= (others => '0');
 	
-	gen_filter:
-	for k in 0 to GRIDS_AMOUNT - 1 generate
-		which_row(k) <= k / GRIDS_COLUMNS;
-		which_column(k) <= k rem GRIDS_COLUMNS;
-		lt_x_array(k) <= GRIDS_LT_X + which_column(k) * BRICK_WIDTH;
-		lt_y_array(k) <= GRIDS_LT_Y + which_row(k) * BRICK_HEIGHT;
-		filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) <= 
-		          grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1))
-			when x >= conv_std_logic_vector(lt_x_array(k) + 1, 10) and
-				  x <= conv_std_logic_vector(lt_x_array(k) + BRICK_WIDTH - 1, 10) and
-				  y >= conv_std_logic_vector(lt_y_array(k) + 1, 9) and
-				  y <= conv_std_logic_vector(lt_y_array(k) + BRICK_HEIGHT - 1, 9)
-			else (others => '0');
-	end generate gen_filter;
-	
-	process(filtrated_grids_map)
-	begin
-		for k in 0 to GRIDS_AMOUNT - 1 loop
-			if (filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) /= zeros) then
-				inside_which <= filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1));
-				x_r <= x - conv_std_logic_vector(lt_x_array(k), 10);
-				y_r <= y - conv_std_logic_vector(lt_y_array(k), 9);
-			end if;
-		end loop;
-	end process;
-	
---	summarized_grids_map(0 to (GRID_BITS - 1)) <= filtrated_grids_map(0 to (GRID_BITS - 1));
---	gen_summary:
---	for k in 1 to GRIDS_AMOUNT - 1 generate
---		summarized_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) <= 
---		filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1))
---			when filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) /= zeros
---			else summarized_grids_map(((k - 1) * GRID_BITS) to (k * GRID_BITS - 1));
---	end generate gen_summary;
+--	gen_filter:
+--	for k in 0 to GRIDS_AMOUNT - 1 generate
+--		which_row(k) <= k / GRIDS_COLUMNS;
+--		which_column(k) <= k rem GRIDS_COLUMNS;
+--		lt_x_array(k) <= GRIDS_LT_X + which_column(k) * BRICK_WIDTH;
+--		lt_y_array(k) <= GRIDS_LT_Y + which_row(k) * BRICK_HEIGHT;
+--		filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) <= 
+--		          grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1))
+--			when x >= conv_std_logic_vector(lt_x_array(k) + 1, 10) and
+--				  x <= conv_std_logic_vector(lt_x_array(k) + BRICK_WIDTH - 1, 10) and
+--				  y >= conv_std_logic_vector(lt_y_array(k) + 1, 9) and
+--				  y <= conv_std_logic_vector(lt_y_array(k) + BRICK_HEIGHT - 1, 9)
+--			else (others => '0');
+--	end generate gen_filter;
 --	
---	summarized_grid <= summarized_grids_map((GRIDS_BITS - GRID_BITS) to (GRIDS_BITS - 1));
---	inside_which <= summarized_grid;
+--	process(filtrated_grids_map)
+--	begin
+--		for k in 0 to GRIDS_AMOUNT - 1 loop
+--			if (filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) /= zeros) then
+--				inside_which <= filtrated_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1));
+--				x_r <= x - conv_std_logic_vector(lt_x_array(k), 10);
+--				y_r <= y - conv_std_logic_vector(lt_y_array(k), 9);
+--			end if;
+--		end loop;
+--	end process;
+	process(x, y, grids_map)
+		variable r, c, k: integer;
+	begin
+		if (x >= GRIDS_LT_X and x <= GRIDS_LT_X + BRICK_WIDTH * GRIDS_COLUMNS and
+		    y >= GRIDS_LT_Y and y <= GRIDS_LT_Y + BRICK_HEIGHT * GRIDS_ROWS) then
+			c := conv_integer(x - GRIDS_LT_X) / BRICK_WIDTH;
+			r := conv_integer(y - GRIDS_LT_Y) / BRICK_HEIGHT;
+			k := r * GRIDS_COLUMNS + c;
+			inside_which <= grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1));
+			x_r <= x - conv_std_logic_vector(BRICK_WIDTH * c, 10);
+			y_r <= y - conv_std_logic_vector(BRICK_HEIGHT * r, 9);
+		else:
+			inside_which <= (others => '0')
+			x_r <= 0
+			y_r <= 0
+		end if;
+	end process;
 end bhv;

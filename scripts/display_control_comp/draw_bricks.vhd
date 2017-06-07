@@ -63,10 +63,10 @@ begin
 			inside_which <= grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1));
 			x_r <= x - conv_std_logic_vector(BRICK_WIDTH * c, 10);
 			y_r <= y - conv_std_logic_vector(BRICK_HEIGHT * r, 9);
-		else:
-			inside_which <= (others => '0')
-			x_r <= 0
-			y_r <= 0
+		else
+			inside_which <= (others => '0');
+			x_r <= (others => '0');
+			y_r <= (others => '0');
 		end if;
 	end process;
 end bhv;

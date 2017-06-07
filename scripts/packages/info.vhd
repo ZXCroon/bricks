@@ -22,8 +22,8 @@ package info is
 	
 	type collision_info is (none, vertical, horizontal, corner);
 	
-	type buff_info is (none, smaller, bigger);
-	constant BUFF_NUM: integer := 3;
+	type buff_info is (none, smaller, bigger, shorter, longer, death, wiggle, traversal);
+	constant BUFF_NUM: integer := 8;
 	type card_info is record
 		lt_position: point;
 		buff: buff_info;
@@ -78,6 +78,11 @@ begin
 		when 0 => return none;
 		when 1 => return smaller;
 		when 2 => return bigger;
+		when 3 => return shorter;
+		when 4 => return longer;
+		when 5 => return death;
+		when 6 => return wiggle;
+		when 7 => return traversal;
 		when others => return none;
 	end case;
 end get_buff;

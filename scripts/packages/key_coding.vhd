@@ -12,6 +12,7 @@ package key_coding is
 	constant key_lshift: KeyVector := x"12";
 	constant key_z: KeyVector := x"1a";
 	constant key_x: KeyVector := x"22";
+	constant key_space: KeyVector := x"29";
 	constant key_esc: KeyVector := x"76";
 	constant key_break: KeyVector := x"f0";
 	constant key_e0: KeyVector := x"e0";

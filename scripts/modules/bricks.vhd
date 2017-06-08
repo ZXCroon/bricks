@@ -10,7 +10,6 @@ entity bricks is
 		clk_100m: in std_logic;
 		ps2data, ps2clock: in std_logic;
 		rst: in std_logic; -- reset when =0
-		launch_sig: in std_logic;
 --		load, run: in std_logic;
 		interface: out interface_type;
 		-- display
@@ -26,7 +25,7 @@ architecture bhv of bricks is
 			datain,clkin,fclk,rst_in: in std_logic;
 			board_speed: out integer;
 			-- 游戏流程的确认，取消
-			confirm, quit, upp, downp: out std_logic := '0'
+			confirm, quit, upp, downp, spacep: out std_logic := '0'
 		);
 	end component; 
 
@@ -124,6 +123,7 @@ architecture bhv of bricks is
 	signal buff_time_left: integer;
 	signal answer_card: card_info;
 	signal finished, fall_out: std_logic;
+	signal spacep: std_logic;
 	signal sig: std_logic;
 	
 	signal shadow_dir: std_logic;
@@ -133,7 +133,7 @@ begin
 	interface <= interface_info;
 	u_keyboard: keyboard_decoder port map(
 		datain=>ps2data, clkin=>ps2clock, fclk=>clk_10m, rst_in=>rst,
-		board_speed=>plate_speed, confirm=>confirm, quit=>quit,
+		board_speed=>plate_speed, confirm=>confirm, quit=>quit, spacep=>spacep,
 		upp=>upp, downp=>downp
 	);
 	u_process_control: process_controller port map(
@@ -150,7 +150,7 @@ begin
 		ask_x, ask_y, hs, vs, r_out, g_out, b_out
 	);
 	u_state: state_control port map(
-		clk_100m, logic_load, logic_run, not launch_sig, plate_speed,
+		clk_100m, logic_load, logic_run, spacep, plate_speed,
 		grids_map_init, ask_x, ask_y,
 		-- output
 		grids_map, ball, plate, buff, shadow_dir, bullet, bullet_x, bullet_y, buff_time_left, answer_card,

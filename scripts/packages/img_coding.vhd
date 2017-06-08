@@ -25,12 +25,13 @@ package img_coding is
 		card_traversal,
 		card_wiggle,
 		img_menu,
+		img_over,
+		img_pause,
 		plate_long,
 		plate_normal,
 		plate_shadow,
 		plate_shoot,
-		plate_short,
-		start
+		plate_short
 	);
 	type img_info2integer is array(img_info) of integer;
 	constant offset_dic: img_info2integer := (
@@ -54,12 +55,13 @@ package img_coding is
 		card_traversal => 7232,
 		card_wiggle => 7632,
 		img_menu => 8032,
-		plate_long => 51232,
-		plate_normal => 51882,
-		plate_shadow => 52382,
-		plate_shoot => 53032,
-		plate_short => 53532,
-		start => 53882
+		img_over => 51232,
+		img_pause => 68632,
+		plate_long => 86032,
+		plate_normal => 86682,
+		plate_shadow => 87182,
+		plate_shoot => 87832,
+		plate_short => 88332
 	);
 	constant width_dic: img_info2integer := (
 		ball_big => 24,
@@ -82,11 +84,12 @@ package img_coding is
 		card_traversal => 20,
 		card_wiggle => 20,
 		img_menu => 300,
+		img_over => 200,
+		img_pause => 200,
 		plate_long => 130,
 		plate_normal => 100,
 		plate_shadow => 130,
 		plate_shoot => 100,
-		plate_short => 70,
-		start => 300
+		plate_short => 70
 	);
 end img_coding;

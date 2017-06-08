@@ -6,7 +6,8 @@
 !*.qpf
 !*.qsf
 !*.vwf
-!images/**/*
+!images/*
+!images/mif/*
 !*.sdc
 
 simulation/*/

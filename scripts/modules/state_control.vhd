@@ -149,7 +149,7 @@ begin
 	current_grids_map <= next_grids_map when load = '0' else grids_map_load;
 	current_plate <= next_plate when load = '0' else
 	                 construct_plate_info(construct_point((SCREEN_WIDTH - NORMAL_PLATE_LEN) / 2, 450), NORMAL_PLATE_LEN, 0);
-	current_velocity <= next_velocity when load = '0' else construct_vector(150, -150);
+	current_velocity <= next_velocity when load = '0' else construct_vector(130, -130);
 	current_ball <= construct_ball_info(NORMAL_BALL_RADIUS, construct_point(320, 442)) when load = '1' else
 						construct_ball_info(NORMAL_BALL_RADIUS, current_plate.l_position + construct_vector(NORMAL_PLATE_LEN / 2, -NORMAL_BALL_RADIUS)) when current_state = stick else
 						next_ball;

@@ -87,11 +87,11 @@ BEGIN
 	GENERIC MAP (
 		clock_enable_input_a => "NORMAL",
 		clock_enable_output_a => "NORMAL",
-		init_file => "../../images/mif/allimg.mif",
+		init_file => "./images/mif/allimg.mif",
 		intended_device_family => "Cyclone II",
 		lpm_hint => "ENABLE_RUNTIME_MOD=NO",
 		lpm_type => "altsyncram",
-		numwords_a => 100000,
+		numwords_a => 90000,
 		operation_mode => "ROM",
 		outdata_aclr_a => "NONE",
 		outdata_reg_a => "CLOCK0",
@@ -130,8 +130,8 @@ END SYN;
 -- Retrieval info: PRIVATE: JTAG_ENABLED NUMERIC "0"
 -- Retrieval info: PRIVATE: JTAG_ID STRING "NONE"
 -- Retrieval info: PRIVATE: MAXIMUM_DEPTH NUMERIC "0"
--- Retrieval info: PRIVATE: MIFfilename STRING "../../images/mif/allimg.mif"
--- Retrieval info: PRIVATE: NUMWORDS_A NUMERIC "100000"
+-- Retrieval info: PRIVATE: MIFfilename STRING "./images/mif/allimg.mif"
+-- Retrieval info: PRIVATE: NUMWORDS_A NUMERIC "90000"
 -- Retrieval info: PRIVATE: RAM_BLOCK_TYPE NUMERIC "0"
 -- Retrieval info: PRIVATE: RegAddr NUMERIC "1"
 -- Retrieval info: PRIVATE: RegOutput NUMERIC "1"
@@ -144,11 +144,11 @@ END SYN;
 -- Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
 -- Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_A STRING "NORMAL"
 -- Retrieval info: CONSTANT: CLOCK_ENABLE_OUTPUT_A STRING "NORMAL"
--- Retrieval info: CONSTANT: INIT_FILE STRING "../../images/mif/allimg.mif"
+-- Retrieval info: CONSTANT: INIT_FILE STRING "./images/mif/allimg.mif"
 -- Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone II"
 -- Retrieval info: CONSTANT: LPM_HINT STRING "ENABLE_RUNTIME_MOD=NO"
 -- Retrieval info: CONSTANT: LPM_TYPE STRING "altsyncram"
--- Retrieval info: CONSTANT: NUMWORDS_A NUMERIC "100000"
+-- Retrieval info: CONSTANT: NUMWORDS_A NUMERIC "90000"
 -- Retrieval info: CONSTANT: OPERATION_MODE STRING "ROM"
 -- Retrieval info: CONSTANT: OUTDATA_ACLR_A STRING "NONE"
 -- Retrieval info: CONSTANT: OUTDATA_REG_A STRING "CLOCK0"

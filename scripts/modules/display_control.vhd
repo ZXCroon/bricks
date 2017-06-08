@@ -5,7 +5,6 @@ use ieee.std_logic_arith.all;
 use work.geometry.all;
 use work.info.all;
 use work.img_coding.all;
-use work.img_coding2v.all;
 use work.basic_settings.all;
 use work.interface_coding.all;
 
@@ -53,8 +52,6 @@ architecture bhv of display_control is
 			x: in std_logic_vector(9 downto 0);
 			y: in std_logic_vector(8 downto 0);
 			img: in img_info;
-			img2v: in img_info2v;
-			img_flag: in std_logic;
 			inclk: in std_logic;
 			clken: in std_logic;
 			r, g, b: out std_logic_vector(2 downto 0);
@@ -84,20 +81,16 @@ architecture bhv of display_control is
 	signal next_y_r: std_logic_vector(8 downto 0);
 	signal next_x_r_b: std_logic_vector(9 downto 0);
 	signal next_y_r_b: std_logic_vector(8 downto 0);
-	signal r, g, b: std_logic_vector(2 downto 0);
 	signal now_r, now_g, now_b: std_logic_vector(2 downto 0);
-	signal now_filled: std_logic;
 	signal next_r, next_g, next_b: std_logic_vector(2 downto 0);
 	signal inside_which: std_logic_vector(0 to (GRID_BITS - 1));
 	signal zeros: std_logic_vector(0 to (GRID_BITS - 1));
 	signal img: img_info;
-	signal img2v: img_info2v;
-	signal img_flag: std_logic := '0';   -- 0: use img; 1: use img_info
 
 begin
-	u0: vga_control port map(clk_25m, rst, r, g, b, hs, vs, now_x, now_y, next_x, next_y, r_out, g_out, b_out);
+	u0: vga_control port map(clk_25m, rst, now_r, now_g, now_b, hs, vs, now_x, now_y, next_x, next_y, r_out, g_out, b_out);
 	u1: draw_bricks port map(next_x, next_y, grids_map, inside_which, next_x_r_b, next_y_r_b);
-	u2: img_reader port map(next_x_r, next_y_r, img, img2v, '0', clk_100m, '1', r, g, b, clk_25m);
+	u2: img_reader port map(next_x_r, next_y_r, img, clk_100m, '1', now_r, now_g, now_b, clk_25m);
 	
 	ask_x <= next_x;
 	ask_y <= next_y;
@@ -106,7 +99,6 @@ begin
 	process(next_x, next_y)
 		variable shadow_x: integer;
 	begin
-		img_flag <= '0';
 		img <= bg_texture;
 		next_x_r <= conv_std_logic_vector(conv_integer(next_x) rem 20, 10);
 		next_y_r <= conv_std_logic_vector(conv_integer(next_y) rem 20, 9);
@@ -178,13 +170,6 @@ begin
 				end if;
 			end if;
 		end if;
---		if (next_y <= plate.l_position(1) and next_y >= bullet_y and next_y <= bullet_y + 15) then
---			if (next_x = bullet_x or next_x = bullet_x + NORMAL_PLATE_LEN - 1) then
---				img <= brick3;
---				next_x_r <= (others => '0');
---				next_y_r <= (others => '0');
---			end if;
---		end if;
 		
 		-- card --
 		if (card_xy.buff /= none) then
@@ -218,34 +203,31 @@ begin
 		end if;
 
 		-- menu --
-		case (game_flag) is
-			when ui_menu =>
-				if(next_x >= 170 and next_x < 170 + 300
-				and next_y >= 168 and next_y < 168 + 144) then
+		case game_flag is
+			when ui_menu=>
+				if(next_x>=170 and next_x<170+300
+				and next_y>=168 and next_y<168+144) then
 					img <= img_menu;
-					next_x_r <= next_x - 170;
-					next_y_r <= next_y - 168;
+					next_x_r <= next_x-170;
+					next_y_r <= next_y-168;
 				else
 					img <= bg_texture;
-					next_x_r <= conv_std_logic_vector(conv_integer(next_x) rem 20, 10);
-					next_y_r <= conv_std_logic_vector(conv_integer(next_y) rem 20, 9);
+					next_x_r <= (others=>'0');
+					next_y_r <= (others=>'0');
 				end if;
 			when ui_pause =>
 				if (next_x >= 220 and next_x < 420 and next_y >= 180 and next_y < 267) then
-					img_flag <= '1';
-					img2v <= pause;
+					img <= img_pause;
 					next_x_r <= next_x - 220;
 					next_y_r <= next_y - 180;
 				end if;
 			when ui_gameover =>
 				if (next_x >= 220 and next_x < 420 and next_y >= 180 and next_y < 267) then
-					img_flag <= '1';
-					img2v <= over;
+					img <= img_over;
 					next_x_r <= next_x - 220;
 					next_y_r <= next_y - 180;
 				end if;
-			when others =>
-				img_flag <= '0';
+			when others => null;
 		end case;
 	end process;
 	

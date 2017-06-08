@@ -85,12 +85,12 @@ set_location_assignment PIN_AC7 -to interface[0]
 set_location_assignment PIN_AB8 -to interface[1]
 set_global_assignment -name USE_CONFIGURATION_DEVICE ON
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
-set_global_assignment -name ENABLE_SIGNALTAP ON
+set_global_assignment -name ENABLE_SIGNALTAP OFF
 set_global_assignment -name USE_SIGNALTAP_FILE "signal tap/display.stp"
-set_global_assignment -name SLD_FILE "C:/Users/Wuql/Quartus/bricks/signal tap/display_auto_stripped.stp"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name SLD_FILE "C:/Users/Wuql/Quartus/bricks/signal tap/display_auto_stripped.stp"
 set_global_assignment -name SDC_FILE bricks.sdc
 set_global_assignment -name VHDL_FILE scripts/modules/bricks.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/interface_coding.vhd
@@ -107,6 +107,7 @@ set_global_assignment -name VHDL_FILE scripts/modules/display_control.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/process_controller.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/keyboard_decoder.vhd
 set_global_assignment -name VHDL_FILE scripts/rom_comp/img_reader.vhd
+set_global_assignment -name VHDL_FILE scripts/rom_comp/rom_reader.vhd
 set_global_assignment -name VHDL_FILE scripts/util_comp/serial_to_parallel.vhd
 set_global_assignment -name VHDL_FILE scripts/util_comp/clock.vhd
 set_global_assignment -name VHDL_FILE scripts/util_comp/rand_generator.vhd
@@ -117,6 +118,7 @@ set_global_assignment -name VHDL_FILE scripts/logic_control_comp/plate_collision
 set_global_assignment -name VHDL_FILE scripts/logic_control_comp/collision_detection.vhd
 set_global_assignment -name VHDL_FILE scripts/logic_control_comp/collision_computation.vhd
 set_global_assignment -name VHDL_FILE scripts/buff_control_comp/card_generator.vhd
+set_global_assignment -name VHDL_FILE scripts/buff_control_comp/bullet_control.vhd
 set_global_assignment -name VHDL_FILE scripts/buff_control_comp/buff_time_control.vhd
 set_global_assignment -name VHDL_FILE scripts/display_control_comp/vga_control.vhd
 set_global_assignment -name VHDL_FILE scripts/display_control_comp/draw_bricks.vhd
@@ -127,11 +129,9 @@ set_global_assignment -name VHDL_FILE scripts/tests/logic_control_test.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/display_control_test.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/buff_test.vhd
 set_global_assignment -name MIF_FILE images/mif/allimg.mif
+set_global_assignment -name QIP_FILE scripts/rom_comp/rom_reader.qip
 set_global_assignment -name QIP_FILE scripts/rom_comp/rom_reader_1.qip
 set_global_assignment -name VECTOR_WAVEFORM_FILE output_files/Waveform.vwf
 set_global_assignment -name VHDL_FILE scripts/tests/img_test.vhd
 set_global_assignment -name SIGNALTAP_FILE "signal tap/display.stp"
-set_global_assignment -name QIP_FILE scripts/rom_comp/rom_reader.qip
-set_location_assignment PIN_AD4 -to launch_sig
-set_global_assignment -name VHDL_FILE scripts/buff_control_comp/bullet_control.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

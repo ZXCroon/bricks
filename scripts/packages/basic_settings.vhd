@@ -29,7 +29,7 @@ package basic_settings is
 	constant INITIATION_CODE: std_logic_vector((CODE_BITS - 1) downto 0) := "110101";
 	constant TERMINATION_CODE: std_logic_vector((CODE_BITS - 1) downto 0) := "111011";
 	
-	constant MIN_VELOCITY_VALUE_X: integer := 63;
+	constant MIN_VELOCITY_VALUE_X: integer := 100;
 	
 	constant CARD_SIDE: integer := 20;
 	constant CARD_GENS: integer := 3;

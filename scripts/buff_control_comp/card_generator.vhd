@@ -56,7 +56,7 @@ begin
 --	u_r_fallperiod: rand_generator generic map(4, 15, seed, 8, 3)
 --	                              port map(clk_100m, calc_sig, random_factor / 2, fall_period);
 	interval <= 300;
-	buff_code <= 10;
+	buff_code <= 7;
 	fallx <= 300;
 	fall_period <= 5;
 	

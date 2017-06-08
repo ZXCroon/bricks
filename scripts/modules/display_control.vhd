@@ -126,7 +126,12 @@ begin
 		
 		-- bricks --
 		if (inside_which /= zeros and buff /= invisible) then
-			img <= brick1;
+			case inside_which is
+				when "01" => img <= brick3;
+				when "10" => img <= brick1;
+				when "11" => img <= brick4;
+				when others => img <= brick2;
+			end case;
 			next_x_r <= next_x_r_b;
 			next_y_r <= next_y_r_b;
 		end if;

@@ -1,5 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
 use work.geometry.all;
 use work.info.all;
 use work.basic_settings.all;
@@ -67,6 +68,7 @@ architecture bhv of logic_control is
 	end component;
 	
 	signal zeros: std_logic_vector(0 to (GRIDS_AMOUNT - 1));
+	signal ones: std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 
 	signal next_ball_t: ball_info;
 	signal next_velocity_t: vector;
@@ -77,6 +79,7 @@ architecture bhv of logic_control is
 	signal fall_out_ub: std_logic;
 	signal ball_moved: std_logic;
 	signal hit_map: std_logic_vector(0 to (GRIDS_AMOUNT - 1));
+	signal break_map: std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 	signal current_velocity_trans: vector;
 	signal current_grids_map_trans: std_logic_vector(0 to (GRIDS_BITS - 1));
 	signal bullet_trans: std_logic_vector(0 to 1);
@@ -86,6 +89,7 @@ architecture bhv of logic_control is
 	signal trav: std_logic := '0';
 begin
 	zeros <= (others => '0');
+	ones <= (others => '1');
 	
 	have_shadow <= '1' when buff = double else '0';
 	u: collision_computation port map(current_grids_map_trans, next_ball_t, next_plate_t,
@@ -94,15 +98,18 @@ begin
 	                                  hit_map, next_velocity_t, next_bullet, fall_out_ub);
 	gen_next_grids_map:
 	for k in 0 to GRIDS_AMOUNT - 1 generate
-		next_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) <= (others => '0') when hit_map(k) = '1' else
-				current_grids_map_trans((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1));
+		next_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) <=
+		current_grids_map_trans((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) - 1
+		when hit_map(k) = '1' and current_grids_map_trans((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) /= ones
+		else	current_grids_map_trans((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1));
+		break_map(k) <= '1' when hit_map(k) = '1' and current_grids_map_trans((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) = 1 else '0';
 	end generate gen_next_grids_map;
 	
 	u_trans: transfer port map(
 		clk, ena, current_ball, current_velocity, current_plate, current_bullet, plate_move, current_grids_map, wiggling,
 		next_ball_t, current_velocity_trans, next_plate_t, bullet_trans, current_grids_map_trans, ball_moved
 	);
-	next_velocity_ub <= next_velocity_t when ball_moved = '1' and (trav = '0' or hit_map = zeros)
+	next_velocity_ub <= next_velocity_t when ball_moved = '1' and (trav = '0' or break_map = zeros)
 	                    else current_velocity_trans;
 	next_ball_ub <= next_ball_t;
 	next_plate_ub <= next_plate_t;

@@ -56,6 +56,7 @@ architecture bhv of bricks is
 			plate: out plate_info;
 			buff: out buff_info;
 			shadow_dir: out std_logic;
+			bullet: out std_logic_vector(0 to 1);
 			bullet_x, bullet_y: out integer;
 			buff_time_left: out integer;
 			answer_card: out card_info;
@@ -78,6 +79,7 @@ architecture bhv of bricks is
 			card_xy: in card_info;
 			buff: in buff_info;
 			shadow_dir: in std_logic;
+			bullet: in std_logic_vector(0 to 1);
 			bullet_x, bullet_y: in integer;
 			game_flag: in interface_type;
 			
@@ -125,6 +127,7 @@ architecture bhv of bricks is
 	signal sig: std_logic;
 	
 	signal shadow_dir: std_logic;
+	signal bullet: std_logic_vector(0 to 1);
 	signal bullet_x, bullet_y: integer;
 begin
 	interface <= interface_info;
@@ -143,14 +146,14 @@ begin
 	--logic_load <= load;
 	--logic_run <= run;
 	u_display: display_control port map(
-		clk_100m, rst, grids_map, plate, ball, answer_card, buff, shadow_dir, bullet_x, bullet_y, interface_info, 
+		clk_100m, rst, grids_map, plate, ball, answer_card, buff, shadow_dir, bullet, bullet_x, bullet_y, interface_info, 
 		ask_x, ask_y, hs, vs, r_out, g_out, b_out
 	);
 	u_state: state_control port map(
 		clk_100m, logic_load, logic_run, not launch_sig, plate_speed,
 		grids_map_init, ask_x, ask_y,
 		-- output
-		grids_map, ball, plate, buff, shadow_dir, bullet_x, bullet_y, buff_time_left, answer_card,
+		grids_map, ball, plate, buff, shadow_dir, bullet, bullet_x, bullet_y, buff_time_left, answer_card,
 		finished, fall_out, sig
 	);
 

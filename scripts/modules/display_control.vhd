@@ -20,6 +20,7 @@ entity display_control is
 		card_xy: in card_info;
 		buff: in buff_info;
 		shadow_dir: in std_logic;    -- 0: shadow is on the left; 1: shadow is on the right
+		bullet: in std_logic_vector(0 to 1);
 		bullet_x, bullet_y: in integer;
 		game_flag: in interface_type;
 		
@@ -164,13 +165,21 @@ begin
 		
 		-- bullet --
 		if (buff = shoot) then
-			if ((next_x = bullet_x or next_x = bullet_x + NORMAL_PLATE_LEN - 1) and
-			    (next_y <= plate.l_position(1) and next_y >= bullet_y and next_y <= bullet_y + 15)) then
-				img <= brick3;
-				next_x_r <= (others => '0');
-				next_y_r <= (others => '0');
+			if (next_y <= plate.l_position(1) and next_y >= bullet_y and next_y <= bullet_y + 15) then
+				if ((bullet(0) = '1' and next_x = bullet_x) or (bullet(1) = '1' and next_x = bullet_x + NORMAL_PLATE_LEN - 1)) then
+					img <= brick3;
+					next_x_r <= (others => '0');
+					next_y_r <= (others => '0');
+				end if;
 			end if;
 		end if;
+--		if (next_y <= plate.l_position(1) and next_y >= bullet_y and next_y <= bullet_y + 15) then
+--			if (next_x = bullet_x or next_x = bullet_x + NORMAL_PLATE_LEN - 1) then
+--				img <= brick3;
+--				next_x_r <= (others => '0');
+--				next_y_r <= (others => '0');
+--			end if;
+--		end if;
 		
 		-- card --
 		if (card_xy.buff /= none) then

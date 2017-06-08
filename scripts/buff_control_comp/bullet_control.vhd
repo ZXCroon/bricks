@@ -8,9 +8,11 @@ entity bullet_control is
 		clk_100m: in std_logic;
 		ena: in std_logic;
 		rst: in std_logic;
+		can_shoot: in std_logic;
 		shoot_sig: in std_logic;
 		l_position: in point;
-		lt_x, lt_y: out integer
+		lt_x: out integer := 0;
+		lt_y: out integer := -400
 	);
 end bullet_control;
 
@@ -23,12 +25,12 @@ architecture bhv of bullet_control is
 		);
 	end component;
 	
-	signal clk_1k: std_logic;
+	signal clk_2k: std_logic;
 	type state is (ready, flying);
 begin
-	u_c: clock generic map(100000) port map(clk_100m, clk_1k);
+	u_c: clock generic map(50000) port map(clk_100m, clk_2k);
 	
-	process(clk_1k, ena, rst)
+	process(clk_2k, ena, rst)
 		variable cnt: integer := 0;
 		variable current_state: state := ready;
 		variable x, y: integer;
@@ -40,11 +42,11 @@ begin
 			current_state := ready;
 			lt_x <= x;
 			lt_y <= y;
-		elsif (clk_1k'event and clk_1k = '1') then
+		elsif (clk_2k'event and clk_2k = '1') then
 			if (ena = '1') then
 				case current_state is
 					when ready =>
-						if (shoot_sig = '1') then
+						if (shoot_sig = '1' and can_shoot = '1') then
 							current_state := flying;
 							cnt := 0;
 							x := l_position(0);

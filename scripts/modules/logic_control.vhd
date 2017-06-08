@@ -13,6 +13,8 @@ entity logic_control is
 		current_plate: in plate_info;
 		current_velocity: in vector;
 		current_ball: in ball_info;
+		current_bullet: in std_logic_vector(0 to 1);
+		bullet_x, bullet_y: integer;
 		buff: in buff_info;
 		shadow_dir: in std_logic;
 		
@@ -20,6 +22,7 @@ entity logic_control is
 		next_plate: out plate_info;
 		next_velocity: out vector;
 		next_ball: out ball_info;
+		next_bullet: out std_logic_vector(0 to 1);
 		fall_out: out std_logic
 	);
 end logic_control;
@@ -34,8 +37,11 @@ architecture bhv of logic_control is
 			current_velocity: in vector;
 			have_shadow: in std_logic;
 			shadow_dir: in std_logic;
+			bullet: in std_logic_vector(0 to 1);
+			bullet_x, bullet_y: in integer;
 			hit_map: out std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 			next_velocity: out vector;
+			next_bullet: out std_logic_vector(0 to 1);
 			fall_out: out std_logic
 		);
 	end component;
@@ -47,12 +53,14 @@ architecture bhv of logic_control is
 			ball: in ball_info;
 			velocity: in vector;
 			plate: in plate_info;
+			bullet: in std_logic_vector(0 to 1);
 			plate_move: in integer;
 			grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
 			wiggle: in std_logic;
 			ball_next: out ball_info;
 			velocity_trans: out vector;
 			plate_next: out plate_info;
+			bullet_trans: out std_logic_vector(0 to 1);
 			grids_map_trans: out std_logic_vector(0 to (GRIDS_BITS - 1));
 			ball_moved: out std_logic
 		);
@@ -71,6 +79,7 @@ architecture bhv of logic_control is
 	signal hit_map: std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 	signal current_velocity_trans: vector;
 	signal current_grids_map_trans: std_logic_vector(0 to (GRIDS_BITS - 1));
+	signal bullet_trans: std_logic_vector(0 to 1);
 	
 	signal have_shadow: std_logic := '0';
 	signal wiggling: std_logic := '0';
@@ -81,7 +90,8 @@ begin
 	have_shadow <= '1' when buff = double else '0';
 	u: collision_computation port map(current_grids_map_trans, next_ball_t, next_plate_t,
 	                                  plate_move, current_velocity_trans, have_shadow, shadow_dir,
-	                                  hit_map, next_velocity_t, fall_out_ub);
+												 bullet_trans, bullet_x, bullet_y,
+	                                  hit_map, next_velocity_t, next_bullet, fall_out_ub);
 	gen_next_grids_map:
 	for k in 0 to GRIDS_AMOUNT - 1 generate
 		next_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) <= (others => '0') when hit_map(k) = '1' else
@@ -89,8 +99,8 @@ begin
 	end generate gen_next_grids_map;
 	
 	u_trans: transfer port map(
-		clk, ena, current_ball, current_velocity, current_plate, plate_move, current_grids_map, wiggling,
-		next_ball_t, current_velocity_trans, next_plate_t, current_grids_map_trans, ball_moved
+		clk, ena, current_ball, current_velocity, current_plate, current_bullet, plate_move, current_grids_map, wiggling,
+		next_ball_t, current_velocity_trans, next_plate_t, bullet_trans, current_grids_map_trans, ball_moved
 	);
 	next_velocity_ub <= next_velocity_t when ball_moved = '1' and (trav = '0' or hit_map = zeros)
 	                    else current_velocity_trans;

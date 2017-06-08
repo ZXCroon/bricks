@@ -10,6 +10,9 @@ entity collision_detection is
 	port(
 		brick: in brick_info;
 		ball: in ball_info;
+		bullet: in std_logic_vector(0 to 1);
+		bullet_x, bullet_y: in integer;
+		bullet_hit: out std_logic_vector(0 to 1);
 		collision: out collision_info
 	);
 end collision_detection;
@@ -39,6 +42,15 @@ begin
 	             vertical when ((left_side or right_side) and inside_y_range) else
 	             horizontal when ((top_side or bottom_side) and inside_x_range) else
 					 corner when (lt_corner or rt_corner or lb_corner or rb_corner) else none;
-	-- corner-collision --
 	
+	bullet_hit(0) <= '1' when
+	(bullet(0) = '1' and bullet_x >= brick.lt_position(0) and bullet_x <= brick.lt_position(0) + BRICK_WIDTH and
+	 bullet_y >= brick.lt_position(1) and bullet_y <= brick.lt_position(1) + BRICK_HEIGHT and brick.class /= zeros)
+	else '0';
+	bullet_hit(1) <= '1' when
+	(bullet(1) = '1' and bullet_x + NORMAL_PLATE_LEN >= brick.lt_position(0) and bullet_x + NORMAL_PLATE_LEN <= brick.lt_position(0) + BRICK_WIDTH and
+	 bullet_y >= brick.lt_position(1) and bullet_y <= brick.lt_position(1) + BRICK_HEIGHT and brick.class /= zeros)
+	else '0';
+
+--	bullet_hit <= "00" when bullet_x > -1 and bullet_y < 800 else "11";
 end bhv;

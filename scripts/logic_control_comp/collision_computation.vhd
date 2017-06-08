@@ -13,8 +13,11 @@ entity collision_computation is
 		current_velocity: in vector;
 		have_shadow: in std_logic;
 		shadow_dir: in std_logic;
+		bullet: in std_logic_vector(0 to 1);
+		bullet_x, bullet_y: in integer;
 		hit_map: out std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 		next_velocity: out vector;
+		next_bullet: out std_logic_vector(0 to 1);
 		fall_out: out std_logic
 	);
 end collision_computation;
@@ -24,6 +27,9 @@ architecture bhv of collision_computation is
 		port(
 			brick: in brick_info;
 			ball: in ball_info;
+			bullet: in std_logic_vector(0 to 1);
+			bullet_x, bullet_y: in integer;
+			bullet_hit: out std_logic_vector(0 to 1);
 			collision: out collision_info
 		);
 	end component;
@@ -54,6 +60,7 @@ architecture bhv of collision_computation is
 	
 	type bricks_info is array(0 to (GRIDS_AMOUNT - 1)) of brick_info;
 	type collisions_info is array(0 to (GRIDS_AMOUNT - 1)) of collision_info;
+	type bullet_hits_type is array(0 to (GRIDS_AMOUNT - 1)) of std_logic_vector(0 to 1);
 	
 	function summarize_collisions(collisions: collisions_info;
 	                              plate_collision, wall_collision: collision_info) return collision_info is
@@ -117,6 +124,7 @@ architecture bhv of collision_computation is
 	signal shadow_x: integer;
 	signal bricks: bricks_info;
 	signal collisions: collisions_info;
+	signal bullet_hits: bullet_hits_type;
 	signal plate_collision, plate_collision_1, plate_collision_2, plate_shadow_collision, wall_collision: collision_info;
 	signal summarized_collision: collision_info;
 	signal next_velocity_t: vector;
@@ -133,8 +141,9 @@ begin
 		bricks(k) <= construct_brick_info(construct_point(GRIDS_LT_X + k rem GRIDS_COLUMNS * BRICK_WIDTH,
 		                                                  GRIDS_LT_Y + k / GRIDS_COLUMNS * BRICK_HEIGHT),
 													 grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)));
-		u1: collision_detection port map(bricks(k), ball, collisions(k));
-		hit_map(k) <= '0' when collisions(k) = none else '1';
+		u1: collision_detection port map(bricks(k), ball, bullet, bullet_x, bullet_y, bullet_hits(k), collisions(k));
+		hit_map(k) <= '0' when collisions(k) = none and bullet_hits(k) = "00" else '1';
+--		hit_map(k) <= '0' when collisions(k) = none else '1';
 	end generate gen_computing_blocks;
 	
 	shadow_x <= plate.l_position(0) + 200 when shadow_dir = '1' else plate.l_position(0) - 200;
@@ -150,4 +159,17 @@ begin
 	
 	fall_out_bool <= fall_out_bool_1 and (have_shadow = '0' or fall_out_bool_2);
 	fall_out <= '1' when fall_out_bool else '0';
+	
+	process(bullet_hits)
+	begin
+		next_bullet <= bullet;
+		for k in 0 to GRIDS_AMOUNT - 1 loop
+			if (bullet_hits(k)(0) = '1') then
+				next_bullet(0) <= '0';
+			end if;
+			if (bullet_hits(k)(1) = '1') then
+				next_bullet(1) <= '0';
+			end if;
+		end loop;
+	end process;
 end bhv;

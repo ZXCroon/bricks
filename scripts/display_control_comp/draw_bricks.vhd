@@ -55,8 +55,8 @@ begin
 	process(x, y, grids_map)
 		variable r, c, k: integer;
 	begin
-		if (x >= GRIDS_LT_X and x <= GRIDS_LT_X + BRICK_WIDTH * GRIDS_COLUMNS and
-		    y >= GRIDS_LT_Y and y <= GRIDS_LT_Y + BRICK_HEIGHT * GRIDS_ROWS) then
+		if (x >= GRIDS_LT_X and x < GRIDS_LT_X + BRICK_WIDTH * GRIDS_COLUMNS and
+		    y >= GRIDS_LT_Y and y < GRIDS_LT_Y + BRICK_HEIGHT * GRIDS_ROWS) then
 			c := conv_integer(x - GRIDS_LT_X) / BRICK_WIDTH;
 			r := conv_integer(y - GRIDS_LT_Y) / BRICK_HEIGHT;
 			k := r * GRIDS_COLUMNS + c;

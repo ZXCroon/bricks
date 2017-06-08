@@ -20,6 +20,7 @@ entity state_control is
 		plate: out plate_info;
 		buff: out buff_info;
 		shadow_dir: out std_logic;
+		bullet_x, bullet_y: out integer;
 		buff_time_left: out integer;
 		answer_card: out card_info;
 		
@@ -89,6 +90,17 @@ architecture bhv of state_control is
 		);
 	end component;
 	
+	component bullet_control
+		port(
+			clk_100m: in std_logic;
+			ena: in std_logic;
+			rst: in std_logic;
+			shoot_sig: in std_logic;
+			l_position: in point;
+			lt_x, lt_y: out integer
+		);
+	end component;
+	
 	signal clk_trans, clk_load, clk_start: std_logic;
 	signal buff_t: buff_info;
 	
@@ -116,6 +128,8 @@ begin
 	                                next_grids_map, next_plate, next_velocity, next_ball, fall_out);
 	u_buff: buff_control port map(clk_100m, run, not load, next_plate, buff_t, shadow_dir_t, buff_time_left,
 	                              ask_x, ask_y, answer_card, sig);
+	u_bullet: bullet_control port map(clk_100m, run, not load, launch_sig, next_plate.l_position, bullet_x, bullet_y);
+	
 	buff <= buff_t;
 	shadow_dir <= shadow_dir_t;
 									  

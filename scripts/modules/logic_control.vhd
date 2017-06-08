@@ -97,7 +97,6 @@ begin
 	next_ball_ub <= next_ball_t;
 	next_plate_ub <= next_plate_t;
 	
-	fall_out <= '0';
 	
 	---------------------  calc buff effects  ----------------------
 	
@@ -115,7 +114,7 @@ begin
 		end if;
 		next_plate.len <= NORMAL_PLATE_LEN;
 		next_velocity <= next_velocity_ub;
---		fall_out <= fall_out_ub;
+		fall_out <= fall_out_ub;
 		wiggling <= '0';
 		trav <= '0';
 		case buff is
@@ -135,7 +134,7 @@ begin
 				next_plate.len <= LONG_PLATE_LEN;
 				
 			when death =>
---				fall_out <= '1';
+				fall_out <= '1';
 				
 			when wiggle =>
 				wiggling <= '1';

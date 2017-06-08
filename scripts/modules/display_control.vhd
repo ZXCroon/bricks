@@ -19,6 +19,7 @@ entity display_control is
 		ball: in ball_info;
 		card_xy: in card_info;
 		buff: in buff_info;
+		shadow_dir: in std_logic;    -- 0: shadow is on the left; 1: shadow is on the right
 		game_flag: in interface_type;
 		
 		ask_x: out std_logic_vector(9 downto 0);
@@ -101,6 +102,7 @@ begin
 	zeros <= (others => '0');
 
 	process(next_x, next_y)
+		variable shadow_x: integer;
 	begin
 		img_flag <= '0';
 		img <= bg_texture;
@@ -115,12 +117,13 @@ begin
 			case buff is
 				when smaller => img <= ball_small;
 				when bigger  => img <= ball_big;
+				when traversal => img <= ball_traversal;
 				when others  => img <= ball_normal;
 			end case;
 		end if;
 		
 		-- bricks --
-		if (inside_which /= zeros) then
+		if (inside_which /= zeros and buff /= invisible) then
 			img <= brick1;
 			next_x_r <= next_x_r_b;
 			next_y_r <= next_y_r_b;
@@ -134,10 +137,28 @@ begin
 			case buff is
 				when longer => img <= plate_long;
 				when shorter => img <= plate_short;
+				when shoot => img <= plate_shoot;
 				when others => img <= plate_normal;
 			end case;
 			next_x_r <= next_x - plate.l_position(0);
 			next_y_r <= next_y - plate.l_position(1);
+		end if;
+		
+		-- plate_shadow --
+		if (buff = double) then
+			if (shadow_dir = '0') then
+				shadow_x := plate.l_position(0) - 200;
+			else
+				shadow_x := plate.l_position(0) + 200;
+			end if;
+			if (next_x >= conv_std_logic_vector(shadow_x, 10) and
+				 next_x <= conv_std_logic_vector(shadow_x + NORMAL_PLATE_LEN, 10) and
+				 next_y >= conv_std_logic_vector(plate.l_position(1), 9) and
+				 next_y <= conv_std_logic_vector(plate.l_position(1) + PLATE_WIDTH, 9)) then
+				img <= plate_shadow;
+				next_x_r <= next_x - shadow_x;
+				next_y_r <= next_y - plate.l_position(1);
+			end if;
 		end if;
 		
 		-- card --

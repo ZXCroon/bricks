@@ -27,6 +27,7 @@ package img_coding is
 		img_menu,
 		plate_long,
 		plate_normal,
+		plate_shadow,
 		plate_shoot,
 		plate_short,
 		start
@@ -55,9 +56,10 @@ package img_coding is
 		img_menu => 8032,
 		plate_long => 51232,
 		plate_normal => 51882,
-		plate_shoot => 52382,
-		plate_short => 52882,
-		start => 53232
+		plate_shadow => 52382,
+		plate_shoot => 53032,
+		plate_short => 53532,
+		start => 53882
 	);
 	constant width_dic: img_info2integer := (
 		ball_big => 24,
@@ -82,6 +84,7 @@ package img_coding is
 		img_menu => 300,
 		plate_long => 130,
 		plate_normal => 100,
+		plate_shadow => 130,
 		plate_shoot => 100,
 		plate_short => 70,
 		start => 300

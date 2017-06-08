@@ -14,6 +14,7 @@ entity logic_control is
 		current_velocity: in vector;
 		current_ball: in ball_info;
 		buff: in buff_info;
+		shadow_dir: in std_logic;
 		
 		next_grids_map: out std_logic_vector(0 to (GRIDS_BITS - 1));
 		next_plate: out plate_info;
@@ -31,6 +32,8 @@ architecture bhv of logic_control is
 			plate: in plate_info;
 			plate_move: in integer;
 			current_velocity: in vector;
+			have_shadow: in std_logic;
+			shadow_dir: in std_logic;
 			hit_map: out std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 			next_velocity: out vector;
 			fall_out: out std_logic
@@ -58,7 +61,7 @@ architecture bhv of logic_control is
 	signal zeros: std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 
 	signal next_ball_t: ball_info;
-	signal next_velocity_tt, next_velocity_t: vector;
+	signal next_velocity_t: vector;
 	signal next_plate_t: plate_info;
 	signal next_ball_ub: ball_info;
 	signal next_velocity_ub: vector;
@@ -69,15 +72,16 @@ architecture bhv of logic_control is
 	signal current_velocity_trans: vector;
 	signal current_grids_map_trans: std_logic_vector(0 to (GRIDS_BITS - 1));
 	
+	signal have_shadow: std_logic := '0';
 	signal wiggling: std_logic := '0';
 	signal trav: std_logic := '0';
 begin
 	zeros <= (others => '0');
 	
+	have_shadow <= '1' when buff = double else '0';
 	u: collision_computation port map(current_grids_map_trans, next_ball_t, next_plate_t,
-	                                  plate_move, current_velocity_trans,
-	                                  hit_map, next_velocity_tt, fall_out_ub);
-	next_velocity_t <= next_velocity_tt;
+	                                  plate_move, current_velocity_trans, have_shadow, shadow_dir,
+	                                  hit_map, next_velocity_t, fall_out_ub);
 	gen_next_grids_map:
 	for k in 0 to GRIDS_AMOUNT - 1 generate
 		next_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) <= (others => '0') when hit_map(k) = '1' else
@@ -138,6 +142,13 @@ begin
 				
 			when traversal =>
 				trav <= '1';
+				
+			when double =>
+				if (shadow_dir = '0' and next_plate_ub.l_position(0) < 200) then
+					next_plate.l_position(0) <= 200;
+				elsif (shadow_dir = '1' and next_plate_ub.l_position(0) > SCREEN_WIDTH - 300) then
+					next_plate.l_position(0) <= SCREEN_WIDTH - 300;
+				end if;
 				
 			when others =>
 		end case;

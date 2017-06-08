@@ -19,6 +19,7 @@ entity state_control is
 		ball: out ball_info;
 		plate: out plate_info;
 		buff: out buff_info;
+		shadow_dir: out std_logic;
 		buff_time_left: out integer;
 		answer_card: out card_info;
 		
@@ -58,6 +59,7 @@ architecture bhv of state_control is
 			current_velocity: in vector;
 			current_ball: in ball_info;
 			buff: in buff_info;
+			shadow_dir: in std_logic;
 			
 			next_grids_map: out std_logic_vector(0 to (GRIDS_BITS - 1));
 			next_plate: out plate_info;
@@ -76,6 +78,7 @@ architecture bhv of state_control is
 			plate: in plate_info;
 			
 			buff: out buff_info;
+			shadow_dir: out std_logic;
 			time_left: out integer;
 			
 			ask_x: in std_logic_vector(9 downto 0);
@@ -103,14 +106,18 @@ architecture bhv of state_control is
 	
 	type state is (stick, fly);
 	signal current_state: state := stick;
+	
+	signal shadow_dir_t: std_logic;
 begin
 	u_c: clock generic map(1000) port map(clk_100m, clk_trans);
 	
 	u_trans: logic_control port map(clk_trans, run, plate_move,
-	                                current_grids_map, current_plate, current_velocity, current_ball, buff_t,
+	                                current_grids_map, current_plate, current_velocity, current_ball, buff_t, shadow_dir_t,
 	                                next_grids_map, next_plate, next_velocity, next_ball, fall_out);
-	u_buff: buff_control port map(clk_100m, run, not load, next_plate, buff_t, buff_time_left, ask_x, ask_y, answer_card, sig);
+	u_buff: buff_control port map(clk_100m, run, not load, next_plate, buff_t, shadow_dir_t, buff_time_left,
+	                              ask_x, ask_y, answer_card, sig);
 	buff <= buff_t;
+	shadow_dir <= shadow_dir_t;
 									  
 	current_grids_map <= next_grids_map when load = '0' else grids_map_load;
 	current_plate <= next_plate when load = '0' else

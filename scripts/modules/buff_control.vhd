@@ -15,6 +15,7 @@ entity buff_control is
 		plate: in plate_info;
 		
 		buff: out buff_info;
+		shadow_dir: out std_logic := '0';
 		time_left: out integer;
 		
 		ask_x: in std_logic_vector(9 downto 0);
@@ -83,6 +84,13 @@ begin
 					 cards(k).lt_position(1) + CARD_SIDE >= plate.l_position(1) and
 					 cards(k).lt_position(1) <= plate.l_position(1) + PLATE_WIDTH) then
 					 buff_get <= cards(k).buff;
+					 if (cards(k).buff = double) then
+						if (plate.l_position(0) < 270) then
+							shadow_dir <= '1';
+						else
+							shadow_dir <= '0';
+						end if;
+					 end if;
 				end if;
 			end if;
 		end loop;

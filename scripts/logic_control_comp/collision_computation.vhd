@@ -11,6 +11,8 @@ entity collision_computation is
 		plate: in plate_info;
 		plate_move: in integer;
 		current_velocity: in vector;
+		have_shadow: in std_logic;
+		shadow_dir: in std_logic;
 		hit_map: out std_logic_vector(0 to (GRIDS_AMOUNT - 1));
 		next_velocity: out vector;
 		fall_out: out std_logic
@@ -111,12 +113,14 @@ architecture bhv of collision_computation is
 		return construct_vector(v_x_1, velocity(1));
 	end velocity_change;
 	
+	signal plate_shadow: plate_info;
+	signal shadow_x: integer;
 	signal bricks: bricks_info;
 	signal collisions: collisions_info;
-	signal plate_collision, wall_collision: collision_info;
+	signal plate_collision, plate_collision_1, plate_collision_2, plate_shadow_collision, wall_collision: collision_info;
 	signal summarized_collision: collision_info;
 	signal next_velocity_t: vector;
-	signal fall_out_bool: boolean;
+	signal fall_out_bool, fall_out_bool_1, fall_out_bool_2: boolean;
 	
 begin
 	summarized_collision <= summarize_collisions(collisions, plate_collision, wall_collision);
@@ -133,8 +137,17 @@ begin
 		hit_map(k) <= '0' when collisions(k) = none else '1';
 	end generate gen_computing_blocks;
 	
-	u1_1: plate_collision_detection port map(plate, ball, plate_collision, fall_out_bool);
+	shadow_x <= plate.l_position(0) + 200 when shadow_dir = '1' else plate.l_position(0) - 200;
+	plate_shadow <= construct_plate_info(construct_point(shadow_x, plate.l_position(1)), plate.len, plate.class);
+	
+	u1_1: plate_collision_detection port map(plate, ball, plate_collision_1, fall_out_bool_1);
+	u1_1_s: plate_collision_detection port map(plate_shadow, ball, plate_collision_2, fall_out_bool_2);
 	u1_2: wall_collision_detection port map(ball, wall_collision);
 	
+	plate_collision <= plate_collision_1 when plate_collision_1 /= none else
+	                   plate_collision_2 when plate_collision_2 /= none and have_shadow = '1' else
+							 none;
+	
+	fall_out_bool <= fall_out_bool_1 and (have_shadow = '0' or fall_out_bool_2);
 	fall_out <= '1' when fall_out_bool else '0';
 end bhv;

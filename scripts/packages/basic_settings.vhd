@@ -5,8 +5,8 @@ package basic_settings is
 	constant SCREEN_WIDTH: integer := 640;
 	constant SCREEN_HEIGHT: integer := 480;
 
-	constant GRIDS_ROWS: integer := 1;
-	constant GRIDS_COLUMNS: integer := 1;
+	constant GRIDS_ROWS: integer := 2;
+	constant GRIDS_COLUMNS: integer := 2;
 	constant GRIDS_AMOUNT: integer := GRIDS_ROWS * GRIDS_COLUMNS;
 	constant GRIDS_LT_X: integer := 60;
 	constant GRIDS_LT_Y: integer := 80;

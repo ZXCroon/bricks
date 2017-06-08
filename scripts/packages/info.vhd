@@ -83,6 +83,9 @@ begin
 		when 5 => return death;
 		when 6 => return wiggle;
 		when 7 => return traversal;
+		when 8 => return double;
+		when 9 => return invisible;
+		when 10 => return shoot;
 		when others => return none;
 	end case;
 end get_buff;

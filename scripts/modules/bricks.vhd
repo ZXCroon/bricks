@@ -55,6 +55,7 @@ architecture bhv of bricks is
 			ball: out ball_info;
 			plate: out plate_info;
 			buff: out buff_info;
+			shadow_dir: out std_logic;
 			buff_time_left: out integer;
 			answer_card: out card_info;
 			
@@ -75,6 +76,7 @@ architecture bhv of bricks is
 			ball: in ball_info;
 			card_xy: in card_info;
 			buff: in buff_info;
+			shadow_dir: in std_logic;
 			game_flag: in interface_type;
 			
 			ask_x: out std_logic_vector(9 downto 0);
@@ -119,6 +121,8 @@ architecture bhv of bricks is
 	signal answer_card: card_info;
 	signal finished, fall_out: std_logic;
 	signal sig: std_logic;
+	
+	signal shadow_dir: std_logic;
 begin
 	interface <= interface_info;
 	u_keyboard: keyboard_decoder port map(
@@ -136,14 +140,14 @@ begin
 	--logic_load <= load;
 	--logic_run <= run;
 	u_display: display_control port map(
-		clk_100m, rst, grids_map, plate, ball, answer_card, buff, interface_info, 
+		clk_100m, rst, grids_map, plate, ball, answer_card, buff, shadow_dir, interface_info, 
 		ask_x, ask_y, hs, vs, r_out, g_out, b_out
 	);
 	u_state: state_control port map(
 		clk_100m, logic_load, logic_run, not launch_sig, plate_speed,
 		grids_map_init, ask_x, ask_y,
 		-- output
-		grids_map, ball, plate, buff, buff_time_left, answer_card,
+		grids_map, ball, plate, buff, shadow_dir, buff_time_left, answer_card,
 		finished, fall_out, sig
 	);
 

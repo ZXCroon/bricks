@@ -10,7 +10,7 @@ port(
 	datain, clkin, fclk, rst_in: in std_logic;
 	board_speed: out integer := 0;
 	-- 游戏流程的确认，取消
-	confirm, quit, upp, downp: out std_logic := '0'
+	confirm, quit, upp, downp, spacep: out std_logic := '0'
 );
 end keyboard_decoder;
 
@@ -77,6 +77,10 @@ begin
 					ise0 <= '0';
 				when key_x =>
 					quit <= not isbreak;
+					isbreak <= '0';
+					ise0 <= '0';
+				when key_space =>
+					spacep <= not isbreak;
 					isbreak <= '0';
 					ise0 <= '0';
 				when others => null;

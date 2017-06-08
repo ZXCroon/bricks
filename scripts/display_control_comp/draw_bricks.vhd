@@ -61,8 +61,8 @@ begin
 			r := conv_integer(y - GRIDS_LT_Y) / BRICK_HEIGHT;
 			k := r * GRIDS_COLUMNS + c;
 			inside_which <= grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1));
-			x_r <= x - conv_std_logic_vector(BRICK_WIDTH * c, 10);
-			y_r <= y - conv_std_logic_vector(BRICK_HEIGHT * r, 9);
+			x_r <= x - conv_std_logic_vector(GRIDS_LT_X, 10) - conv_std_logic_vector(BRICK_WIDTH * c, 10);
+			y_r <= y - conv_std_logic_vector(GRIDS_LT_Y, 9) - conv_std_logic_vector(BRICK_HEIGHT * r, 9);
 		else
 			inside_which <= (others => '0');
 			x_r <= (others => '0');

@@ -46,6 +46,7 @@ architecture bhv of logic_control is
 			plate: in plate_info;
 			plate_move: in integer;
 			grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
+			wiggle: in std_logic;
 			ball_next: out ball_info;
 			velocity_trans: out vector;
 			plate_next: out plate_info;
@@ -76,8 +77,7 @@ begin
 	u: collision_computation port map(current_grids_map_trans, next_ball_t, next_plate_t,
 	                                  plate_move, current_velocity_trans,
 	                                  hit_map, next_velocity_tt, fall_out_ub);
-	next_velocity_t <= next_velocity_tt when wiggling = '0' else
-	                   next_velocity_tt + construct_vector(next_ball_t.position(0) mod 5 - 2, next_ball_t.position(1) mod 5 - 2);
+	next_velocity_t <= next_velocity_tt;
 	gen_next_grids_map:
 	for k in 0 to GRIDS_AMOUNT - 1 generate
 		next_grids_map((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) <= (others => '0') when hit_map(k) = '1' else
@@ -85,7 +85,7 @@ begin
 	end generate gen_next_grids_map;
 	
 	u_trans: transfer port map(
-		clk, ena, current_ball, current_velocity, current_plate, plate_move, current_grids_map,
+		clk, ena, current_ball, current_velocity, current_plate, plate_move, current_grids_map, wiggling,
 		next_ball_t, current_velocity_trans, next_plate_t, current_grids_map_trans, ball_moved
 	);
 	next_velocity_ub <= next_velocity_t when ball_moved = '1' and (trav = '0' or hit_map = zeros)
@@ -93,7 +93,7 @@ begin
 	next_ball_ub <= next_ball_t;
 	next_plate_ub <= next_plate_t;
 	
-	
+	fall_out <= '0';
 	
 	---------------------  calc buff effects  ----------------------
 	
@@ -111,7 +111,7 @@ begin
 		end if;
 		next_plate.len <= NORMAL_PLATE_LEN;
 		next_velocity <= next_velocity_ub;
-		fall_out <= fall_out_ub;
+--		fall_out <= fall_out_ub;
 		wiggling <= '0';
 		trav <= '0';
 		case buff is
@@ -131,7 +131,7 @@ begin
 				next_plate.len <= LONG_PLATE_LEN;
 				
 			when death =>
-				fall_out <= '1';
+--				fall_out <= '1';
 				
 			when wiggle =>
 				wiggling <= '1';

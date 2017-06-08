@@ -10,6 +10,7 @@ entity bricks is
 		clk_100m: in std_logic;
 		ps2data, ps2clock: in std_logic;
 		rst: in std_logic; -- reset when =0
+		launch_sig: in std_logic;
 --		load, run: in std_logic;
 		interface: out interface_type;
 		-- display
@@ -44,6 +45,7 @@ architecture bhv of bricks is
 			clk_100m: in std_logic;
 			load: in std_logic;
 			run: in std_logic;
+			launch_sig: in std_logic;
 			plate_move: in integer;
 			grids_map_load: in std_logic_vector(0 to (GRIDS_BITS - 1));
 			ask_x: in std_logic_vector(9 downto 0);
@@ -138,7 +140,7 @@ begin
 		ask_x, ask_y, hs, vs, r_out, g_out, b_out
 	);
 	u_state: state_control port map(
-		clk_100m, logic_load, logic_run, plate_speed,
+		clk_100m, logic_load, logic_run, not launch_sig, plate_speed,
 		grids_map_init, ask_x, ask_y,
 		-- output
 		grids_map, ball, plate, buff, buff_time_left, answer_card,

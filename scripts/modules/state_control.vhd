@@ -9,6 +9,7 @@ entity state_control is
 		clk_100m: in std_logic;
 		load: in std_logic; -- =1 load initial map, =0 continue game
 		run: in std_logic; -- =0 pause game, =1 game running
+		launch_sig: in std_logic;
 		plate_move: in integer;
 		grids_map_load: in std_logic_vector(0 to (GRIDS_BITS - 1));
 		ask_x: in std_logic_vector(9 downto 0);
@@ -99,6 +100,9 @@ architecture bhv of state_control is
 	signal next_velocity: vector;
 	
 	signal zeros: std_logic_vector(0 to (GRIDS_BITS - 1));
+	
+	type state is (stick, fly);
+	signal current_state: state := stick;
 begin
 	u_c: clock generic map(1000) port map(clk_100m, clk_trans);
 	
@@ -112,7 +116,9 @@ begin
 	current_plate <= next_plate when load = '0' else
 	                 construct_plate_info(construct_point((SCREEN_WIDTH - NORMAL_PLATE_LEN) / 2, 450), NORMAL_PLATE_LEN, 0);
 	current_velocity <= next_velocity when load = '0' else construct_vector(100, -100);
-	current_ball <= next_ball when load = '0' else construct_ball_info(NORMAL_BALL_RADIUS, construct_point(320, 442));
+	current_ball <= construct_ball_info(NORMAL_BALL_RADIUS, construct_point(320, 442)) when load = '1' else
+						construct_ball_info(NORMAL_BALL_RADIUS, current_plate.l_position + construct_vector(NORMAL_PLATE_LEN / 2, -NORMAL_BALL_RADIUS)) when current_state = stick else
+						next_ball;
 	
 	grids_map <= current_grids_map;
 	ball <= current_ball;
@@ -120,4 +126,15 @@ begin
 	
 	zeros <= (others => '0');
 	finished <= '1' when current_grids_map = zeros else '0';
+	
+	process(load, launch_sig)
+	begin
+		if (load = '1') then
+			current_state <= stick;
+		elsif (launch_sig'event and launch_sig = '1') then
+			if (current_state = stick) then
+				current_state <= fly;
+			end if;
+		end if;
+	end process;
 end bhv;

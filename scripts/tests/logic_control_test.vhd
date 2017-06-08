@@ -10,6 +10,7 @@ entity logic_control_test is
 		clk_100m: in std_logic;
 		Ld: in std_logic;
 		run: in std_logic;
+		launch_sig: in std_logic;
 		ps2data, ps2clock: in std_logic;
 		hs, vs: out std_logic;
 		r_out, g_out, b_out: out std_logic_vector(2 downto 0);
@@ -34,6 +35,7 @@ architecture bhv of logic_control_test is
 			clk_100m: in std_logic;
 			load: in std_logic;
 			run: in std_logic;
+			launch_sig: in std_logic;
 			plate_move: in integer;
 			grids_map_load: in std_logic_vector(0 to (GRIDS_BITS - 1));
 			ask_x: in std_logic_vector(9 downto 0);
@@ -148,7 +150,7 @@ begin
 		clk_100m, rst, grids_map, plate, ball, answer_card, buff, game_flag, 
 	    ask_x, ask_y, hs, vs, r_out, g_out, b_out);
 	u_s: state_control port map(
-		clk_100m, Ld, run, plate_move, grids_map_init, ask_x, ask_y,
+		clk_100m, Ld, run, launch_sig, plate_move, grids_map_init, ask_x, ask_y,
 	    grids_map, ball, plate, buff, buff_time_left, answer_card, 
 	    finished, fall_out, sig);
 	

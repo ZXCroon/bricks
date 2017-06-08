@@ -13,6 +13,7 @@ entity transfer is
 		plate: in plate_info;
 		plate_move: in integer;
 		grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
+		wiggle: in std_logic;
 		ball_next: out ball_info;
 		velocity_trans: out vector;
 		plate_next: out plate_info;
@@ -42,6 +43,8 @@ begin
 	process(clk)
 		variable x_cnt, y_cnt, p_cnt: integer := 0;
 		variable last_velocity: vector;
+		variable wiggle_d: integer := -30;
+		variable dir: std_logic := '0';
 	begin
 		if (clk'event and clk = '1') then
 			velocity_trans <= velocity;
@@ -60,10 +63,34 @@ begin
 				if (x_cnt = 0 and y_cnt = 0) then
 					ball_next <= construct_ball_info(ball.radius, ball.position + delta_x + delta_y);
 					ball_moved <= '1';
+					
+					if (dir = '0') then
+						wiggle_d := wiggle_d + 1;
+						if (wiggle_d = 30) then
+							dir := '1';
+						end if;
+					else
+						wiggle_d := wiggle_d - 1;
+						if (wiggle_d = -30) then
+							dir := '0';
+						end if;
+					end if;
 				else
 					if (x_cnt = 0) then
 						ball_next <= construct_ball_info(ball.radius, ball.position + delta_x);
 						ball_moved <= '1';
+						
+						if (dir = '0') then
+							wiggle_d := wiggle_d + 1;
+							if (wiggle_d = 30) then
+								dir := '1';
+							end if;
+						else
+							wiggle_d := wiggle_d - 1;
+							if (wiggle_d = -30) then
+								dir := '0';
+							end if;
+						end if;
 					elsif (y_cnt = 0) then
 						ball_next <= construct_ball_info(ball.radius, ball.position + delta_y);
 						ball_moved <= '1';
@@ -74,7 +101,7 @@ begin
 				end if;
 				x_cnt := x_cnt + 1;
 				y_cnt := y_cnt + 1;
-				if (x_cnt >= velocity_abs(0)) then
+				if ((wiggle = '0' and x_cnt >= velocity_abs(0)) or (wiggle = '1' and x_cnt >= velocity_abs(0) + wiggle_d)) then
 					x_cnt := 0;
 				end if;
 				if (y_cnt >= velocity_abs(1)) then

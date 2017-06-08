@@ -94,7 +94,7 @@ architecture bhv of display_control is
 begin
 	u0: vga_control port map(clk_25m, rst, r, g, b, hs, vs, now_x, now_y, next_x, next_y, r_out, g_out, b_out);
 	u1: draw_bricks port map(next_x, next_y, grids_map, inside_which, next_x_r_b, next_y_r_b);
-	u2: img_reader port map(next_x_r, next_y_r, img, img2v, img_flag, clk_100m, '1', r, g, b, clk_25m);
+	u2: img_reader port map(next_x_r, next_y_r, img, img2v, '0', clk_100m, '1', r, g, b, clk_25m);
 	
 	ask_x <= next_x;
 	ask_y <= next_y;
@@ -131,8 +131,11 @@ begin
 	       next_x <= conv_std_logic_vector(plate.l_position(0) + plate.len, 10) and
 		    next_y >= conv_std_logic_vector(plate.l_position(1), 9) and
 			 next_y <= conv_std_logic_vector(plate.l_position(1) + PLATE_WIDTH, 9)) then
---			 case buff is
-			img <= plate_normal;
+			case buff is
+				when longer => img <= plate_long;
+				when shorter => img <= plate_short;
+				when others => img <= plate_normal;
+			end case;
 			next_x_r <= next_x - plate.l_position(0);
 			next_y_r <= next_y - plate.l_position(1);
 		end if;
@@ -142,6 +145,14 @@ begin
 			case card_xy.buff is
 				when smaller => img <= card_smaller;
 				when bigger => img <= card_bigger;
+				when longer => img <= card_longer;
+				when shorter => img <= card_shorter;
+				when death => img <= card_death;
+				when double => img <= card_double;
+				when traversal => img <= card_traversal;
+				when shoot => img <= card_shoot;
+				when wiggle => img <= card_wiggle;
+				when invisible => img <= card_invisible;
 				when others => img <= card_smaller;
 			end case;
 			next_x_r <= next_x - card_xy.lt_position(0);

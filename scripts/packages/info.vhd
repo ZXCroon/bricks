@@ -22,8 +22,8 @@ package info is
 	
 	type collision_info is (none, vertical, horizontal, corner);
 	
-	type buff_info is (none, smaller, bigger, shorter, longer, death, wiggle, traversal);
-	constant BUFF_NUM: integer := 8;
+	type buff_info is (none, smaller, bigger, shorter, longer, death, wiggle, traversal, double, invisible, shoot);
+	constant BUFF_NUM: integer := 10;
 	type card_info is record
 		lt_position: point;
 		buff: buff_info;

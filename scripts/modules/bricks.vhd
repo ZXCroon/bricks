@@ -25,7 +25,7 @@ architecture bhv of bricks is
 			datain,clkin,fclk,rst_in: in std_logic;
 			board_speed: out integer;
 			-- 游戏流程的确认，取消
-			confirm, quit, upp, downp: out std_logic := '0'
+			confirm, quit, upp, downp, spacep: out std_logic := '0'
 		);
 	end component; 
 

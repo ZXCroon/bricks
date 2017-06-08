@@ -153,18 +153,32 @@ begin
 		end if;
 
 		-- menu --
-		if(game_flag=ui_menu) then
-			if(next_x>=170 and next_x<170+300
-			and next_y>=168 and next_y<168+144) then
-				img <= img_menu;
-				next_x_r <= next_x-170;
-				next_y_r <= next_y-168;
-			else
-				img <= bg_texture;
-				next_x_r <= (others=>'0');
-				next_y_r <= (others=>'0');
-			end if;
-		end if;
+		case game_flag is
+			when ui_menu=>
+				if(next_x>=170 and next_x<170+300
+				and next_y>=168 and next_y<168+144) then
+					img <= img_menu;
+					next_x_r <= next_x-170;
+					next_y_r <= next_y-168;
+				else
+					img <= bg_texture;
+					next_x_r <= (others=>'0');
+					next_y_r <= (others=>'0');
+				end if;
+			when ui_pause =>
+				if (next_x >= 220 and next_x < 420 and next_y >= 180 and next_y < 267) then
+					img <= img_pause;
+					next_x_r <= next_x - 220;
+					next_y_r <= next_y - 180;
+				end if;
+			when ui_gameover =>
+				if (next_x >= 220 and next_x < 420 and next_y >= 180 and next_y < 267) then
+					img <= img_over;
+					next_x_r <= next_x - 220;
+					next_y_r <= next_y - 180;
+				end if;
+			when others => null;
+		end case;
 	end process;
 	
 end bhv;

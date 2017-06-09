@@ -82,6 +82,13 @@ architecture bhv of bricks is
 		);
 	end component;
 	
+	component map_loader is
+		port (
+			clk, ena: in std_logic; -- 25m
+			grids_map_load: out std_logic_vector(0 to (GRIDS_BITS - 1))
+		);
+	end component;
+
 	component clock
 		generic(n: integer);
 		port(
@@ -131,6 +138,9 @@ begin
 		logic_run=>logic_run, logic_load=>logic_load,
 		interface_info=>interface_info
 	);
+	u_map_loader: map_loader port map(
+		clk=>clk_25m, ena=>logic_load, grids_map_load=>grids_map_init
+	);
 	--logic_load <= load;
 	--logic_run <= run;
 	u_display: display_control port map(
@@ -145,7 +155,7 @@ begin
 		finished, fall_out, sig
 	);
 
-	grids_map_init <= (others => '1');
+	--grids_map_init <= (others => '1');
 
 
 	-- convert clocks

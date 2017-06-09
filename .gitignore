@@ -9,5 +9,6 @@
 !images/*
 !images/mif/*
 !*.sdc
+!images/map/*
 
 simulation/*/

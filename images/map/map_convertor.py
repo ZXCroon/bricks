@@ -6,7 +6,7 @@ for filename in os.listdir():
         img = Image.open(filename)
         w, h = img.size
 
-        txt = 'WIDTH=2;\nDEPTH=%d;\nADDRESS_RADIX=UNS;\nDATA_RADIX=BIN;\nCONTENT BEGIN\n' % (w * h)
+        txt = 'WIDTH=1;\nDEPTH=%d;\nADDRESS_RADIX=UNS;\nDATA_RADIX=BIN;\nCONTENT BEGIN\n' % (w * h * 2)
 
         s = ''
         k = 0
@@ -24,7 +24,8 @@ for filename in os.listdir():
                 else:
                     s = '11'
 
-                txt += '\t%d:%s;\n' % (k, s)
+                txt += '\t%d:%s;\n' % (2*k, s[0])
+                txt += '\t%d:%s;\n' % (2*k+1, s[1])
                 str += s
                 k += 1
         txt += 'END;\n'

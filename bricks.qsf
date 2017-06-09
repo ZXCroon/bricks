@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C70F672C8
-set_global_assignment -name TOP_LEVEL_ENTITY map_loader
+set_global_assignment -name TOP_LEVEL_ENTITY bricks
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:12:29  MAY 16, 2017"
 set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"

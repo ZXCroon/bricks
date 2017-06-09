@@ -24,6 +24,7 @@ entity state_control is
 		bullet_x, bullet_y: out integer;
 		buff_time_left: out integer;
 		answer_card: out card_info;
+		score: out integer;
 		
 		finished: out std_logic;
 		fall_out: out std_logic;
@@ -60,6 +61,7 @@ architecture bhv of state_control is
 			current_plate: in plate_info;
 			current_velocity: in vector;
 			current_ball: in ball_info;
+			current_score: in integer;
 			buff: in buff_info;
 			shadow_dir: in std_logic;
 			current_bullet: in std_logic_vector(0 to 1);
@@ -70,6 +72,7 @@ architecture bhv of state_control is
 			next_velocity: out vector;
 			next_bullet: out std_logic_vector(0 to 1);
 			next_ball: out ball_info;
+			next_score: out integer;
 			fall_out: out std_logic
 		);
 	end component;
@@ -114,14 +117,17 @@ architecture bhv of state_control is
 	signal current_plate: plate_info;
 	signal current_velocity: vector;
 	signal current_bullet: std_logic_vector(0 to 1);
+	signal current_score: integer;
 	
 	signal next_grids_map: std_logic_vector(0 to (GRIDS_BITS - 1));
 	signal next_ball: ball_info;
 	signal next_plate: plate_info;
 	signal next_velocity: vector;
 	signal next_bullet: std_logic_vector(0 to 1);
+	signal next_score: integer;
 	signal bullet_x_t, bullet_y_t: integer;
 	signal can_shoot: std_logic;
+	
 	
 	signal zeros: std_logic_vector(0 to (GRIDS_BITS - 1));
 	
@@ -133,9 +139,10 @@ begin
 	u_c: clock generic map(1000) port map(clk_100m, clk_trans);
 	
 	u_trans: logic_control port map(clk_trans, run, plate_move,
-	                                current_grids_map, current_plate, current_velocity, current_ball, buff_t, shadow_dir_t,
+	                                current_grids_map, current_plate, current_velocity, current_ball, current_score,
+											  buff_t, shadow_dir_t,
 											  current_bullet, bullet_x_t, bullet_y_t,
-	                                next_grids_map, next_plate, next_velocity, next_bullet, next_ball, fall_out);
+	                                next_grids_map, next_plate, next_velocity, next_bullet, next_ball, next_score, fall_out);
 	u_buff: buff_control port map(clk_100m, run, not load, next_plate, buff_t, shadow_dir_t, buff_time_left,
 	                              ask_x, ask_y, answer_card, sig);
 	u_bullet: bullet_control port map(clk_100m, run, not load, can_shoot, launch_sig, next_plate.l_position, bullet_x_t, bullet_y_t);
@@ -149,16 +156,18 @@ begin
 	current_grids_map <= next_grids_map when load = '0' else grids_map_load;
 	current_plate <= next_plate when load = '0' else
 	                 construct_plate_info(construct_point((SCREEN_WIDTH - NORMAL_PLATE_LEN) / 2, 450), NORMAL_PLATE_LEN, 0);
-	current_velocity <= next_velocity when load = '0' else construct_vector(130, -130);
+	current_velocity <= next_velocity when load = '0' else construct_vector(160, -160);
 	current_ball <= construct_ball_info(NORMAL_BALL_RADIUS, construct_point(320, 442)) when load = '1' else
 						construct_ball_info(NORMAL_BALL_RADIUS, current_plate.l_position + construct_vector(NORMAL_PLATE_LEN / 2, -NORMAL_BALL_RADIUS)) when current_state = stick else
 						next_ball;
 	current_bullet <= "11" when launch_sig = '1' else next_bullet;
+	current_score <= next_score when load = '0' else 0;
 	
 	grids_map <= current_grids_map;
 	ball <= current_ball;
 	plate <= current_plate;
 	bullet <= current_bullet;
+	score <= current_score;
 	
 	zeros <= (others => '0');
 	finished <= '1' when current_grids_map = zeros else '0';

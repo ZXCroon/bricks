@@ -12,6 +12,7 @@ entity transfer is
 		velocity: in vector;
 		plate: in plate_info;
 		bullet: in std_logic_vector(0 to 1);
+		score: in integer;
 		plate_move: in integer;
 		grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
 		wiggle: in std_logic;
@@ -19,6 +20,7 @@ entity transfer is
 		velocity_trans: out vector;
 		plate_next: out plate_info;
 		bullet_trans: out std_logic_vector(0 to 1);
+		score_trans: out integer;
 		grids_map_trans: out std_logic_vector(0 to (GRIDS_BITS - 1));
 		ball_moved: out std_logic
 	);
@@ -52,6 +54,7 @@ begin
 			velocity_trans <= velocity;
 			grids_map_trans <= grids_map;
 			bullet_trans <= bullet;
+			score_trans <= score;
 			
 			if (ena = '0') then
 				ball_next <= ball;

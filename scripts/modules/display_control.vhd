@@ -22,6 +22,7 @@ entity display_control is
 		bullet: in std_logic_vector(0 to 1);
 		bullet_x, bullet_y: in integer;
 		game_flag: in interface_type;
+		score: in integer;
 		
 		ask_x: out std_logic_vector(9 downto 0);
 		ask_y: out std_logic_vector(8 downto 0);
@@ -70,6 +71,23 @@ architecture bhv of display_control is
 			y_r: out std_logic_vector(8 downto 0)
 		);
 	end component;
+	
+	function num2img(x: integer) return img_info is
+	begin
+		case x is
+			when 0 => return num0;
+			when 1 => return num1;
+			when 2 => return num2;
+			when 3 => return num3;
+			when 4 => return num4;
+			when 5 => return num5;
+			when 6 => return num6;
+			when 7 => return num7;
+			when 8 => return num8;
+			when 9 => return num9;
+			when others => return num0;
+		end case;
+	end num2img;
 	
 	signal clk_25m: std_logic;
 	
@@ -200,6 +218,23 @@ begin
 				when bigger  => img <= ball_big;
 				when others  => img <= ball_normal;
 			end case;
+		end if;
+		
+		-- score --
+		if (next_y >= 20 and next_y < 60) then
+			if (next_x >= SCREEN_WIDTH - 110 and next_x < SCREEN_WIDTH - 80) then
+				img <= num2img(score / 100);
+				next_x_r <= next_x - (SCREEN_WIDTH - 110);
+				next_y_r <= next_y - 20;
+			elsif (next_x >= SCREEN_WIDTH - 80 and next_x < SCREEN_WIDTH - 50) then
+				img <= num2img(score / 10 rem 10);
+				next_x_r <= next_x - (SCREEN_WIDTH - 80);
+				next_y_r <= next_y - 20;
+			elsif (next_x >= SCREEN_WIDTH - 50 and next_x < SCREEN_WIDTH - 20) then
+				img <= num2img(score rem 10);
+				next_x_r <= next_x - (SCREEN_WIDTH - 50);
+				next_y_r <= next_y - 20;
+			end if;
 		end if;
 
 		-- menu --

@@ -15,6 +15,7 @@ entity logic_control is
 		current_velocity: in vector;
 		current_ball: in ball_info;
 		current_bullet: in std_logic_vector(0 to 1);
+		current_score: in integer;
 		bullet_x, bullet_y: integer;
 		buff: in buff_info;
 		shadow_dir: in std_logic;
@@ -24,6 +25,7 @@ entity logic_control is
 		next_velocity: out vector;
 		next_ball: out ball_info;
 		next_bullet: out std_logic_vector(0 to 1);
+		next_score: out integer;
 		fall_out: out std_logic
 	);
 end logic_control;
@@ -55,6 +57,7 @@ architecture bhv of logic_control is
 			velocity: in vector;
 			plate: in plate_info;
 			bullet: in std_logic_vector(0 to 1);
+			score: in integer;
 			plate_move: in integer;
 			grids_map: in std_logic_vector(0 to (GRIDS_BITS - 1));
 			wiggle: in std_logic;
@@ -62,6 +65,7 @@ architecture bhv of logic_control is
 			velocity_trans: out vector;
 			plate_next: out plate_info;
 			bullet_trans: out std_logic_vector(0 to 1);
+			score_trans: out integer;
 			grids_map_trans: out std_logic_vector(0 to (GRIDS_BITS - 1));
 			ball_moved: out std_logic
 		);
@@ -83,6 +87,7 @@ architecture bhv of logic_control is
 	signal current_velocity_trans: vector;
 	signal current_grids_map_trans: std_logic_vector(0 to (GRIDS_BITS - 1));
 	signal bullet_trans: std_logic_vector(0 to 1);
+	signal current_score_trans: integer;
 	
 	signal have_shadow: std_logic := '0';
 	signal wiggling: std_logic := '0';
@@ -105,9 +110,21 @@ begin
 		break_map(k) <= '1' when hit_map(k) = '1' and current_grids_map_trans((k * GRID_BITS) to (k * GRID_BITS + GRID_BITS - 1)) = 1 else '0';
 	end generate gen_next_grids_map;
 	
+	process(hit_map)
+		variable cnt: integer := 0;
+	begin
+		cnt := 0;
+		for k in 0 to GRIDS_AMOUNT - 1 loop
+			if (hit_map(k) = '1') then
+				cnt := cnt + 1;
+			end if;
+		end loop;
+		next_score <= current_score_trans + cnt;
+	end process;
+	
 	u_trans: transfer port map(
-		clk, ena, current_ball, current_velocity, current_plate, current_bullet, plate_move, current_grids_map, wiggling,
-		next_ball_t, current_velocity_trans, next_plate_t, bullet_trans, current_grids_map_trans, ball_moved
+		clk, ena, current_ball, current_velocity, current_plate, current_bullet, current_score, plate_move, current_grids_map, wiggling,
+		next_ball_t, current_velocity_trans, next_plate_t, bullet_trans, current_score_trans, current_grids_map_trans, ball_moved
 	);
 	next_velocity_ub <= next_velocity_t when ball_moved = '1' and (trav = '0' or break_map = zeros)
 	                    else current_velocity_trans;

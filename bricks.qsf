@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C70F672C8
-set_global_assignment -name TOP_LEVEL_ENTITY rand_generator
+set_global_assignment -name TOP_LEVEL_ENTITY map_loader
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:12:29  MAY 16, 2017"
 set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
@@ -46,8 +46,8 @@ set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
-set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
@@ -67,14 +67,13 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_location_assignment PIN_AD7 -to ps2data
 set_location_assignment PIN_AD6 -to ps2clock
 set_location_assignment PIN_N2 -to clk_100m
-set_global_assignment -name EDA_NETLIST_WRITER_OUTPUT_DIR simulation/rom -section_id eda_simulation
+set_global_assignment -name EDA_NETLIST_WRITER_OUTPUT_DIR simulation/map -section_id eda_simulation
 set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
 set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH tb -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME tentity -section_id tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME tb -section_id tb
-set_global_assignment -name EDA_TEST_BENCH_FILE simulation/rom/tb.vhd -section_id tb
 set_global_assignment -name VECTOR_OUTPUT_FORMAT VWF
 set_global_assignment -name INCREMENTAL_VECTOR_INPUT_SOURCE "E:/Development/DLC/bricks/output_files/Waveform.vwf"
 set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
@@ -97,6 +96,7 @@ set_global_assignment -name VHDL_FILE scripts/packages/key_coding.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/info.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/geometry.vhd
 set_global_assignment -name VHDL_FILE scripts/packages/basic_settings.vhd
+set_global_assignment -name VHDL_FILE scripts/modules/map_loader.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/state_control.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/logic_control.vhd
 set_global_assignment -name VHDL_FILE scripts/modules/buff_control.vhd
@@ -125,12 +125,12 @@ set_global_assignment -name VHDL_FILE scripts/tests/test_process.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/logic_control_test.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/display_control_test.vhd
 set_global_assignment -name VHDL_FILE scripts/tests/buff_test.vhd
-set_global_assignment -name MIF_FILE images/mif/allimg.mif
 set_global_assignment -name QIP_FILE scripts/rom_comp/rom_reader.qip
 set_global_assignment -name QIP_FILE scripts/rom_comp/rom_reader_1.qip
 set_global_assignment -name VECTOR_WAVEFORM_FILE output_files/Waveform.vwf
 set_global_assignment -name VHDL_FILE scripts/tests/img_test.vhd
 set_global_assignment -name SIGNALTAP_FILE "signal tap/display.stp"
+set_global_assignment -name QIP_FILE scripts/map_comp/rom_reader_map.qip
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

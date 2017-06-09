@@ -91,6 +91,13 @@ architecture bhv of bricks is
 		);
 	end component;
 	
+	component map_loader is
+		port (
+			clk, ena: in std_logic; -- 25m
+			grids_map_load: out std_logic_vector(0 to (GRIDS_BITS - 1))
+		);
+	end component;
+
 	component clock
 		generic(n: integer);
 		port(
@@ -146,10 +153,13 @@ begin
 		logic_run=>logic_run, logic_load=>logic_load,
 		interface_info=>interface_info
 	);
+	u_map_loader: map_loader port map(
+		clk=>clk_25m, ena=>logic_load, grids_map_load=>grids_map_init
+	);
 	--logic_load <= load;
 	--logic_run <= run;
 	u_display: display_control port map(
-		clk_100m, rst, grids_map, plate, ball, answer_card, buff, shadow_dir, bullet, bullet_x, bullet_y, score, interface_info, 
+	clk_100m, rst, grids_map, plate, ball, answer_card, buff, shadow_dir, bullet, bullet_x, bullet_y, score, interface_info, 
 		ask_x, ask_y, hs, vs, r_out, g_out, b_out
 	);
 	u_state: state_control port map(
@@ -163,6 +173,7 @@ begin
 --	grids_map_init <= "10100110100011010110010000011010001110011010010110010101100000001110100101010000100000011010001110000011010001011000001110010100000110100011100110100101101010001110001000110101100100";
 	grids_map_init <= "01011010";--000000000000000000000101000010001111010100000001000110001011000100010000010001101010111101000100000100011000101100010001000001010010001011110101000000000000000000000000000000";
 	
+
 	-- convert clocks
 	-- TODO: clk_25m和clk_100m上升沿可能不同步
 	process(clk_100m)

@@ -5,8 +5,9 @@ use ieee.std_logic_arith.all;
 
 entity rand_generator is
 	generic(
-		lowerbound, upperbound: integer;
-		seed, a, b: integer
+		lowerbound: integer := 700;
+		upperbound: integer := 7000;
+		seed, a, b: integer := 812734
 	);
 	port(
 		clk_100m: in std_logic;

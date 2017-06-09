@@ -49,16 +49,16 @@ begin
 	u_c: clock generic map(100000) port map(clk_100m, clk_1k);
 	u_r_interval: rand_generator generic map(700, 7000, seed, seed + 32457, 79)
 	                             port map(clk_100m, calc_sig, random_factor, interval);
-	u_r_buff: rand_generator generic map(1, BUFF_NUM, seed, 377, 787)
-	                         port map(clk_100m, calc_sig, random_factor / 2, buff_code);
+	--u_r_buff: rand_generator generic map(1, BUFF_NUM, seed, 377, 787)
+	--                         port map(clk_100m, calc_sig, random_factor / 2, buff_code);
 	u_r_fallx: rand_generator generic map(0, SCREEN_WIDTH - CARD_SIDE, seed, seed / 2, seed)
 	                          port map(clk_100m, calc_sig, random_factor * 2, fallx);
-	u_r_fallperiod: rand_generator generic map(4, 15, seed, 8, 3)
-	                              port map(clk_100m, calc_sig, random_factor / 2, fall_period);
+	--u_r_fallperiod: rand_generator generic map(4, 15, seed, 8, 3)
+	--                              port map(clk_100m, calc_sig, random_factor / 2, fall_period);
 --	interval <= 300;
---	buff_code <= 7;
+	buff_code <= fallx rem 10 + 1;
 --	fallx <= 300;
---	fall_period <= 5;
+	fall_period <= 5;
 	
 	process(clk_1k, rst)
 		variable cnt: integer := 0;

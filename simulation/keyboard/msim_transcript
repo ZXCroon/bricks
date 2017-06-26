@@ -1,0 +1,1683 @@
+# Reading C:/altera/13.0sp1/modelsim_ase/tcl/vsim/pref.tcl 
+# do bricks_run_msim_gate_vhdl.do 
+# if {[file exists gate_work]} {
+# 	vdel -lib gate_work -all
+# }
+# vlib gate_work
+# vmap work gate_work
+# Modifying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini
+# 
+# vcom -93 -work work {bricks.vho}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package VITAL_Timing
+# -- Loading package VITAL_Primitives
+# -- Loading package cycloneii_atom_pack
+# -- Loading package cycloneii_components
+# -- Compiling entity keyboard_decoder
+# -- Compiling architecture structure of keyboard_decoder
+# 
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# ** Error: (vcom-11) Could not find work.key_coding.
+# 
+# ** Error: C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd(5): (vcom-1195) Cannot find expanded name "work.key_coding".
+# 
+# ** Error: C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd(5): Unknown expanded name.
+# ** Error: C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd(7): VHDL Compiler exiting
+# ** Error: C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
+# Error in macro ./bricks_run_msim_gate_vhdl.do line 10
+# C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
+#     while executing
+# "vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd}"
+do bricks_run_msim_gate_vhdl.do
+# if {[file exists gate_work]} {
+# 	vdel -lib gate_work -all
+# }
+# vlib gate_work
+# vmap work gate_work
+# Modifying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini
+# 
+# vcom -93 -work work {bricks.vho}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package VITAL_Timing
+# -- Loading package VITAL_Primitives
+# -- Loading package cycloneii_atom_pack
+# -- Loading package cycloneii_components
+# -- Compiling entity keyboard_decoder
+# -- Compiling architecture structure of keyboard_decoder
+# 
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/scripts/packages/key_coding.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package key_coding
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package key_coding
+# -- Compiling entity tb
+# -- Compiling architecture bhv of tb
+# ** Warning: [4] C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd(18): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# ** Warning: [4] C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd(19): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# ** Warning: [4] C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd(21): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# 
+# vsim -t 1ps +transport_int_delays +transport_path_delays -sdftyp /tentity=bricks_vhd.sdo -L cycloneii -L gate_work -L work -voptargs="+acc"  tb
+# vsim +transport_int_delays +transport_path_delays -L cycloneii -L gate_work -L work -voptargs=\"+acc\" -sdftyp /tentity=bricks_vhd.sdo -t 1ps tb 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.key_coding
+# Loading work.tb(bhv)
+# SDF 10.1d Compiler 2012.11 Nov  2 2012
+# 
+# Loading ieee.vital_timing(body)
+# Loading ieee.vital_primitives(body)
+# Loading cycloneii.cycloneii_atom_pack(body)
+# Loading cycloneii.cycloneii_components
+# Loading work.keyboard_decoder(structure)
+# ** Failure: (vsim-3807) Types do not match between component and entity for port "board_speed".
+#    Time: 0 ps  Iteration: 0  Instance: /tb/tentity File: bricks.vho Line: 40
+# Loading cycloneii.cycloneii_lcell_comb(vital_lcell_comb)
+# Loading cycloneii.cycloneii_lcell_ff(vital_lcell_ff)
+# Loading cycloneii.cycloneii_and1(altvital)
+# Loading cycloneii.cycloneii_io(structure)
+# Loading cycloneii.cycloneii_mux21(altvital)
+# Loading cycloneii.cycloneii_dffe(behave)
+# Loading cycloneii.cycloneii_asynch_io(behave)
+# Loading cycloneii.cycloneii_clkctrl(vital_clkctrl)
+# Loading cycloneii.cycloneii_ena_reg(behave)
+# Fatal error at bricks.vho line 40
+#  while elaborating region: /tb/tentity
+# Fatal error in file C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd
+#  while elaborating region: /tb
+# Loading instances from bricks_vhd.sdo
+# Loading timing data from bricks_vhd.sdo
+# Load interrupted
+# Error loading design
+# Error: Error loading design 
+#        Pausing macro execution 
+# MACRO ./bricks_run_msim_gate_vhdl.do PAUSED at line 13
+do bricks_run_msim_gate_vhdl.do
+# transcript on
+# if {[file exists gate_work]} {
+# 	vdel -lib gate_work -all
+# }
+# vlib gate_work
+# vmap work gate_work
+# Modifying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini
+# 
+# vcom -93 -work work {bricks.vho}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package VITAL_Timing
+# -- Loading package VITAL_Primitives
+# -- Loading package cycloneii_atom_pack
+# -- Loading package cycloneii_components
+# -- Compiling entity keyboard_decoder
+# -- Compiling architecture structure of keyboard_decoder
+# 
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/scripts/packages/key_coding.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package key_coding
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tbgate.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package key_coding
+# -- Compiling entity tbgate
+# -- Compiling architecture bhv of tbgate
+# ** Warning: [4] C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tbgate.vhd(19): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# ** Warning: [4] C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tbgate.vhd(20): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# ** Warning: [4] C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tbgate.vhd(22): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# 
+# vsim -t 1ps +transport_int_delays +transport_path_delays -sdftyp /tentity=bricks_vhd.sdo -L cycloneii -L gate_work -L work -voptargs="+acc"  tbgate
+# vsim +transport_int_delays +transport_path_delays -L cycloneii -L gate_work -L work -voptargs=\"+acc\" -sdftyp /tentity=bricks_vhd.sdo -t 1ps tbgate 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.key_coding
+# Loading work.tbgate(bhv)
+# SDF 10.1d Compiler 2012.11 Nov  2 2012
+# 
+# Loading ieee.vital_timing(body)
+# Loading ieee.vital_primitives(body)
+# Loading cycloneii.cycloneii_atom_pack(body)
+# Loading cycloneii.cycloneii_components
+# Loading work.keyboard_decoder(structure)
+# Loading cycloneii.cycloneii_lcell_comb(vital_lcell_comb)
+# Loading cycloneii.cycloneii_lcell_ff(vital_lcell_ff)
+# Loading cycloneii.cycloneii_and1(altvital)
+# Loading cycloneii.cycloneii_io(structure)
+# Loading cycloneii.cycloneii_mux21(altvital)
+# Loading cycloneii.cycloneii_dffe(behave)
+# Loading cycloneii.cycloneii_asynch_io(behave)
+# Loading cycloneii.cycloneii_clkctrl(vital_clkctrl)
+# Loading cycloneii.cycloneii_ena_reg(behave)
+# Loading instances from bricks_vhd.sdo
+# Loading timing data from bricks_vhd.sdo
+# ** Warning: Design size of 5 instances exceeds ModelSim ALTERA recommended capacity.
+# This may because you are loading cell libraries which are not recommended with
+# the ModelSim Altera version. Expect performance to be adversely affected.
+# ** Note: (vsim-3587) SDF Backannotation Successfully Completed.
+#    Time: 0 ps  Iteration: 0  Instance: /tbgate File: C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tbgate.vhd
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run 1 us
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 0  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ps  Iteration: 0  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 2  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ps  Iteration: 2  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ps  Iteration: 4  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 0 ps  Iteration: 4  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 4066 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 4066 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 4088 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 4088 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 4095 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 4095 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 4098 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 4098 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 4456 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 4456 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 5774 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 5774 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 5802 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 5802 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 5807 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 5807 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 5812 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 5812 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 6163 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 6163 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 7670 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 7670 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 7680 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 7680 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 8052 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 8052 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 8077 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 8077 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 8092 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 8092 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 8117 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 8117 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 8561 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 8561 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 8566 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 8566 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 8576 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 8576 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 8715 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 8715 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 9209 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 9209 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 9219 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 9219 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 9376 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 9376 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 9386 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 9386 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 9758 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 9758 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 9783 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 9783 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 9798 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 9798 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 9823 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 9823 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10265 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10265 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10267 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10267 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10272 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10272 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10275 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10275 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10282 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10282 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10285 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10285 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10421 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10421 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10653 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10653 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10915 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10915 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10925 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 10925 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11744 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 11744 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11971 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 11971 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11981 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 11981 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11991 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 11991 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 12359 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
+#    Time: 12359 ps  Iteration: 1  Instance: /tbgate
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 16.552 ns
+#    Time: 16552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 16.552 ns
+#    Time: 16552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 16.552 ns
+#    Time: 16552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 16.552 ns
+#    Time: 16552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 16.552 ns
+#    Time: 16552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 16.552 ns
+#    Time: 16552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 16.552 ns
+#    Time: 16552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 16.552 ns
+#    Time: 16552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 36.505 ns
+#    Time: 36505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 36.552 ns
+#    Time: 36552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 36.552 ns
+#    Time: 36552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 36.552 ns
+#    Time: 36552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 36.552 ns
+#    Time: 36552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 36.552 ns
+#    Time: 36552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 36.552 ns
+#    Time: 36552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 36.552 ns
+#    Time: 36552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 36.552 ns
+#    Time: 36552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 56.505 ns
+#    Time: 56505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.17 ns; At : 56.532 ns
+#    Time: 56532 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|code[2]\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.172 ns; At : 56.534 ns
+#    Time: 56534 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|code[4]\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 56.552 ns
+#    Time: 56552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 56.552 ns
+#    Time: 56552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 56.552 ns
+#    Time: 56552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 56.552 ns
+#    Time: 56552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 56.552 ns
+#    Time: 56552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 56.552 ns
+#    Time: 56552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 56.552 ns
+#    Time: 56552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 56.552 ns
+#    Time: 56552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.256 ns; At : 58.617 ns
+#    Time: 58617 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 76.505 ns
+#    Time: 76505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 76.552 ns
+#    Time: 76552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 76.552 ns
+#    Time: 76552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 76.552 ns
+#    Time: 76552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 76.552 ns
+#    Time: 76552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 76.552 ns
+#    Time: 76552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 76.552 ns
+#    Time: 76552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 76.552 ns
+#    Time: 76552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 76.552 ns
+#    Time: 76552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 96.505 ns
+#    Time: 96505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 96.552 ns
+#    Time: 96552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 96.552 ns
+#    Time: 96552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 96.552 ns
+#    Time: 96552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 96.552 ns
+#    Time: 96552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 96.552 ns
+#    Time: 96552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 96.552 ns
+#    Time: 96552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 96.552 ns
+#    Time: 96552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 96.552 ns
+#    Time: 96552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 116.505 ns
+#    Time: 116505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 116.552 ns
+#    Time: 116552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 116.552 ns
+#    Time: 116552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 116.552 ns
+#    Time: 116552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 116.552 ns
+#    Time: 116552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 116.552 ns
+#    Time: 116552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 116.552 ns
+#    Time: 116552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 116.552 ns
+#    Time: 116552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 116.552 ns
+#    Time: 116552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 136.505 ns
+#    Time: 136505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 136.552 ns
+#    Time: 136552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 136.552 ns
+#    Time: 136552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 136.552 ns
+#    Time: 136552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 136.552 ns
+#    Time: 136552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 136.552 ns
+#    Time: 136552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 136.552 ns
+#    Time: 136552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 136.552 ns
+#    Time: 136552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 136.552 ns
+#    Time: 136552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 156.505 ns
+#    Time: 156505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 156.552 ns
+#    Time: 156552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 156.552 ns
+#    Time: 156552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 156.552 ns
+#    Time: 156552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 156.552 ns
+#    Time: 156552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 156.552 ns
+#    Time: 156552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 156.552 ns
+#    Time: 156552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 156.552 ns
+#    Time: 156552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 156.552 ns
+#    Time: 156552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 176.505 ns
+#    Time: 176505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 176.552 ns
+#    Time: 176552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 176.552 ns
+#    Time: 176552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 176.552 ns
+#    Time: 176552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 176.552 ns
+#    Time: 176552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 176.552 ns
+#    Time: 176552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 176.552 ns
+#    Time: 176552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 176.552 ns
+#    Time: 176552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 176.552 ns
+#    Time: 176552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 196.505 ns
+#    Time: 196505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 196.552 ns
+#    Time: 196552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 196.552 ns
+#    Time: 196552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 196.552 ns
+#    Time: 196552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 196.552 ns
+#    Time: 196552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 196.552 ns
+#    Time: 196552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 196.552 ns
+#    Time: 196552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 196.552 ns
+#    Time: 196552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 196.552 ns
+#    Time: 196552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 216.505 ns
+#    Time: 216505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 216.552 ns
+#    Time: 216552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 216.552 ns
+#    Time: 216552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 216.552 ns
+#    Time: 216552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 216.552 ns
+#    Time: 216552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 216.552 ns
+#    Time: 216552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 216.552 ns
+#    Time: 216552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 216.552 ns
+#    Time: 216552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 216.552 ns
+#    Time: 216552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 276.505 ns
+#    Time: 276505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 276.552 ns
+#    Time: 276552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 276.552 ns
+#    Time: 276552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 276.552 ns
+#    Time: 276552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 276.552 ns
+#    Time: 276552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 276.552 ns
+#    Time: 276552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 276.552 ns
+#    Time: 276552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 276.552 ns
+#    Time: 276552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 276.552 ns
+#    Time: 276552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 296.505 ns
+#    Time: 296505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 296.552 ns
+#    Time: 296552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 296.552 ns
+#    Time: 296552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 296.552 ns
+#    Time: 296552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 296.552 ns
+#    Time: 296552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 296.552 ns
+#    Time: 296552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 296.552 ns
+#    Time: 296552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 296.552 ns
+#    Time: 296552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 296.552 ns
+#    Time: 296552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 316.505 ns
+#    Time: 316505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 316.552 ns
+#    Time: 316552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 316.552 ns
+#    Time: 316552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 316.552 ns
+#    Time: 316552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 316.552 ns
+#    Time: 316552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 316.552 ns
+#    Time: 316552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 316.552 ns
+#    Time: 316552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 316.552 ns
+#    Time: 316552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 316.552 ns
+#    Time: 316552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 336.505 ns
+#    Time: 336505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 336.552 ns
+#    Time: 336552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 336.552 ns
+#    Time: 336552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 336.552 ns
+#    Time: 336552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 336.552 ns
+#    Time: 336552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 336.552 ns
+#    Time: 336552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 336.552 ns
+#    Time: 336552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 336.552 ns
+#    Time: 336552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 336.552 ns
+#    Time: 336552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 356.505 ns
+#    Time: 356505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 356.552 ns
+#    Time: 356552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 356.552 ns
+#    Time: 356552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 356.552 ns
+#    Time: 356552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 356.552 ns
+#    Time: 356552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 356.552 ns
+#    Time: 356552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 356.552 ns
+#    Time: 356552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 356.552 ns
+#    Time: 356552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 356.552 ns
+#    Time: 356552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 376.505 ns
+#    Time: 376505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 376.552 ns
+#    Time: 376552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 376.552 ns
+#    Time: 376552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 376.552 ns
+#    Time: 376552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 376.552 ns
+#    Time: 376552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 376.552 ns
+#    Time: 376552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 376.552 ns
+#    Time: 376552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 376.552 ns
+#    Time: 376552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 376.552 ns
+#    Time: 376552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 396.505 ns
+#    Time: 396505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 396.552 ns
+#    Time: 396552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 396.552 ns
+#    Time: 396552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 396.552 ns
+#    Time: 396552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 396.552 ns
+#    Time: 396552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 396.552 ns
+#    Time: 396552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 396.552 ns
+#    Time: 396552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 396.552 ns
+#    Time: 396552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 396.552 ns
+#    Time: 396552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 416.505 ns
+#    Time: 416505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 416.552 ns
+#    Time: 416552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 416.552 ns
+#    Time: 416552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 416.552 ns
+#    Time: 416552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 416.552 ns
+#    Time: 416552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 416.552 ns
+#    Time: 416552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 416.552 ns
+#    Time: 416552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 416.552 ns
+#    Time: 416552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 416.552 ns
+#    Time: 416552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 436.505 ns
+#    Time: 436505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 436.552 ns
+#    Time: 436552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 436.552 ns
+#    Time: 436552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 436.552 ns
+#    Time: 436552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 436.552 ns
+#    Time: 436552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 436.552 ns
+#    Time: 436552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 436.552 ns
+#    Time: 436552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 436.552 ns
+#    Time: 436552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 436.552 ns
+#    Time: 436552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 456.505 ns
+#    Time: 456505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 456.552 ns
+#    Time: 456552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 456.552 ns
+#    Time: 456552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 456.552 ns
+#    Time: 456552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 456.552 ns
+#    Time: 456552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 456.552 ns
+#    Time: 456552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 456.552 ns
+#    Time: 456552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 456.552 ns
+#    Time: 456552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 456.552 ns
+#    Time: 456552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 476.505 ns
+#    Time: 476505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 476.552 ns
+#    Time: 476552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 476.552 ns
+#    Time: 476552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 476.552 ns
+#    Time: 476552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 476.552 ns
+#    Time: 476552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 476.552 ns
+#    Time: 476552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 476.552 ns
+#    Time: 476552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 476.552 ns
+#    Time: 476552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 476.552 ns
+#    Time: 476552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 536.505 ns
+#    Time: 536505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 536.552 ns
+#    Time: 536552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 536.552 ns
+#    Time: 536552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 536.552 ns
+#    Time: 536552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 536.552 ns
+#    Time: 536552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 536.552 ns
+#    Time: 536552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 536.552 ns
+#    Time: 536552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 536.552 ns
+#    Time: 536552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 536.552 ns
+#    Time: 536552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 556.505 ns
+#    Time: 556505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 556.552 ns
+#    Time: 556552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 556.552 ns
+#    Time: 556552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 556.552 ns
+#    Time: 556552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 556.552 ns
+#    Time: 556552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 556.552 ns
+#    Time: 556552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 556.552 ns
+#    Time: 556552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 556.552 ns
+#    Time: 556552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 556.552 ns
+#    Time: 556552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 576.505 ns
+#    Time: 576505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 576.552 ns
+#    Time: 576552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 576.552 ns
+#    Time: 576552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 576.552 ns
+#    Time: 576552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 576.552 ns
+#    Time: 576552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 576.552 ns
+#    Time: 576552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 576.552 ns
+#    Time: 576552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 576.552 ns
+#    Time: 576552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 576.552 ns
+#    Time: 576552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 596.505 ns
+#    Time: 596505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 596.552 ns
+#    Time: 596552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 596.552 ns
+#    Time: 596552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 596.552 ns
+#    Time: 596552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 596.552 ns
+#    Time: 596552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 596.552 ns
+#    Time: 596552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 596.552 ns
+#    Time: 596552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 596.552 ns
+#    Time: 596552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 596.552 ns
+#    Time: 596552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 616.505 ns
+#    Time: 616505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 616.552 ns
+#    Time: 616552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 616.552 ns
+#    Time: 616552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 616.552 ns
+#    Time: 616552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 616.552 ns
+#    Time: 616552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 616.552 ns
+#    Time: 616552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 616.552 ns
+#    Time: 616552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 616.552 ns
+#    Time: 616552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 616.552 ns
+#    Time: 616552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 636.505 ns
+#    Time: 636505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 636.552 ns
+#    Time: 636552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 636.552 ns
+#    Time: 636552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 636.552 ns
+#    Time: 636552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 636.552 ns
+#    Time: 636552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 636.552 ns
+#    Time: 636552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 636.552 ns
+#    Time: 636552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 636.552 ns
+#    Time: 636552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 636.552 ns
+#    Time: 636552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 656.505 ns
+#    Time: 656505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 656.552 ns
+#    Time: 656552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 656.552 ns
+#    Time: 656552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 656.552 ns
+#    Time: 656552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 656.552 ns
+#    Time: 656552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 656.552 ns
+#    Time: 656552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 656.552 ns
+#    Time: 656552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 656.552 ns
+#    Time: 656552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 656.552 ns
+#    Time: 656552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 676.505 ns
+#    Time: 676505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 676.552 ns
+#    Time: 676552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 676.552 ns
+#    Time: 676552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 676.552 ns
+#    Time: 676552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 676.552 ns
+#    Time: 676552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 676.552 ns
+#    Time: 676552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 676.552 ns
+#    Time: 676552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 676.552 ns
+#    Time: 676552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 676.552 ns
+#    Time: 676552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 696.505 ns
+#    Time: 696505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 696.552 ns
+#    Time: 696552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 696.552 ns
+#    Time: 696552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 696.552 ns
+#    Time: 696552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 696.552 ns
+#    Time: 696552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 696.552 ns
+#    Time: 696552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 696.552 ns
+#    Time: 696552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 696.552 ns
+#    Time: 696552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 696.552 ns
+#    Time: 696552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 716.505 ns
+#    Time: 716505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 716.552 ns
+#    Time: 716552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 716.552 ns
+#    Time: 716552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 716.552 ns
+#    Time: 716552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 716.552 ns
+#    Time: 716552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 716.552 ns
+#    Time: 716552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 716.552 ns
+#    Time: 716552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 716.552 ns
+#    Time: 716552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 716.552 ns
+#    Time: 716552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+# ** Warning: */LCELL_FF HOLD   X  VIOLATION ON DATAIN WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.144 ns; At : 736.505 ns
+#    Time: 736505 ps  Iteration: 2  Instance: /tbgate/tentity/\kb|state.delay\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 736.552 ns
+#    Time: 736552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d4\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 736.552 ns
+#    Time: 736552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d3\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 736.552 ns
+#    Time: 736552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d2\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 736.552 ns
+#    Time: 736552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d1\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 736.552 ns
+#    Time: 736552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.parity\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 736.552 ns
+#    Time: 736552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d7\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 736.552 ns
+#    Time: 736552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d5\
+# ** Warning: */LCELL_FF HOLD  Low VIOLATION ON ENA WITH RESPECT TO CLK;
+# 
+#   Expected := 0.306 ns; Observed := 0.19 ns; At : 736.552 ns
+#    Time: 736552 ps  Iteration: 0  Instance: /tbgate/tentity/\kb|state.d6\
+do testrtl.do
+# transcript on
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Modifying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini
+# 
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/scripts/keyboard_comp/KeyboardReader.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity KeyboardReader
+# -- Compiling architecture rtl of KeyboardReader
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/scripts/packages/key_coding.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package key_coding
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/scripts/modules/keyboard_decoder.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package key_coding
+# -- Compiling entity keyboard_decoder
+# -- Compiling architecture behave of keyboard_decoder
+# 
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package key_coding
+# -- Compiling entity tb
+# -- Compiling architecture bhv of tb
+# ** Warning: [4] C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd(18): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# ** Warning: [4] C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd(19): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# ** Warning: [4] C:/Users/Wuql/Quartus/bricks/simulation/keyboard/tb.vhd(21): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# 
+# vsim -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cycloneii -L rtl_work -L work -voptargs="+acc"  tb
+# vsim -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cycloneii -L rtl_work -L work -voptargs=\"+acc\" tb 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.key_coding
+# Loading work.tb(bhv)
+# Loading work.keyboard_decoder(behave)
+# Loading work.keyboardreader(rtl)
+# 
+# do wave.do
+# onerror {resume}
+# quietly WaveActivateNextPane {} 0
+# add wave -noupdate /tb/fclk
+# add wave -noupdate /tb/datain
+# add wave -noupdate /tb/clkin
+# add wave -noupdate /tb/rstin
+# add wave -noupdate -expand -group internal -radix hexadecimal /tb/tentity/scancode
+# add wave -noupdate -expand -group internal /tb/tentity/leftp
+# add wave -noupdate -expand -group internal /tb/tentity/rightp
+# add wave -noupdate -expand -group internal /tb/tentity/shiftp
+# add wave -noupdate -expand -group internal /tb/tentity/isbreak
+# add wave -noupdate -group output /tb/confirm
+# add wave -noupdate -group output /tb/quit
+# add wave -noupdate -group output /tb/upp
+# add wave -noupdate -group output /tb/downp
+# add wave -noupdate -group output /tb/board_speed
+# add wave -noupdate /tb/tentity/dataok
+# add wave -noupdate /tb/tentity/kb/state
+# add wave -noupdate /tb/tentity/kb/code
+# TreeUpdate [SetDefaultTree]
+# WaveRestoreCursors {{Cursor 1} {180110 ps} 0}
+# quietly wave cursor active 1
+# configure wave -namecolwidth 150
+# configure wave -valuecolwidth 100
+# configure wave -justifyvalue left
+# configure wave -signalnamewidth 0
+# configure wave -snapdistance 10
+# configure wave -datasetprefix 0
+# configure wave -rowmargin 4
+# configure wave -childrowmargin 2
+# configure wave -gridoffset 0
+# configure wave -gridperiod 1
+# configure wave -griddelta 40
+# configure wave -timeline 0
+# configure wave -timelineunits ns
+# update
+# WaveRestoreZoom {118290 ps} {267290 ps}
+# 
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+run 1us
+quit -sim

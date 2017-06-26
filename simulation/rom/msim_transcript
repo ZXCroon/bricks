@@ -1,0 +1,93 @@
+# Reading C:/altera/13.0sp1/modelsim_ase/tcl/vsim/pref.tcl 
+# do bricks_run_msim_rtl_vhdl.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Modifying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini
+# 
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/scripts/packages/img_coding.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling package img_coding
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/scripts/rom_comp/rom_reader.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity rom_reader
+# -- Compiling architecture SYN of rom_reader
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/scripts/rom_comp/img_reader.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package img_coding
+# -- Compiling entity img_reader
+# -- Compiling architecture bhv of img_reader
+# 
+# vcom -93 -work work {C:/Users/Wuql/Quartus/bricks/simulation/rom/tb.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package MATH_REAL
+# -- Loading package img_coding
+# -- Compiling entity tb
+# -- Compiling architecture bhv of tb
+# ** Warning: [4] C:/Users/Wuql/Quartus/bricks/simulation/rom/tb.vhd(34): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cycloneii -L rtl_work -L work -voptargs="+acc"  tb
+# vsim -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cycloneii -L rtl_work -L work -voptargs=\"+acc\" -t 1ps tb 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.math_real(body)
+# Loading work.img_coding
+# Loading work.tb(bhv)
+# Loading work.img_reader(bhv)
+# Loading work.rom_reader(syn)
+# Loading altera_mf.altera_common_conversion(body)
+# Loading altera_mf.altera_device_families(body)
+# Loading altera_mf.altsyncram(translated)
+# 
+# add wave *
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+# 
+#           File in use by: Wuql  Hostname: WUQL-PC  ProcessID: 14224
+# 
+#           Attempting to use alternate WLF file "./wlft3mh4hz".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+# 
+#           Using alternate file: ./wlft3mh4hz
+# 
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# ** Error: (vsim-7) Failed to open VHDL file "../images/mif/allimg.mif" in rb mode.
+# 
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /tb/tentity/romreader/altsyncram_component
+# ** Fatal: (vsim-7) Failed to open VHDL file "../images/mif/allimg.mif" in rb mode.
+# 
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Process: /tb/tentity/romreader/altsyncram_component/MEMORY File: C:/altera/13.0sp1/modelsim_ase/win32aloem/../altera/vhdl/src/altera_mf/altera_mf.vhd
+# Fatal error in Process MEMORY at C:/altera/13.0sp1/modelsim_ase/win32aloem/../altera/vhdl/src/altera_mf/altera_mf.vhd line 40237
+# 
+# HDL call sequence:
+# Stopped at C:/altera/13.0sp1/modelsim_ase/win32aloem/../altera/vhdl/src/altera_mf/altera_mf.vhd 40237 Subprogram read_my_memory
+# called from  C:/altera/13.0sp1/modelsim_ase/win32aloem/../altera/vhdl/src/altera_mf/altera_mf.vhd 41850 Process MEMORY
+# 
